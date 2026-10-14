@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>من نحن | قصة متجر Activkeyz ورؤيتنا</title>
+  <meta name="description"
+    content="تعرف على Activkeyz، المنصة الرائدة في تزويد التراخيص والاشتراكات الرقمية في الشرق الأوسط.">
+  <meta name="google" content="notranslate">
+  <link rel="icon" type="image/png" href="logos/activkeyzsecondlogo.png">
+
+  <!-- Fonts: IBM Plex Sans Arabic (Primary) + Latin Complement -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&family=Cairo:wght@600;700;800&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="site-pages.css">
+</head>
+
+<body>
+
+  <!-- BACKGROUND LAYERS -->
+  <div class="page-background" aria-hidden="true">
+    <div class="stars-layer"></div>
+    <div class="hero-bg-art" style="height: 520px; opacity: 0.8;"></div>
+    <div class="lower-bg-art" style="top: 450px; opacity: 0.2;"></div>
+    <div class="ambient-glow-top"></div>
+    <div class="ambient-glow-bottom"></div>
+  </div>
+
+  <!-- 1. ANNOUNCEMENT BAR -->
+  <div class="top-announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-spacer"></div>
+
+      <div class="announcement-msg">
+        <span class="gift-icon"><i class="fa-solid fa-sparkles"></i></span>
+        <span>متجرك الموثوق للاشتراكات والخدمات الرقمية مع ضمان كامل ودعم متواصل!</span>
+      </div>
+
+      <div class="announcement-countdown" id="countdownTimer">
+        <div class="countdown-slot"><span class="countdown-num" id="hoursVal">14</span><span
+            class="countdown-txt">ساعة</span></div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-slot"><span class="countdown-num" id="minutesVal">20</span><span
+            class="countdown-txt">دقيقة</span></div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-slot"><span class="countdown-num" id="secondsVal">55</span><span
+            class="countdown-txt">ثانية</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MAIN HEADER -->
+  <header class="main-header" id="mainHeader">
+    <div class="container header-inner">
+
+      <!-- Brand Logo -->
+      <a href="./" class="brand-logo">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="brand-logo-img">
+        <div class="logo-text-group">
+          <span class="logo-title">Activkeyz</span>
+          <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu">
+        <a href="./" class="nav-item">الرئيسية</a>
+        <a href="category.html?cat=all" class="nav-item">المنتجات</a>
+        <a href="about.html" class="nav-item active">من نحن</a>
+        <a href="reviews.html" class="nav-item">آراء العملاء</a>
+        <a href="blog.html" class="nav-item">المدونة</a>
+        <a href="policy.html" class="nav-item">السياسات والضمان</a>
+        <a href="contact.html" class="nav-item">اتصل بنا</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="header-actions-wrap">
+        <a href="contact.html" class="header-btn user-btn">
+          <i class="fa-solid fa-headset"></i>
+          <span>الدعم الفني</span>
+        </a>
+        <a href="category.html?cat=all" class="header-btn cart-toggle-btn" title="تصفح المنتجات">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-pill-count" id="cartBadgeCount">0</span>
+        </a>
+        <button class="mobile-menu-burger" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div class="mobile-drawer-layer" id="mobileDrawer">
+    <div class="mobile-drawer-top">
+      <div class="brand-logo">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="mobile-logo-img">
+        <span class="logo-title" style="font-size:1.05rem;">Activkeyz</span>
+      </div>
+      <button class="drawer-exit-btn" id="drawerCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mobile-links-col">
+      <a href="./" class="mobile-link"><i class="fa-solid fa-house"></i> الرئيسية</a>
+      <a href="category.html?cat=all" class="mobile-link"><i class="fa-solid fa-table-cells-large"></i> جميع المنتجات
+        والأقسام</a>
+      <a href="about.html" class="mobile-link active"><i class="fa-solid fa-circle-info"></i> من نحن وقصة متجرنا</a>
+      <a href="reviews.html" class="mobile-link"><i class="fa-solid fa-star"></i> آراء وتقييمات العملاء</a>
+      <a href="blog.html" class="mobile-link"><i class="fa-solid fa-newspaper"></i> المدونة والشروحات</a>
+      <a href="policy.html" class="mobile-link"><i class="fa-solid fa-shield-halved"></i> سياسة الضمان والاسترجاع</a>
+      <a href="contact.html" class="mobile-link"><i class="fa-solid fa-headset"></i> اتصل بنا والدعم الفني</a>
+    </div>
+  </div>
+
+  <main class="page-main-flow">
+
+    <!-- SUBPAGE HERO -->
+    <section class="subpage-hero-banner">
+      <div class="container">
+        <div class="subpage-hero-badge">
+          <i class="fa-solid fa-rocket"></i>
+          <span>قصة التميز الرقمي | رؤية Activkeyz</span>
+        </div>
+        <h1 class="subpage-hero-title">نبني المستقبل الرقمي بين يديك</h1>
+        <p class="subpage-hero-desc">
+          انطلقت منصة Activkeyz لسد الفجوة بين أسعار الاشتراكات العالمية الباهظة والقدرة الشرائية للمبدعين والشركات
+          والمستخدمين في الوطن العربي، مع التزام صارم بالأصالة والأمان وسرعة التسليم.
+        </p>
+      </div>
+    </section>
+
+    <!-- STATS STRIP (VERIFIED METRICS ONLY) -->
+    <section class="container" style="margin-bottom: 50px;">
+      <div class="story-numbers-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="story-stat-tile">
+          <div class="story-stat-num">23</div>
+          <div class="story-stat-txt">اشتراك رقمي منشور ومعتمد</div>
+        </div>
+        <div class="story-stat-tile">
+          <div class="story-stat-num">5</div>
+          <div class="story-stat-txt">أقسام رقمية متخصصة</div>
+        </div>
+        <div class="story-stat-tile">
+          <div class="story-stat-num">100%</div>
+          <div class="story-stat-txt">ضمان شامل طوال مدة الاشتراك</div>
+        </div>
+        <div class="story-stat-tile">
+          <div class="story-stat-num">24/7</div>
+          <div class="story-stat-txt">دعم فني وتواصل مستمر</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE PILLARS -->
+    <section class="container" style="margin-bottom: 60px;">
+      <div class="category-header-wrap" style="text-align: center; margin-bottom: 30px;">
+        <span class="sub-badge" style="margin: 0 auto 10px auto;"><i class="fa-solid fa-gem"></i> ركائز قيمنا</span>
+        <h2 style="font-size: 2rem; color: #fff; font-weight: 800;">لماذا يختار المحترفون Activkeyz؟</h2>
+      </div>
+
+      <div class="about-pillars-grid">
+        <div class="pillar-card-box">
+          <div class="pillar-icon-box">
+            <i class="fa-solid fa-bolt-lightning"></i>
+          </div>
+          <h3 class="pillar-title">تسليم آلي وفوري</h3>
+          <p class="pillar-desc">نظام سحابي ذكي يولد ويرسل مفتاح التفعيل لبريدك وشاشتك فور إتمام الدفع بدون أي انتظار
+            يدوي.</p>
+        </div>
+
+        <div class="pillar-card-box">
+          <div class="pillar-icon-box">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <h3 class="pillar-title">ضمان رسمي كامل</h3>
+          <p class="pillar-desc">ضمان استبدال فوري طوال فترة الاشتراك المحددة. في حال حدوث أي توقف، يتم تعويضك فوراً
+            بدون تعقيد.</p>
+        </div>
+
+        <div class="pillar-card-box">
+          <div class="pillar-icon-box">
+            <i class="fa-solid fa-tags"></i>
+          </div>
+          <h3 class="pillar-title">أسعار جملة تنافسية</h3>
+          <p class="pillar-desc">نعتمد شراكات وتراخيص مؤسسية بالجملة لنمنحك توفيراً يصل إلى 75% مقارنة بالأسعار الفردية
+            المباشرة.</p>
+        </div>
+
+        <div class="pillar-card-box">
+          <div class="pillar-icon-box">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <h3 class="pillar-title">دعم عربي 24/7</h3>
+          <p class="pillar-desc">فريق دعم تقني متخصص جاهز عبر واتساب وتليجرام لمساعدتك في خطوات التفعيل وربط حسابك خطوة
+            بخطوة.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DETAILED STORY SECTION -->
+    <section class="container" style="margin-bottom: 60px;">
+      <div class="about-story-section">
+        <div class="story-text-wrap">
+          <span class="sub-badge" style="margin-bottom: 12px;"><i class="fa-solid fa-compass"></i> مسيرتنا وهدفنا</span>
+          <h2 style="font-size: 1.85rem; color: #fff; font-weight: 800; margin-bottom: 16px;">
+            تطوير مفهوم التجارة الرقمية في المنطقة
+          </h2>
+          <p style="color: #cbd5e1; line-height: 1.8; margin-bottom: 14px; font-size: 0.95rem;">
+            بدأت رحلتنا حين لاحظنا الصعوبات التي تواجه المصممين، والمبرمجين، وصناع المحتوى، والطلاب في الشرق الأوسط في
+            الحصول على أدوات العمل الأساسية مثل ChatGPT Plus، Adobe Creative Cloud، Microsoft Office 365، وCanva Pro،
+            إما بسبب القيود البنكية أو الأسعار المرتفعة للغاية.
+          </p>
+          <p style="color: #cbd5e1; line-height: 1.8; margin-bottom: 20px; font-size: 0.95rem;">
+            قمنا ببناء بنية تحتية برمجية متطورة تتيح للمستخدم العربي الشراء بكل سهولة عبر وسائل الدفع المحلية المفضلة
+            (فودافون كاش، إنستاباي، فيزا، ميزة، وUSDT) واستلام الترخيص مباشرة مع أدلة إرشادية واضحة ومبسطة باللغة
+            العربية.
+          </p>
+          <div style="display:flex; gap:16px; flex-wrap:wrap;">
+            <a href="category.html?cat=all" class="btn btn-cyan-primary">
+              <i class="fa-solid fa-store"></i>
+              <span>استكشف المنتجات الرقمية</span>
+            </a>
+            <a href="reviews.html" class="btn btn-glass-secondary">
+              <i class="fa-solid fa-star"></i>
+              <span>اطلع على آراء المشترين</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="story-numbers-grid">
+          <div class="story-stat-tile">
+            <div class="story-stat-num">500+</div>
+            <div class="story-stat-txt">منتج واشتراك متاح</div>
+          </div>
+          <div class="story-stat-tile">
+            <div class="story-stat-num">15+</div>
+            <div class="story-stat-txt">دولة عربية مغطاة</div>
+          </div>
+          <div class="story-stat-tile">
+            <div class="story-stat-num">99.8%</div>
+            <div class="story-stat-txt">نسبة كفاءة واستقرار الحسابات</div>
+          </div>
+          <div class="story-stat-tile">
+            <div class="story-stat-num">24 / 7</div>
+            <div class="story-stat-txt">متابعة ودعم فني حي</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAYMENT & SECURITY TRUST BAR -->
+    <section class="container" style="margin-bottom: 70px;">
+      <div
+        style="background: rgba(10, 20, 38, 0.7); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 20px; padding: 28px; text-align: center;">
+        <h3 style="font-size: 1.15rem; color: #fff; margin-bottom: 16px; font-weight: 700;">
+          طرق دفع معتمدة وآمنة بنسبة 100%
+        </h3>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+          <span class="partner-chip"><i class="fa-solid fa-mobile-screen"></i> Vodafone Cash</span>
+          <span class="partner-chip"><i class="fa-solid fa-building-columns"></i> InstaPay Egypt</span>
+          <span class="partner-chip"><i class="fa-brands fa-cc-visa"></i> VISA</span>
+          <span class="partner-chip"><i class="fa-brands fa-cc-mastercard"></i> MasterCard</span>
+          <span class="partner-chip"><i class="fa-solid fa-credit-card"></i> Meeza ميزة</span>
+          <span class="partner-chip"><i class="fa-brands fa-bitcoin"></i> USDT / Crypto</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <!-- ===================================================================
+       FOOTER
+       =================================================================== -->
+  <footer class="main-page-footer" id="mainFooter">
+    <div class="container footer-main-grid">
+
+      <!-- Column 1: Brand & Direct Support -->
+      <div class="footer-col-item brand-column">
+        <a href="./" class="brand-logo" aria-label="Activkeyz الرئيسية">
+          <img src="logos/activkeyzmainlogo.png" alt="Activkeyz" class="brand-logo-img footer-logo-img">
+          <div class="logo-text-group">
+            <span class="logo-title" style="font-size:1.15rem;">Activkeyz</span>
+            <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+          </div>
+        </a>
+        <p class="footer-tagline">
+          منصتك المعتمدة للاشتراكات والخدمات البرمجية بأسعار تنافسية وضمان شامل ودعم فني متواصل.
+        </p>
+        <div class="footer-contact-actions">
+          <a href="https://wa.me/201225106057" target="_blank" class="footer-contact-pill" title="واتساب المبيعات">
+            <i class="fa-brands fa-whatsapp" style="color: #22c55e;"></i>
+            <span>واتساب المبيعات</span>
+          </a>
+          <a href="contact.html" class="footer-contact-pill" title="مركز المساعدة">
+            <i class="fa-solid fa-headset"></i>
+            <span>الدعم الفني</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Public Products & Categories -->
+      <div class="footer-col-item">
+        <h4 class="footer-block-header">الأقسام والمنتجات</h4>
+        <ul class="footer-anchor-list">
+          <li><a href="category.html?cat=all"><i class="fa-solid fa-border-all"></i> جميع المنتجات والاشتراكات</a></li>
+          <li><a href="category.html?cat=ai"><i class="fa-solid fa-wand-magic-sparkles"></i> أدوات الذكاء الاصطناعي</a></li>
+          <li><a href="category.html?cat=creative"><i class="fa-solid fa-palette"></i> البرامج الإبداعية والتصميم</a></li>
+          <li><a href="category.html?cat=office"><i class="fa-solid fa-briefcase"></i> برامج المكتب والإنتاجية</a></li>
+          <li><a href="category.html?cat=streaming"><i class="fa-solid fa-play"></i> الترفيه والمشاهدة</a></li>
+          <li><a href="category.html?cat=gaming"><i class="fa-solid fa-shield-halved"></i> الألعاب وبطاقات الحماية</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Auth-Aware Customer Shortcuts & Public Support -->
+      <div class="footer-col-item footer-auth-col">
+        <h4 class="footer-block-header" id="footerAccountHeading">الحساب والخدمات</h4>
+        
+        <!-- Logged-Out Visitor Shortcuts -->
+        <ul class="footer-anchor-list footer-visitor-links" id="footerVisitorLinks">
+          <li><a href="account.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> تسجيل الدخول أو إنشاء حساب</a></li>
+          <li><a href="track-order.html"><i class="fa-solid fa-truck-fast"></i> تتبع الطلب بالرقم المرجعي</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-circle-question"></i> مركز المساعدة والاستفسارات</a></li>
+          <li><a href="policy.html"><i class="fa-solid fa-shield-halved"></i> شروط الضمان وسياسة الخصوصية</a></li>
+          <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> عن متجر Activkeyz</a></li>
+        </ul>
+
+        <!-- Logged-In Customer Shortcuts -->
+        <ul class="footer-anchor-list footer-customer-links" id="footerCustomerLinks" style="display: none;">
+          <li><a href="account.html?tab=dashboard"><i class="fa-solid fa-gauge-high"></i> لوحة تحكم حسابي</a></li>
+          <li><a href="account.html?tab=orders"><i class="fa-solid fa-box-archive"></i> طلباتي ومشترياتي</a></li>
+          <li><a href="account.html?tab=wallet"><i class="fa-solid fa-coins"></i> محفظة كوينز Nexa</a></li>
+          <li><a href="account.html?tab=profile"><i class="fa-solid fa-id-card"></i> إعدادات وبيانات الحساب</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-headset"></i> تذاكر الدعم والمساعدة</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Authentic Horizontal Payment Logos Strip -->
+    <div class="footer-baseline-strip">
+      <div class="container baseline-strip-inner">
+        <div class="rights-copyright-text">جميع الحقوق محفوظة © 2026 Activkeyz</div>
+        <div class="payment-logos-strip" aria-label="طرق الدفع المعتمدة">
+          <span class="pay-strip-label">طرق الدفع المعتمدة:</span>
+          <img src="logos/vodafone.svg" alt="Vodafone Cash" class="pay-strip-img" loading="lazy" title="فودافون كاش">
+          <img src="logos/instapay.webp" alt="InstaPay" class="pay-strip-img" loading="lazy" title="شبكة إنستاباي مصر">
+          <img src="logos/tether-usdt.svg" alt="USDT TRC20" class="pay-strip-img" loading="lazy" title="Tether USDT TRC20">
+        </div>
+      </div>
+    </div>
+
+    <!-- META / FACEBOOK ADVERTISING COMPLIANCE & LEGAL DISCLAIMER -->
+    <div class="footer-meta-compliance-box">
+      <div class="container compliance-inner">
+        <div class="compliance-links-row">
+          <a href="privacy.html" class="compliance-link">سياسة الخصوصية</a>
+          <span class="compliance-dot">·</span>
+          <a href="terms.html" class="compliance-link">شروط الاستخدام والخدمة</a>
+          <span class="compliance-dot">·</span>
+          <a href="refund.html" class="compliance-link">الضمان والاسترجاع</a>
+          <span class="compliance-dot">·</span>
+          <a href="policy.html" class="compliance-link">مركز السياسات الشامل</a>
+          <span class="compliance-dot">·</span>
+          <a href="contact.html" class="compliance-link">اتصل بنا والدعم الفني</a>
+          <span class="compliance-dot">·</span>
+          <a href="dashboard.html" class="compliance-link footer-admin-lock-link" title="لوحة التحكم الإدارية" target="_blank"><i class="fa-solid fa-lock"></i> لوحة التحكم</a>
+        </div>
+
+        <p class="meta-disclaimer-text">
+          <strong>إخلاء مسؤولية الإعلانات وميتا (Meta / Facebook Disclaimer):</strong><br>
+          هذا الموقع ليس جزءاً من موقع فيسبوك (Facebook™) أو شركة ميتا بلاتفورمز (Meta Platforms, Inc.). بالإضافة إلى ذلك، فإن هذا الموقع غير معتمد أو مدعوم من قِبل فيسبوك بأي شكل من الأشكال. كلمة FACEBOOK هي علامة تجارية مسجلة ومملوكة قانونياً لشركة META PLATFORMS, INC.
+        </p>
+
+        <p class="meta-disclaimer-en">
+          <strong>Meta &amp; FTC Compliance Notice:</strong> This website is an independent e-commerce storefront and is NOT affiliated with, sponsored by, or endorsed by Facebook™ or Meta Platforms, Inc. FACEBOOK™ is a registered trademark of META PLATFORMS, INC. All trademarks, service marks, and company names are property of their respective owners. Activkeyz provides genuine digital subscription licenses under strict authorized reseller practices.
+        </p>
+
+        <p class="trademark-notice-text">
+          جميع أسماء المنتجات والبرامج والشعارات المعروضة هي علامات تجارية مملوكة حصرياً لأصحابها الرسميين (مثل OpenAI, Adobe, Microsoft, Google, CapCut وغيرها). Activkeyz منصة مستقلة توفر حلول واشتراكات رقمية مرخصة مع ضمان تشغيل شامل ودعم فني مخصص.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Update Cart Badge Count
+    try {
+      const cart = JSON.parse(localStorage.getItem('nexa_cart') || '[]');
+      const countEl = document.getElementById('cartBadgeCount');
+      if (countEl) countEl.textContent = cart.reduce((acc, item) => acc + (item.qty || 1), 0);
+    } catch (e) { }
+
+    // Mobile Drawer Toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const drawer = document.getElementById('mobileDrawer');
+    const drawerClose = document.getElementById('drawerCloseBtn');
+    if (mobileBtn && drawer) {
+      mobileBtn.addEventListener('click', () => {
+        drawer.classList.add('active');
+        drawer.classList.add('open');
+      });
+    }
+    if (drawerClose && drawer) {
+      drawerClose.addEventListener('click', () => {
+        drawer.classList.remove('active');
+        drawer.classList.remove('open');
+      });
+    }
+  </script>
+
+</body>
+
+</html>

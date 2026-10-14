@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activkeyz | متجرك الذكي للمنتجات الرقمية</title>
+  <meta name="description" content="أفضل الاشتراكات والبرامج الرقمية في مكان واحد - تسليم فوري وضمان معتمد.">
+  <meta name="google" content="notranslate">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logos/activkeyzsecondlogo.png">
+  <link rel="apple-touch-icon" href="logos/activkeyzsecondlogo.png">
+
+  <!-- Fonts: IBM Plex Sans Arabic (Primary) + Latin Complement -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&family=Cairo:wght@600;700;800&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="site-pages.css">
+  <link rel="stylesheet" href="mobile-redesign.css">
+</head>
+
+<body>
+
+  <!-- BACKGROUND LAYERS -->
+  <div class="page-background" aria-hidden="true">
+    <div class="stars-layer"></div>
+    <div class="hero-bg-art"></div>
+    <div class="lower-bg-art"></div>
+    <div class="ambient-glow-top"></div>
+    <div class="ambient-glow-bottom"></div>
+  </div>
+
+  <!-- 1. ANNOUNCEMENT BAR (HIGGSFIELD-STYLE) -->
+  <div class="top-announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-offer-capsule">
+        <i class="fa-solid fa-bolt"></i>
+        <span>خصم 20% لفترة محدودة</span>
+      </div>
+
+      <div class="announcement-msg" id="storeAnnouncementMsg">
+        <span class="gift-icon"><i class="fa-solid fa-gift"></i></span>
+        <span id="storeAnnouncementText">تفعيل آلي فوري وضمان معتمد</span>
+      </div>
+
+      <div class="announcement-countdown" id="countdownTimer">
+        <span class="countdown-clock-ico"><i class="fa-regular fa-clock"></i></span>
+        <div class="countdown-slot">
+          <span class="countdown-num" id="hoursVal">17</span>
+          <span class="countdown-txt">ساعة</span>
+        </div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-slot">
+          <span class="countdown-num" id="minutesVal">59</span>
+          <span class="countdown-txt">دقيقة</span>
+        </div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-slot">
+          <span class="countdown-num" id="secondsVal">23</span>
+          <span class="countdown-txt">ثانية</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MAIN HEADER -->
+  <header class="main-header" id="mainHeader">
+    <div class="container header-inner">
+
+      <!-- Brand Logo (Right in RTL) -->
+      <a href="./" class="brand-logo" aria-label="Activkeyz الرئيسية">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="brand-logo-img">
+        <div class="logo-text-group">
+          <span class="logo-title">Activkeyz</span>
+          <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu">
+        <a href="./" class="nav-item active">الرئيسية</a>
+        <a href="category.html?cat=all" class="nav-item">المنتجات <span class="nav-micro-tag">جديد</span></a>
+        <a href="about.html" class="nav-item">من نحن</a>
+        <a href="reviews.html" class="nav-item">آراء العملاء <span class="nav-micro-tag tag-top"><i class="fa-solid fa-check" style="font-size:0.55rem; margin-left:3px;"></i>موثق</span></a>
+        <a href="blog.html" class="nav-item">المدونة</a>
+        <a href="policy.html" class="nav-item">السياسات والضمان</a>
+        <a href="contact.html" class="nav-item">اتصل بنا</a>
+      </nav>
+
+      <!-- Search Input -->
+      <div class="header-search-wrap">
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="ابحث عن منتجك الرقمي..." autocomplete="off">
+          <span class="search-kbd-hint">Ctrl K</span>
+          <i class="fa-solid fa-magnifying-glass search-ico"></i>
+          <button class="clear-search-btn" id="clearSearchBtn" style="display:none;"><i
+              class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="search-drop-results" id="searchSuggestions"></div>
+      </div>
+
+      <!-- Action Buttons (Left in RTL) -->
+      <div class="header-actions-wrap">
+
+        <!-- Account Button & Dropdown -->
+        <div class="user-menu-wrapper" id="userMenuWrapper">
+          <a href="account.html" class="header-btn user-btn" id="accountBtn">
+            <i class="fa-regular fa-user"></i>
+            <span id="accountBtnText">حسابي</span>
+          </a>
+          <div class="user-dropdown-popover" id="userDropdownMenu">
+            <div class="user-dropdown-header">
+              <span class="user-dropdown-name" id="dropdownUserName">حسابي</span>
+              <span class="user-dropdown-email" id="dropdownUserEmail"></span>
+            </div>
+            <a href="account.html?tab=dashboard" class="user-dropdown-link">
+              <i class="fa-solid fa-gauge-high"></i>
+              <span>لوحة حسابي</span>
+            </a>
+            <a href="account.html?tab=orders" class="user-dropdown-link">
+              <i class="fa-solid fa-box-archive"></i>
+              <span>طلباتي</span>
+            </a>
+            <a href="account.html?tab=wallet" class="user-dropdown-link">
+              <i class="fa-solid fa-coins"></i>
+              <span>Activkeyz Coins</span>
+            </a>
+            <a href="account.html?tab=profile" class="user-dropdown-link">
+              <i class="fa-solid fa-id-card"></i>
+              <span>بيانات الحساب</span>
+            </a>
+            <div class="user-dropdown-divider"></div>
+            <button type="button" class="user-dropdown-link text-danger" onclick="handleStoreLogout(event)">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span>تسجيل الخروج</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="header-btn cart-toggle-btn" id="cartBtn" title="عرض السلة">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-pill-count" id="cartBadgeCount">1</span>
+        </button>
+
+        <!-- Currency Selector (ج.م / ر.س) -->
+        <div class="currency-dropdown-wrapper" id="currencyDropdownWrap">
+          <button class="header-btn currency-btn" id="currencyToggleBtn" title="تغيير العملة">
+            <i class="fa-solid fa-coins"></i>
+            <span id="currentCurrencyLabel">ج.م</span>
+            <i class="fa-solid fa-chevron-down chevron-ico"></i>
+          </button>
+          <div class="currency-popover" id="currencyMenu">
+            <div class="currency-choice active" data-currency="EGP">
+              <span>ج.م (الجنيه المصري)</span>
+            </div>
+            <div class="currency-choice" data-currency="SAR">
+              <span>ر.س (الريال السعودي)</span>
+            </div>
+            <div class="currency-choice" data-currency="USD">
+              <span>$ (الدولار الأمريكي)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Search Trigger Button -->
+        <button class="header-btn mobile-search-btn" id="mobileSearchBtn" title="بحث سريع" aria-label="بحث سريع" onclick="focusMobileSearch(event)">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+        <div class="lang-dropdown-wrapper">
+          <button class="header-btn lang-btn" id="langDropdownBtn" title="تغيير اللغة">
+            <i class="fa-solid fa-globe"></i>
+            <span>العربية</span>
+            <i class="fa-solid fa-chevron-down chevron-ico"></i>
+          </button>
+          <div class="lang-popover" id="langMenu">
+            <div class="lang-choice active" data-lang="ar">العربية (Arabic)</div>
+            <div class="lang-choice" data-lang="en">English</div>
+          </div>
+        </div>
+
+        <button class="mobile-menu-burger" id="mobileMenuBtn" aria-label="القائمة الرئيسية" onclick="toggleMobileDrawer(event)">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Global Search Bar Row (Real-Time Database Search) -->
+    <div class="mobile-search-bar-row" id="mobileSearchRow">
+      <div class="container mobile-search-inner">
+        <div class="mobile-search-box">
+          <i class="fa-solid fa-magnifying-glass mobile-search-ico"></i>
+          <input type="text" id="mobileSearchInput" placeholder="ابحث عن أي برنامج أو اشتراك رقمي..." autocomplete="off">
+          <button type="button" class="mobile-search-clear" id="mobileSearchClear" style="display:none;" aria-label="مسح البحث">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="mobile-search-dropdown" id="mobileSearchSuggestions"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE DRAWER BACKDROP OVERLAY -->
+  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay" onclick="closeMobileDrawer()"></div>
+
+  <!-- MOBILE NAV DRAWER (PREMIUM SIDE-SHEET) -->
+  <aside class="mobile-drawer-layer" id="mobileDrawer" aria-label="القائمة الجانبية">
+    <!-- Top Bar: Logo & Close Button -->
+    <div class="mobile-drawer-top">
+      <div class="brand-logo">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="brand-logo-img mobile-logo-img">
+        <div class="logo-text-group">
+          <span class="logo-title" style="font-size:1.05rem;">Activkeyz</span>
+          <span class="logo-subtitle" style="font-size:0.65rem;">متجرك الذكي للمنتجات الرقمية</span>
+        </div>
+      </div>
+      <button class="drawer-exit-btn" id="drawerCloseBtn" aria-label="إغلاق القائمة" onclick="closeMobileDrawer()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Scrollable Drawer Body -->
+    <div class="mobile-drawer-body">
+
+      <!-- CUSTOMER AUTH PROFILE CARD -->
+      <div class="mobile-user-card" id="mobileUserCard">
+        <!-- Logged-In State (shown when authenticated) -->
+        <div class="mobile-user-authenticated" id="mobileUserAuthBox" style="display: none;">
+          <div class="mobile-user-profile-row">
+            <div class="mobile-user-avatar-wrap">
+              <img src="logos/default-avatar.jpg" alt="Avatar" class="mobile-user-avatar" id="mobileUserAvatar">
+              <span class="user-status-dot" title="متصل"></span>
+            </div>
+            <div class="mobile-user-info">
+              <div class="mobile-user-name" id="mobileUserName">عميل ActivKeyz</div>
+              <div class="mobile-user-email" id="mobileUserEmail">user@example.com</div>
+              <span class="mobile-user-badge"><i class="fa-solid fa-shield-halved"></i> عضو معتمد</span>
+            </div>
+          </div>
+          <!-- Quick User Action Pills -->
+          <div class="mobile-user-shortcuts">
+            <a href="account.html?tab=orders" class="mobile-user-shortcut-pill">
+              <i class="fa-solid fa-box-archive"></i>
+              <span>طلباتي</span>
+              <span class="shortcut-count" id="mobileOrdersCount" style="display:none;">0</span>
+            </a>
+            <a href="account.html?tab=wallet" class="mobile-user-shortcut-pill">
+              <i class="fa-solid fa-coins"></i>
+              <span>Activkeyz Coins</span>
+            </a>
+            <a href="account.html?tab=profile" class="mobile-user-shortcut-pill">
+              <i class="fa-solid fa-id-card"></i>
+              <span>بياناتي</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Guest State (shown when not logged in) -->
+        <div class="mobile-user-guest" id="mobileUserGuestBox">
+          <div class="guest-card-header">
+            <div class="guest-avatar-ring">
+              <img src="logos/default-avatar.jpg" alt="ActivKeyz Guest" class="guest-avatar-img">
+            </div>
+            <div class="guest-meta">
+              <div class="guest-greeting">مرحباً بك في Activkeyz</div>
+              <p class="guest-subtext">سجل دخولك لمتابعة مشترياتك وتفعيل اشتراكاتك فوراً</p>
+            </div>
+          </div>
+          <a href="account.html" class="btn-guest-login">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            <span>تسجيل الدخول / إنشاء حساب</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation Links: Main Store -->
+      <div class="mobile-links-section">
+        <span class="mobile-menu-section-title">تصفح المتجر</span>
+        <a href="./" class="mobile-link active"><i class="fa-solid fa-house"></i> الرئيسية</a>
+        <a href="category.html?cat=all" class="mobile-link"><i class="fa-solid fa-table-cells-large"></i> جميع المنتجات والاشتراكات</a>
+        <a href="track-order.html" class="mobile-link"><i class="fa-solid fa-truck-fast"></i> تتبع الطلب بالرقم المرجعي</a>
+      </div>
+
+      <!-- Navigation Links: Store Info & Support -->
+      <div class="mobile-links-section">
+        <span class="mobile-menu-section-title">خدمات ومعلومات</span>
+        <a href="about.html" class="mobile-link"><i class="fa-solid fa-circle-info"></i> من نحن</a>
+        <a href="reviews.html" class="mobile-link"><i class="fa-solid fa-star"></i> آراء العملاء وتجاربهم</a>
+        <a href="policy.html" class="mobile-link"><i class="fa-solid fa-shield-halved"></i> الضمان الذهبي والسياسات</a>
+        <a href="contact.html" class="mobile-link"><i class="fa-solid fa-headset"></i> اتصل بنا والدعم الفني</a>
+      </div>
+
+      <!-- Logged-in Logout Action -->
+      <div class="mobile-logout-wrap logged-in-only" id="mobileLogoutWrap" style="display: none;">
+        <button type="button" class="mobile-logout-btn" onclick="handleStoreLogout(event)">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>تسجيل الخروج من الحساب</span>
+        </button>
+      </div>
+
+      <!-- Support & Help Footer inside Drawer -->
+      <div class="mobile-drawer-footer">
+        <a href="https://wa.me/201018501254" target="_blank" rel="noopener" class="drawer-whatsapp-btn">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>مساعدة فورية عبر واتساب</span>
+        </a>
+      </div>
+
+    </div>
+  </aside>
+
+  <main class="page-main-flow">
+
+    <!-- 3. HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+
+        <!-- Column 1 (Far Right in RTL): Vertical Trust Highlights -->
+        <div class="hero-stats-col">
+          <div class="stat-bubble">
+            <div class="stat-figure">شامل</div>
+            <div class="stat-caption">ضمان طوال المدة</div>
+          </div>
+          <div class="stat-bubble">
+            <div class="stat-figure">24/7</div>
+            <div class="stat-caption">دعم فني مخصص</div>
+          </div>
+          <div class="stat-bubble">
+            <div class="stat-figure" style="display:flex; align-items:center; gap:6px;">
+              <i class="fa-solid fa-shield-halved" style="color:var(--cyan-bright); font-size:1.35rem;"></i>
+              <span style="font-size:1.25rem;">كامل</span>
+            </div>
+            <div class="stat-caption">ضمان ذهبي معتمد</div>
+          </div>
+        </div>
+
+        <!-- Column 2 (Center in RTL): Main Pitch & Buttons -->
+        <div class="hero-center-col">
+          <div class="hero-welcome-badge">
+            <span>مرحباً بك في Activkeyz +</span>
+          </div>
+
+          <h1 class="hero-headline">
+            <span class="headline-white">أفضل الاشتراكات والبرامج</span>
+            <span class="headline-cyan">الرقمية في مكان واحد</span>
+          </h1>
+
+          <!-- Live Trust Social Proof Counter Strip (Placed Directly Under Headline With Large SVG Icons) -->
+          <div class="hero-live-counter-strip" id="heroLiveCounters">
+            <!-- Metric 1: Verified Satisfied Clients -->
+            <div class="hero-counter-item">
+              <div class="counter-svg-badge" title="عملاء موثوقون">
+                <svg class="counter-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M22 11l-3 3-1.5-1.5" stroke="#38bdf8" stroke-width="2.4"/>
+                </svg>
+              </div>
+              <div class="counter-text-stack">
+                <div class="counter-num-wrap" dir="ltr"><span class="counter-plus">+</span><span class="counter-val" id="counterClients" data-target="3200">0</span></div>
+                <span class="counter-label">عميل راضٍ وواثق</span>
+              </div>
+            </div>
+
+            <div class="hero-counter-divider" aria-hidden="true"></div>
+
+            <!-- Metric 2: Completed Digital Orders -->
+            <div class="hero-counter-item">
+              <div class="counter-svg-badge" title="طلبات رقمية مكتملة">
+                <svg class="counter-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                  <line x1="12" y1="22.08" x2="12" y2="12"/>
+                  <path d="M17 15l2 2 3-3" stroke="#38bdf8" stroke-width="2.4"/>
+                </svg>
+              </div>
+              <div class="counter-text-stack">
+                <div class="counter-num-wrap" dir="ltr"><span class="counter-plus">+</span><span class="counter-val" id="counterOrders" data-target="7000">0</span></div>
+                <span class="counter-label">طلب رقمي مكتمل</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="hero-lead-text">
+            احصل على منتجاتك الرقمية المفضلة بسرعة وأمان.<br>
+            اشتراكات أصلية · تسليم فوري · أسعار تنافسية · تجربة شراء موثوقة.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#featured-products" class="btn btn-cyan-primary">
+              <span>تسوق الآن</span>
+              <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <a href="#categories" class="btn btn-translucent">
+              <span>استكشف جميع المنتجات</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 3 (Left in RTL): 5 Cards Showcase + Rock Pedestal -->
+        <div class="hero-deck-col">
+
+          <div class="cards-fan-stage" id="cardsFanStage">
+
+            <!-- Card 1: Gaming (Far Left) -->
+            <a href="category.html?cat=gaming" class="fan-card card-pos-1" title="الألعاب والبطاقات والحماية">
+              <svg class="card-led-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <rect class="card-led-track" x="1.2" y="1.2" width="97.6" height="97.6" rx="8" ry="8" pathLength="100" />
+                <rect class="card-led-beam" x="1.2" y="1.2" width="97.6" height="97.6" rx="8" ry="8" pathLength="100" />
+              </svg>
+              <img src="CARD5.jpg" alt="الألعاب والبطاقات والحماية" class="fan-card-img" decoding="async">
+              <div class="fan-card-caption">
+                <span class="caption-sub">اشتراكات الألعاب والاتصال الآمن</span>
+                <h3 class="caption-title">الألعاب والبطاقات</h3>
+              </div>
+              <button class="fan-card-arrow-btn" aria-label="عرض الفئة"><i class="fa-solid fa-arrow-left"></i></button>
+            </a>
+
+            <!-- Card 2: Streaming (Inner Left) -->
+            <a href="category.html?cat=streaming" class="fan-card card-pos-2" title="الترفيه والاشتراكات">
+              <svg class="card-led-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <rect class="card-led-track" x="1.2" y="1.2" width="97.6" height="97.6" rx="8" ry="8" pathLength="100" />
+                <rect class="card-led-beam" x="1.2" y="1.2" width="97.6" height="97.6" rx="8" ry="8" pathLength="100" />
+              </svg>
+              <img src="CARD1.jpg" alt="الترفيه والاشتراكات" class="fan-card-img" decoding="async">
+              <div class="fan-card-caption">
+                <span class="caption-sub">عالم من المحتوى والترفيه</span>
+                <h3 class="caption-title">الترفيه والاشتراكات</h3>
+              </div>
+              <button class="fan-card-arrow-btn" aria-label="عرض الفئة"><i class="fa-solid fa-arrow-left"></i></button>
+            </a>
+
+            <!-- Card 3: AI (Center - Elevated & Active) -->
+            <a href="category.html?cat=ai" class="fan-card card-pos-3 active-center" title="أدوات الذكاء الاصطناعي">
+              <svg class="card-led-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <rect class="card-led-track" x="1.2" y="1.2" width="97.6" height="97.6" rx="8" ry="8" pathLength="100" />
+                <rect class="card-led-beam" x="1.2" y="1.2" width="97.6" height="97.6" rx="8" ry="8" pathLength="100" />
+              </svg>
+              <img src="CARD4.jpg" alt="أدوات الذكاء الاصطناعي" class="fan-card-img" decoding="async">
+              <div class="fan-ai-mark">AI</div>
+              <div class="fan-card-caption">
+                <span class="caption-sub">الجيل القادم من الإنتاجية</span>
+                <h3 class="caption-title">أدوات الذكاء الاصطناعي</h3>
+              </div>
+              <button class="fan-card-arrow-btn center-arrow-btn" aria-label="عرض الفئة"><i class="fa-solid fa-arrow-left"></i></button>
+            </a>
+
+            <!-- Card 4: Creative (Inner Right) -->
+            <a href="category.html?cat=creative" class="fan-card card-pos-4" title="البرامج الإبداعية والتصميم">
+              <svg class="card-led-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <rect class="card-led-track" x="1.2" y="1.2" width="97.6" height="97.6" rx="8" ry="8" pathLength="100" />
+                <rect class="card-led-beam" x="1.2" y="1.2" width="97.6" height="97.6" rx="8" ry="8" pathLength="100" />
+              </svg>
+              <img src="CARD3.jpg" alt="البرامج الإبداعية والتصميم" class="fan-card-img" decoding="async">
+              <div class="fan-card-caption">
+                <span class="caption-sub">للمحترفين والمبدعين</span>
+                <h3 class="caption-title">البرامج الإبداعية</h3>
+              </div>
+              <button class="fan-card-arrow-btn" aria-label="عرض الفئة"><i class="fa-solid fa-arrow-left"></i></button>
+            </a>
+
+            <!-- Card 5: Office (Far Right) -->
+            <a href="category.html?cat=office" class="fan-card card-pos-5" title="برامج المكتب والإنتاجية">
+              <svg class="card-led-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <rect class="card-led-track" x="1.2" y="1.2" width="97.6" height="97.6" rx="8" ry="8" pathLength="100" />
+                <rect class="card-led-beam" x="1.2" y="1.2" width="97.6" height="97.6" rx="8" ry="8" pathLength="100" />
+              </svg>
+              <img src="CARD2.jpg" alt="برامج المكتب والإنتاجية" class="fan-card-img" decoding="async">
+              <div class="fan-card-caption">
+                <span class="caption-sub">إنتاجية وأعمال بلا حدود</span>
+                <h3 class="caption-title">برامج المكتب</h3>
+              </div>
+              <button class="fan-card-arrow-btn" aria-label="عرض الفئة"><i class="fa-solid fa-arrow-left"></i></button>
+            </a>
+
+          </div>
+
+
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. CATEGORY PILLS BAR -->
+    <section class="category-pills-bar" id="categories">
+      <div class="container">
+        <div class="pills-row-wrapper">
+          <a href="category.html?cat=all" class="filter-pill active" id="pillAll">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>الكل</span>
+          </a>
+          <a href="category.html?cat=ai" class="filter-pill" id="pillAi">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>أدوات الذكاء الاصطناعي</span>
+          </a>
+          <a href="category.html?cat=creative" class="filter-pill" id="pillCreative">
+            <i class="fa-solid fa-palette"></i>
+            <span>البرامج الإبداعية</span>
+          </a>
+          <a href="category.html?cat=office" class="filter-pill" id="pillOffice">
+            <i class="fa-solid fa-border-all"></i>
+            <span>برامج المكتب</span>
+          </a>
+          <a href="category.html?cat=streaming" class="filter-pill" id="pillStreaming">
+            <i class="fa-solid fa-play"></i>
+            <span>الترفيه والاشتراكات</span>
+          </a>
+          <a href="category.html?cat=gaming" class="filter-pill" id="pillGaming">
+            <i class="fa-solid fa-gamepad"></i>
+            <span>الألعاب والبطاقات</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FEATURED PRODUCTS ("المنتجات المميزة") -->
+    <section class="featured-products-block" id="featured-products">
+      <div class="container">
+
+        <div class="block-top-heading">
+          <div class="heading-titles-box">
+            <h2 class="block-heading-title">أقسام الاشتراكات المميزة</h2>
+            <p class="block-heading-desc">تصفح أقسام الاشتراكات الرقمية واختر القسم المناسب لاستعراض كافة الباقات
+              والتراخيص الأصلية المعتمدة</p>
+          </div>
+          <a href="category.html?cat=all" class="view-everything-anchor">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>عرض جميع الأقسام والمنتجات</span>
+          </a>
+        </div>
+
+        <!-- 5 Category Gateway Cards (Wide Landscape, Perimeter Neon Glow, No Prices, No Cart Buttons) -->
+        <!-- 5 Category Gateway Cards (Wide Landscape, Perimeter Neon Glow, No Prices, No Cart Buttons) -->
+        <div class="featured-products-row" id="categoriesGrid">
+
+          <!-- 1. AI Assistant Pro (Rightmost in RTL) -->
+          <a href="category.html?cat=ai" class="horizontal-prod-card" data-category="ai"
+            title="استعراض قسم أدوات الذكاء الاصطناعي">
+            <div class="prod-card-bg"
+              style="background-image: url('Robot_head_floating_above_platform_2K_20261008041722.jpg');"></div>
+            <div class="prod-card-body">
+              <div class="prod-info-top">
+                <span class="prod-category-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> أدوات الذكاء الاصطناعي</span>
+                <h3 class="prod-title-main">أدوات الذكاء الاصطناعي</h3>
+                <p class="prod-subtitle-desc">ChatGPT, Gemini, Perplexity والجيل القادم</p>
+              </div>
+              <div class="prod-info-bottom">
+                <span class="prod-card-meta-text">استكشف الاشتراكات</span>
+                <div class="prod-card-action-btn" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></div>
+              </div>
+            </div>
+            <div class="prod-card-neon-underglow"></div>
+          </a>
+
+          <!-- 2. Creative Suite -->
+          <a href="category.html?cat=creative" class="horizontal-prod-card" data-category="creative"
+            title="استعراض قسم البرامج الإبداعية">
+            <div class="prod-card-bg" style="background-image: url('Removing_text_from_image_2K_20261008033655.jpg');">
+            </div>
+            <div class="prod-card-body">
+              <div class="prod-info-top">
+                <span class="prod-category-badge"><i class="fa-solid fa-palette"></i> برامج التصميم</span>
+                <h3 class="prod-title-main">البرامج الإبداعية والتصميم</h3>
+                <p class="prod-subtitle-desc">Adobe, Canva Pro, CapCut وتراخيص المبدعين</p>
+              </div>
+              <div class="prod-info-bottom">
+                <span class="prod-card-meta-text">استكشف الاشتراكات</span>
+                <div class="prod-card-action-btn" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></div>
+              </div>
+            </div>
+            <div class="prod-card-neon-underglow"></div>
+          </a>
+
+          <!-- 3. Office Tools -->
+          <a href="category.html?cat=office" class="horizontal-prod-card" data-category="office"
+            title="استعراض قسم برامج المكتب والإنتاجية">
+            <div class="prod-card-bg"
+              style="background-image: url('Image_enhancement_and_tool_addition_2K_20261008034117.jpg');"></div>
+            <div class="prod-card-body">
+              <div class="prod-info-top">
+                <span class="prod-category-badge"><i class="fa-solid fa-briefcase"></i> برامج المكتب</span>
+                <h3 class="prod-title-main">برامج المكتب والإنتاجية</h3>
+                <p class="prod-subtitle-desc">Microsoft 365, Notion, Zoom Pro و Coursera</p>
+              </div>
+              <div class="prod-info-bottom">
+                <span class="prod-card-meta-text">استكشف الاشتراكات</span>
+                <div class="prod-card-action-btn" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></div>
+              </div>
+            </div>
+            <div class="prod-card-neon-underglow"></div>
+          </a>
+
+          <!-- 4. Streaming Bundle -->
+          <a href="category.html?cat=streaming" class="horizontal-prod-card" data-category="streaming"
+            title="استعراض قسم الترفيه والاشتراكات">
+            <div class="prod-card-bg"
+              style="background-image: url('Enhancing_image_without_text_2K_20261008033501.jpg');"></div>
+            <div class="prod-card-body">
+              <div class="prod-info-top">
+                <span class="prod-category-badge"><i class="fa-solid fa-play"></i> ترفيه وموسيقى</span>
+                <h3 class="prod-title-main">الترفيه والاشتراكات الرقمية</h3>
+                <p class="prod-subtitle-desc">YouTube Premium, Spotify, Prime Video</p>
+              </div>
+              <div class="prod-info-bottom">
+                <span class="prod-card-meta-text">استكشف الاشتراكات</span>
+                <div class="prod-card-action-btn" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></div>
+              </div>
+            </div>
+            <div class="prod-card-neon-underglow"></div>
+          </a>
+
+          <!-- 5. Gaming Pass (Leftmost in RTL) -->
+          <a href="category.html?cat=gaming" class="horizontal-prod-card" data-category="gaming"
+            title="استعراض قسم الألعاب والبطاقات">
+            <div class="prod-card-bg"
+              style="background-image: url('Enhancing_image_without_text_2K_20261008033420.jpg');"></div>
+            <div class="prod-card-body">
+              <div class="prod-info-top">
+                <span class="prod-category-badge"><i class="fa-solid fa-gamepad"></i> ألعاب وحماية</span>
+                <h3 class="prod-title-main">الألعاب والبطاقات والـ VPN</h3>
+                <p class="prod-subtitle-desc">Discord Nitro, NordVPN, ProtonVPN والألعاب</p>
+              </div>
+              <div class="prod-info-bottom">
+                <span class="prod-card-meta-text">استكشف الاشتراكات</span>
+                <div class="prod-card-action-btn" aria-hidden="true"><i class="fa-solid fa-arrow-left"></i></div>
+              </div>
+            </div>
+            <div class="prod-card-neon-underglow"></div>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- DYNAMIC BUNDLES & COMBO OFFERS -->
+    <section class="featured-bundles-section" id="featuredBundlesSection" style="margin: 40px 0;">
+      <div class="container">
+        <div class="block-top-heading">
+          <div class="heading-titles-box">
+            <h2 class="block-heading-title"><i class="fa-solid fa-tags"
+                style="color:var(--cyan-primary); margin-left:8px;"></i> عروض الباقات والكومبو التوفيرية</h2>
+            <p class="block-heading-desc">وفر مبالغ ضخمة باقتناء باقات الاشتراكات المجمعة الأكثر طلباً — تفعيل موحد
+              وضمان شامل</p>
+          </div>
+        </div>
+
+        <div class="featured-bundles-row" id="featuredBundlesGrid"
+          style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px;">
+          <!-- Dynamically populated from Supabase bundles table by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. VALUE PROPOSITIONS BAR -->
+    <section class="value-propositions-section">
+      <div class="container">
+        <div class="value-bar-capsule">
+
+          <div class="value-node">
+            <div class="value-icon-ring"><i class="fa-solid fa-bolt"></i></div>
+            <div class="value-text-wrap">
+              <h4 class="value-header">تسليم فوري</h4>
+              <p class="value-sub">احصل على منتجاتك خلال دقائق</p>
+            </div>
+          </div>
+
+          <div class="value-node">
+            <div class="value-icon-ring"><i class="fa-regular fa-credit-card"></i></div>
+            <div class="value-text-wrap">
+              <h4 class="value-header">دفع آمن وسريع</h4>
+              <p class="value-sub">معلوماتك محمية بالكامل</p>
+            </div>
+          </div>
+
+          <div class="value-node">
+            <div class="value-icon-ring"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="value-text-wrap">
+              <h4 class="value-header">منتجات أصلية وموثوقة</h4>
+              <p class="value-sub">اشتراكات وباقات رقمية موثوقة</p>
+            </div>
+          </div>
+
+          <div class="value-node">
+            <div class="value-icon-ring"><i class="fa-solid fa-headset"></i></div>
+            <div class="value-text-wrap">
+              <h4 class="value-header">دعم فني على مدار الساعة</h4>
+              <p class="value-sub">نحن دائماً هنا لمساعدتك</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. HOW IT WORKS SECTION ("كيف تعمل؟") -->
+    <section class="workflow-steps-section" id="how-it-works">
+      <div class="container workflow-container-flex">
+
+        <!-- Right: Heading in RTL -->
+        <div class="workflow-title-box">
+          <h2 class="workflow-h2">كيف تعمل؟</h2>
+          <p class="workflow-sub">ثلاث خطوات بسيطة للحصول على منتجك الرقمي</p>
+        </div>
+
+        <!-- Left: Workflow Stepper in RTL (1 on right -> 3 on left) -->
+        <div class="workflow-stepper-capsule">
+
+          <div class="workflow-step-node">
+            <div class="step-circle-badge">1</div>
+            <div class="step-glyph"><i class="fa-solid fa-cart-shopping"></i></div>
+            <div class="step-meta">
+              <span class="step-label">اختر المنتج</span>
+              <span class="step-sublabel">تصفح المنتجات واختر ما يناسبك</span>
+            </div>
+          </div>
+
+          <div class="step-dotted-divider"></div>
+
+          <div class="workflow-step-node">
+            <div class="step-circle-badge">2</div>
+            <div class="step-glyph"><i class="fa-solid fa-wallet"></i></div>
+            <div class="step-meta">
+              <span class="step-label">أكمل الدفع</span>
+              <span class="step-sublabel">ادفع بسهولة وأمان عبر وسائل الدفع المتاحة</span>
+            </div>
+          </div>
+
+          <div class="step-dotted-divider"></div>
+
+          <div class="workflow-step-node">
+            <div class="step-circle-badge">3</div>
+            <div class="step-glyph"><i class="fa-solid fa-envelope-circle-check"></i></div>
+            <div class="step-meta">
+              <span class="step-label">استلم عبر البريد</span>
+              <span class="step-sublabel">تصلك بيانات التفعيل إلى بريدك الإلكتروني</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 8. VERIFIED METRICS STATS COUNTER (PRIORITY 6) -->
+    <section class="stats-counter-section" id="verifiedStatsCounter" style="padding: 30px 0; margin-bottom: 20px;">
+      <div class="container">
+        <div class="block-top-heading" style="text-align: center; margin-bottom: 24px; justify-content: center;">
+          <div class="heading-titles-box" style="text-align: center;">
+            <h2 class="block-heading-title">إحصائيات ومؤشرات المنصة</h2>
+            <p class="block-heading-desc">أرقام حقيقية وموثقة تعكس جاهزية وتنوع خدمات متجر Activkeyz الرقمية</p>
+          </div>
+        </div>
+
+        <div class="stats-counter-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+          <div class="stat-counter-card" style="background: rgba(11, 20, 36, 0.75); border: 1px solid rgba(56, 189, 248, 0.22); border-radius: 16px; padding: 20px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <i class="fa-solid fa-box-archive" style="font-size: 1.8rem; color: var(--cyan-primary); margin-bottom: 8px;"></i>
+            <div class="stat-counter-value" style="font-size: 2.2rem; font-weight: 800; color: #ffffff; font-family: var(--font-latin);">
+              <span id="statPublishedProducts">23</span>
+            </div>
+            <div class="stat-counter-label" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 700; margin-top: 4px;">اشتراك رقمي منشور</div>
+          </div>
+
+          <div class="stat-counter-card" style="background: rgba(11, 20, 36, 0.75); border: 1px solid rgba(56, 189, 248, 0.22); border-radius: 16px; padding: 20px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <i class="fa-solid fa-table-cells-large" style="font-size: 1.8rem; color: var(--cyan-primary); margin-bottom: 8px;"></i>
+            <div class="stat-counter-value" style="font-size: 2.2rem; font-weight: 800; color: #ffffff; font-family: var(--font-latin);">
+              <span id="statActiveCategories">5</span>
+            </div>
+            <div class="stat-counter-label" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 700; margin-top: 4px;">أقسام برمجية رئيسية</div>
+          </div>
+
+          <div class="stat-counter-card" style="background: rgba(11, 20, 36, 0.75); border: 1px solid rgba(56, 189, 248, 0.22); border-radius: 16px; padding: 20px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <i class="fa-solid fa-shield-halved" style="font-size: 1.8rem; color: var(--cyan-primary); margin-bottom: 8px;"></i>
+            <div class="stat-counter-value" style="font-size: 2.2rem; font-weight: 800; color: #ffffff; font-family: var(--font-latin);">
+              <span>100%</span>
+            </div>
+            <div class="stat-counter-label" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 700; margin-top: 4px;">ضمان شامل طوال المدة</div>
+          </div>
+
+          <div class="stat-counter-card" style="background: rgba(11, 20, 36, 0.75); border: 1px solid rgba(56, 189, 248, 0.22); border-radius: 16px; padding: 20px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <i class="fa-solid fa-headset" style="font-size: 1.8rem; color: var(--cyan-primary); margin-bottom: 8px;"></i>
+            <div class="stat-counter-value" style="font-size: 2.2rem; font-weight: 800; color: #ffffff; font-family: var(--font-latin);">
+              <span>24/7</span>
+            </div>
+            <div class="stat-counter-label" style="font-size: 0.88rem; color: var(--text-muted); font-weight: 700; margin-top: 4px;">دعم فني وتواصل مستمر</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 9. UNIFIED AUTH-AWARE FOOTER (PRIORITY 3) -->
+  <footer class="main-page-footer" id="mainFooter">
+    <div class="container footer-main-grid">
+
+      <!-- Column 1: Brand & Direct Support -->
+      <div class="footer-col-item brand-column">
+        <a href="./" class="brand-logo" aria-label="Activkeyz الرئيسية">
+          <img src="logos/activkeyzmainlogo.png" alt="Activkeyz" class="brand-logo-img footer-logo-img">
+          <div class="logo-text-group">
+            <span class="logo-title" style="font-size:1.15rem;">Activkeyz</span>
+            <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+          </div>
+        </a>
+        <p class="footer-tagline">
+          منصتك المعتمدة للاشتراكات والخدمات البرمجية بأسعار تنافسية وضمان شامل ودعم فني متواصل.
+        </p>
+        <div class="footer-contact-actions">
+          <a href="https://wa.me/201225106057" target="_blank" class="footer-contact-pill" title="واتساب المبيعات">
+            <i class="fa-brands fa-whatsapp" style="color: #22c55e;"></i>
+            <span>واتساب المبيعات</span>
+          </a>
+          <a href="contact.html" class="footer-contact-pill" title="مركز المساعدة">
+            <i class="fa-solid fa-headset"></i>
+            <span>الدعم الفني</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Public Products & Categories -->
+      <div class="footer-col-item">
+        <h4 class="footer-block-header">الأقسام والمنتجات</h4>
+        <ul class="footer-anchor-list">
+          <li><a href="category.html?cat=all"><i class="fa-solid fa-border-all"></i> جميع المنتجات والاشتراكات</a></li>
+          <li><a href="category.html?cat=ai"><i class="fa-solid fa-wand-magic-sparkles"></i> أدوات الذكاء الاصطناعي</a></li>
+          <li><a href="category.html?cat=creative"><i class="fa-solid fa-palette"></i> البرامج الإبداعية والتصميم</a></li>
+          <li><a href="category.html?cat=office"><i class="fa-solid fa-briefcase"></i> برامج المكتب والإنتاجية</a></li>
+          <li><a href="category.html?cat=streaming"><i class="fa-solid fa-play"></i> الترفيه والمشاهدة</a></li>
+          <li><a href="category.html?cat=gaming"><i class="fa-solid fa-shield-halved"></i> الألعاب وبطاقات الحماية</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Auth-Aware Customer Shortcuts & Public Support -->
+      <div class="footer-col-item footer-auth-col">
+        <h4 class="footer-block-header" id="footerAccountHeading">الحساب والخدمات</h4>
+        
+        <!-- Logged-Out Visitor Shortcuts -->
+        <ul class="footer-anchor-list footer-visitor-links" id="footerVisitorLinks">
+          <li><a href="account.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> تسجيل الدخول أو إنشاء حساب</a></li>
+          <li><a href="track-order.html"><i class="fa-solid fa-truck-fast"></i> تتبع الطلب بالرقم المرجعي</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-circle-question"></i> مركز المساعدة والاستفسارات</a></li>
+          <li><a href="policy.html"><i class="fa-solid fa-shield-halved"></i> شروط الضمان وسياسة الخصوصية</a></li>
+          <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> عن متجر Activkeyz</a></li>
+        </ul>
+
+        <!-- Logged-In Customer Shortcuts -->
+        <ul class="footer-anchor-list footer-customer-links" id="footerCustomerLinks" style="display: none;">
+          <li><a href="account.html?tab=dashboard"><i class="fa-solid fa-gauge-high"></i> لوحة تحكم حسابي</a></li>
+          <li><a href="account.html?tab=orders"><i class="fa-solid fa-box-archive"></i> طلباتي ومشترياتي</a></li>
+          <li><a href="account.html?tab=wallet"><i class="fa-solid fa-coins"></i> محفظة كوينز ActivKeyz</a></li>
+          <li><a href="account.html?tab=profile"><i class="fa-solid fa-id-card"></i> إعدادات وبيانات الحساب</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-headset"></i> تذاكر الدعم والمساعدة</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Authentic Horizontal Payment Logos Strip -->
+    <div class="footer-baseline-strip">
+      <div class="container baseline-strip-inner">
+        <div class="rights-copyright-text">جميع الحقوق محفوظة © 2026 Activkeyz</div>
+        <div class="payment-logos-strip" aria-label="طرق الدفع المعتمدة">
+          <span class="pay-strip-label">طرق الدفع المعتمدة:</span>
+          <img src="logos/vodafone.svg" alt="Vodafone Cash" class="pay-strip-img" loading="lazy" title="فودافون كاش">
+          <img src="logos/instapay.webp" alt="InstaPay" class="pay-strip-img" loading="lazy" title="شبكة إنستاباي مصر">
+          <img src="logos/tether-usdt.svg" alt="USDT TRC20" class="pay-strip-img" loading="lazy" title="Tether USDT TRC20">
+        </div>
+      </div>
+    </div>
+
+    <!-- META / FACEBOOK ADVERTISING COMPLIANCE & LEGAL DISCLAIMER -->
+    <div class="footer-meta-compliance-box">
+      <div class="container compliance-inner">
+        <div class="compliance-links-row">
+          <a href="privacy.html" class="compliance-link">سياسة الخصوصية</a>
+          <span class="compliance-dot">·</span>
+          <a href="terms.html" class="compliance-link">شروط الاستخدام والخدمة</a>
+          <span class="compliance-dot">·</span>
+          <a href="refund.html" class="compliance-link">الضمان والاسترجاع</a>
+          <span class="compliance-dot">·</span>
+          <a href="policy.html" class="compliance-link">مركز السياسات الشامل</a>
+          <span class="compliance-dot">·</span>
+          <a href="contact.html" class="compliance-link">اتصل بنا والدعم الفني</a>
+          <span class="compliance-dot">·</span>
+          <a href="dashboard.html" class="compliance-link footer-admin-lock-link" title="لوحة التحكم الإدارية" target="_blank"><i class="fa-solid fa-lock"></i> لوحة التحكم</a>
+        </div>
+
+        <p class="meta-disclaimer-text">
+          <strong>إخلاء مسؤولية الإعلانات وميتا (Meta / Facebook Disclaimer):</strong><br>
+          هذا الموقع ليس جزءاً من موقع فيسبوك (Facebook™) أو شركة ميتا بلاتفورمز (Meta Platforms, Inc.). بالإضافة إلى ذلك، فإن هذا الموقع غير معتمد أو مدعوم من قِبل فيسبوك بأي شكل من الأشكال. كلمة FACEBOOK هي علامة تجارية مسجلة ومملوكة قانونياً لشركة META PLATFORMS, INC.
+        </p>
+
+        <p class="meta-disclaimer-en">
+          <strong>Meta & FTC Compliance Notice:</strong> This website is an independent e-commerce storefront and is NOT affiliated with, sponsored by, or endorsed by Facebook™ or Meta Platforms, Inc. FACEBOOK™ is a registered trademark of META PLATFORMS, INC. All trademarks, service marks, and company names are property of their respective owners. Activkeyz provides genuine digital subscription licenses under strict authorized reseller practices.
+        </p>
+
+        <p class="trademark-notice-text">
+          جميع أسماء المنتجات والبرامج والشعارات المعروضة هي علامات تجارية مملوكة حصرياً لأصحابها الرسميين (مثل OpenAI, Adobe, Microsoft, Google, CapCut وغيرها). Activkeyz منصة مستقلة توفر حلول واشتراكات رقمية مرخصة مع ضمان تشغيل شامل ودعم فني مخصص.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================
+       MODALS & SLIDING DRAWERS
+       =================================================================== -->
+
+  <!-- CART DRAWER -->
+  <div class="cart-drawer-overlay" id="cartOverlay" onclick="closeCartDrawer()"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span>سلة المشتريات</span>
+        <span class="cart-pill-count" id="cartTotalItems">1</span>
+      </div>
+      <button class="cart-close-btn" onclick="closeCartDrawer()" title="إغلاق">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="cart-drawer-body" id="cartItemsList">
+      <!-- Dynamic -->
+    </div>
+
+    <div class="cart-drawer-footer">
+      <div class="cart-summary-row">
+        <span>المجموع الفرعي:</span>
+        <span id="cartSubtotal">$14.99</span>
+      </div>
+      <div class="cart-summary-row discount-row">
+        <span>خصم العرض (20%):</span>
+        <span id="cartDiscount">-$3.00</span>
+      </div>
+      <div class="cart-summary-row total-row">
+        <span>الإجمالي النهائي:</span>
+        <span class="cart-total-val" id="cartTotalFinal">$11.99</span>
+      </div>
+      <button class="btn btn-cyan-primary btn-block" onclick="window.location.href='checkout.html?from=cart'">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>متابعة إتمام الطلب (Checkout)</span>
+      </button>
+      <button class="btn btn-glass-secondary btn-block" style="margin-top:8px;" onclick="orderCartViaWhatsApp()">
+        <i class="fa-brands fa-whatsapp" style="color:#22c55e;"></i>
+        <span>الطلب الفوري عبر واتساب (01225106057)</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- PRODUCT DETAILS MODAL -->
+  <div class="modal-overlay" id="productModalOverlay" onclick="closeProductModal()"></div>
+  <div class="product-modal" id="productModal">
+    <button class="modal-close-btn" onclick="closeProductModal()" title="إغلاق">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div id="productModalContent">
+      <!-- Dynamic -->
+    </div>
+  </div>
+
+
+
+  <!-- USER ACCOUNT MODAL -->
+  <div class="modal-overlay" id="accountModalOverlay" onclick="closeAccountModal()"></div>
+  <div class="account-modal" id="accountModal">
+    <button class="modal-close-btn" onclick="closeAccountModal()" title="إغلاق">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div class="account-modal-tabs">
+      <button class="account-tab active" id="tabLogin" onclick="switchAccountTab('login')">تسجيل الدخول</button>
+      <button class="account-tab" id="tabRegister" onclick="switchAccountTab('register')">إنشاء حساب جديد</button>
+    </div>
+    <div id="loginFormSection" class="account-tab-body">
+      <form onsubmit="handleUserLogin(event);" style="display:flex; flex-direction:column; gap:14px;">
+        <div class="form-group">
+          <label>البريد الإلكتروني</label>
+          <input type="email" id="loginEmailInput" placeholder="example@mail.com" required value="user@activkeyz.com">
+        </div>
+        <div class="form-group">
+          <label>كلمة المرور</label>
+          <input type="password" id="loginPasswordInput" placeholder="••••••••" required value="••••••••">
+        </div>
+        <button type="submit" class="btn btn-cyan-primary btn-block" style="margin-top:8px;">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>دخول إلى حسابي</span>
+        </button>
+      </form>
+    </div>
+    <div id="registerFormSection" class="account-tab-body" style="display:none;">
+      <form onsubmit="handleUserRegister(event);" style="display:flex; flex-direction:column; gap:14px;">
+        <div class="form-group">
+          <label>الاسم الكامل</label>
+          <input type="text" id="regNameInput" placeholder="محمد أحمد" required>
+        </div>
+        <div class="form-group">
+          <label>البريد الإلكتروني</label>
+          <input type="email" id="regEmailInput" placeholder="example@mail.com" required>
+        </div>
+        <div class="form-group">
+          <label>رقم واتساب للتواصل والاستلام <span style="color:#22c55e; font-weight:800; font-size:0.75rem;">(إلزامي *)</span></label>
+          <div class="phone-input-combo">
+            <select id="regCountryCode" class="phone-country-select" title="اختر رمز الدولة">
+              <option value="+20" selected>🇪🇬 +20 (مصر)</option>
+              <option value="+966">🇸🇦 +966 (السعودية)</option>
+              <option value="+971">🇦🇪 +971 (الإمارات)</option>
+              <option value="+965">🇰🇼 +965 (الكويت)</option>
+              <option value="+974">🇶🇦 +974 (قطر)</option>
+              <option value="+968">🇴🇲 +968 (عُمان)</option>
+              <option value="+973">🇧🇭 +973 (البحرين)</option>
+              <option value="+962">🇯🇴 +962 (الأردن)</option>
+              <option value="+964">🇮🇶 +964 (العراق)</option>
+              <option value="+218">🇱🇾 +218 (ليبيا)</option>
+              <option value="+216">🇹🇳 +216 (تونس)</option>
+              <option value="+213">🇩🇿 +213 (الجزائر)</option>
+              <option value="+212">🇲🇦 +212 (المغرب)</option>
+              <option value="+1">🇺🇸 +1 (أمريكا/كندا)</option>
+              <option value="+44">🇬🇧 +44 (بريطانيا)</option>
+              <option value="">🌐 دولة أخرى</option>
+            </select>
+            <div style="flex:1;">
+              <input type="tel" id="regPhoneInput" placeholder="01XXXXXXXXX" required autocomplete="tel">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>كلمة المرور</label>
+          <input type="password" id="regPasswordInput" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-cyan-primary btn-block" style="margin-top:8px;">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>إنشاء حساب فوري</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- PRODUCT DATABASE & DATA STORE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="products-data.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="nexa-ui.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

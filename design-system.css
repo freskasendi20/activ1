@@ -1,0 +1,1299 @@
+/* ===================================================================
+   ACTIVKEYZ - UNIFIED GLOBAL DESIGN SYSTEM (design-system.css)
+   Single Source of Truth for Design Tokens, Typography, Spacing,
+   Standardized Buttons, Form Inputs, Cards, and Responsive Rules.
+   =================================================================== */
+
+:root {
+  /* --- 1. COLOR TOKENS (Neutral Dark + Restrained Cyan) --- */
+  --color-bg-base: #030712;
+  --color-bg-surface: #060e1e;
+  --color-bg-card: rgba(10, 20, 38, 0.78);
+  --color-bg-card-hover: rgba(15, 28, 54, 0.9);
+  --color-bg-input: rgba(5, 12, 24, 0.88);
+  --color-bg-elevated: #0d1b32;
+
+  /* Restrained Cyan Brand Accents */
+  --color-primary: #38bdf8;
+  --color-primary-hover: #0ea5e9;
+  --color-primary-dark: #0284c7;
+  --color-primary-subtle: rgba(56, 189, 248, 0.12);
+  --color-primary-glow: 0 0 12px rgba(56, 189, 248, 0.25);
+
+  /* Functional Accents */
+  --color-success: #22c55e;
+  --color-success-subtle: rgba(34, 197, 94, 0.12);
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-danger-subtle: rgba(239, 68, 68, 0.12);
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #1eb956;
+
+  /* Typography Colors */
+  --color-text-white: #ffffff;
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  --color-text-dim: #475569;
+
+  /* Borders & Dividers */
+  --border-subtle: rgba(56, 189, 248, 0.16);
+  --border-medium: rgba(56, 189, 248, 0.28);
+  --border-focus: #38bdf8;
+  --border-glass: rgba(255, 255, 255, 0.08);
+
+  /* --- 2. GLOBAL SPACING SCALE (4 / 8 / 12 / 16 / 24 / 32 / 48) --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* Page Gutters */
+  --gutter-mobile: 16px;
+  --gutter-desktop: 24px;
+  --container-max-w: 1280px;
+
+  /* --- 3. STANDARDIZED BORDER RADIUS --- */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 10px;      /* Standard for buttons & inputs */
+  --radius-lg: 14px;      /* Standard for cards & widgets */
+  --radius-xl: 18px;      /* Main hero / modal containers */
+  --radius-badge: 6px;
+
+  /* --- 4. STANDARDIZED BUTTON & INPUT HEIGHTS --- */
+  --btn-h-sm: 40px;       /* Compact action / chip */
+  --btn-h-md: 44px;       /* Standard secondary / tool */
+  --btn-h-lg: 48px;       /* Prominent primary CTA */
+  --input-h-md: 44px;     /* Standard input */
+  --input-h-lg: 48px;     /* Prominent checkout / console input */
+
+  /* --- 5. GLOBAL TYPOGRAPHY SCALE --- */
+  --font-arabic: 'IBM Plex Sans Arabic', 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-latin: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* Font Sizes */
+  --text-page-title: 24px;     /* Mobile: 22px */
+  --text-section-title: 19px;  /* Mobile: 17px */
+  --text-product-title: 17px;  /* Mobile: 16px */
+  --text-body: 14px;
+  --text-label: 13px;
+  --text-btn: 14px;
+  --text-helper: 12px;
+  --text-micro: 11px;
+
+  /* Font Weights */
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-black: 800;
+
+  /* Shadows (Subtle, professional, no blinding neon) */
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-dropdown: 0 10px 30px rgba(0, 0, 0, 0.65), 0 0 1px rgba(56, 189, 248, 0.3);
+}
+
+/* ===================================================================
+   STANDARDIZED BUTTON SYSTEM
+   Variants: Primary, Secondary, Outline, Ghost, Destructive, WhatsApp, Icon
+   Sizes: sm (40px), md (44px), lg (48px)
+   =================================================================== */
+
+/* Base Button Rule */
+.btn,
+button.btn,
+a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--btn-h-md);
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-md);
+  font-family: var(--font-arabic);
+  font-size: var(--text-btn);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  white-space: nowrap;
+  user-select: none;
+  text-align: center;
+}
+
+.btn:active {
+  transform: scale(0.985);
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.35);
+}
+
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Button Sizing Classes */
+.btn-sm {
+  height: var(--btn-h-sm) !important;
+  padding: 0 var(--space-3) !important;
+  font-size: var(--text-label) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+.btn-md {
+  height: var(--btn-h-md) !important;
+  padding: 0 var(--space-4) !important;
+  font-size: var(--text-btn) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.btn-lg {
+  height: var(--btn-h-lg) !important;
+  padding: 0 var(--space-5) !important;
+  font-size: 15px !important;
+  font-weight: var(--fw-black) !important;
+  border-radius: var(--radius-md) !important;
+}
+
+.btn-block {
+  width: 100% !important;
+  display: flex !important;
+}
+
+/* --- BUTTON VARIANTS --- */
+
+/* 1. Primary CTA (Clear, High-Converting Cyan) */
+.btn-primary,
+.btn.btn-primary,
+.btn-cyan-primary,
+.btn-console-buy-now,
+.btn-clean-submit,
+.btn-step-next {
+  background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35) !important;
+  font-weight: var(--fw-black) !important;
+}
+
+.btn-primary:hover,
+.btn.btn-primary:hover,
+.btn-cyan-primary:hover,
+.btn-console-buy-now:hover,
+.btn-clean-submit:hover,
+.btn-step-next:hover {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9) !important;
+  color: #030712 !important;
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.45) !important;
+}
+
+/* 2. Secondary (Dark Glass Surface with Cyan Border) */
+.btn-secondary,
+.btn.btn-secondary,
+.btn-glass-secondary,
+.btn-console-cart,
+.btn-step-prev {
+  background: rgba(14, 25, 48, 0.8) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--border-medium) !important;
+  box-shadow: var(--shadow-subtle) !important;
+}
+
+.btn-secondary:hover,
+.btn.btn-secondary:hover,
+.btn-glass-secondary:hover,
+.btn-console-cart:hover,
+.btn-step-prev:hover {
+  background: rgba(20, 36, 68, 0.95) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* 3. Outline (Subtle Border, Transparent Surface) */
+.btn-outline,
+.btn.btn-outline,
+.btn-translucent,
+.clean-back-btn {
+  background: transparent !important;
+  color: var(--color-primary) !important;
+  border: 1px solid var(--border-medium) !important;
+}
+
+.btn-outline:hover,
+.btn.btn-outline:hover,
+.btn-translucent:hover,
+.clean-back-btn:hover {
+  background: var(--color-primary-subtle) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* 4. Ghost (No Border, Clean Clickable Label) */
+.btn-ghost,
+.btn.btn-ghost,
+.dash-btn-ghost {
+  background: transparent !important;
+  color: var(--color-text-secondary) !important;
+  border: 1px solid transparent !important;
+}
+
+.btn-ghost:hover,
+.btn.btn-ghost:hover,
+.dash-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: var(--color-text-white) !important;
+}
+
+/* 5. Destructive (Red Subdued) */
+.btn-destructive,
+.btn.btn-destructive {
+  background: var(--color-danger-subtle) !important;
+  color: var(--color-danger) !important;
+  border: 1px solid rgba(239, 68, 68, 0.35) !important;
+}
+
+.btn-destructive:hover,
+.btn.btn-destructive:hover {
+  background: var(--color-danger) !important;
+  color: #ffffff !important;
+}
+
+/* 6. WhatsApp Action (Distinctive, Safe Green) */
+.btn-whatsapp,
+.btn.btn-whatsapp,
+.btn-support-wa {
+  background: rgba(34, 197, 94, 0.12) !important;
+  color: var(--color-whatsapp) !important;
+  border: 1px solid rgba(34, 197, 94, 0.35) !important;
+  box-shadow: none !important;
+}
+
+.btn-whatsapp:hover,
+.btn.btn-whatsapp:hover,
+.btn-support-wa:hover {
+  background: var(--color-whatsapp) !important;
+  color: #022c22 !important;
+  border-color: var(--color-whatsapp) !important;
+}
+
+/* 7. Icon-Only Action */
+.btn-icon {
+  width: var(--btn-h-md);
+  height: var(--btn-h-md);
+  padding: 0 !important;
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.btn-icon.btn-sm {
+  width: var(--btn-h-sm) !important;
+  height: var(--btn-h-sm) !important;
+  border-radius: var(--radius-sm) !important;
+}
+
+.btn-icon i,
+.btn i {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* ===================================================================
+   STANDARDIZED FORM INPUTS & LABELS
+   =================================================================== */
+
+.form-group,
+.delivery-field-unit,
+.clean-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  text-align: right;
+  width: 100%;
+}
+
+.form-label,
+.delivery-label,
+.clean-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-label);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.form-label .field-req,
+.delivery-label .field-req {
+  font-size: var(--text-helper);
+  font-weight: var(--fw-bold);
+}
+
+.form-input,
+.delivery-input-wrapper input:not(#deliveryWhatsappPhone),
+.clean-input-box input:not(#customerPhone),
+.clean-promo-input-wrap input {
+  width: 100%;
+  height: var(--input-h-md);
+  background: var(--color-bg-input) !important;
+  border: 1px solid var(--border-medium) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 0 var(--space-4) !important;
+  color: var(--color-text-white) !important;
+  font-family: var(--font-arabic) !important;
+  font-size: var(--text-body) !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+}
+
+.form-input:focus,
+.delivery-input-wrapper input:focus,
+.clean-input-box input:focus,
+.clean-promo-input-wrap input:focus {
+  border-color: var(--color-primary) !important;
+  background: rgba(8, 18, 36, 0.98) !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2) !important;
+}
+
+.form-input::placeholder,
+.delivery-input-wrapper input::placeholder,
+.clean-input-box input::placeholder {
+  color: var(--color-text-muted) !important;
+  font-size: var(--text-label) !important;
+}
+
+.form-hint,
+.delivery-hint,
+.clean-field-hint {
+  font-size: var(--text-helper);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+/* ===================================================================
+   STANDARDIZED QUANTITY STEPPER
+   Matches height and radius of adjacent buttons
+   =================================================================== */
+
+.console-stepper,
+.cart-qty-stepper,
+.quantity-stepper {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: var(--btn-h-md) !important;
+  background: var(--color-bg-input) !important;
+  border: 1px solid var(--border-medium) !important;
+  border-radius: var(--radius-md) !important;
+  padding: 2px !important;
+  box-sizing: border-box !important;
+  user-select: none !important;
+}
+
+.console-stepper .stepper-btn,
+.cart-qty-stepper .stepper-btn,
+.quantity-stepper .stepper-btn {
+  width: 36px !important;
+  height: 36px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: none !important;
+  border-radius: var(--radius-xs) !important;
+  color: var(--color-text-primary) !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.console-stepper .stepper-btn:hover,
+.cart-qty-stepper .stepper-btn:hover {
+  background: var(--color-primary-subtle) !important;
+  color: var(--color-primary) !important;
+}
+
+.console-stepper .stepper-val,
+.cart-qty-stepper .stepper-val,
+.quantity-stepper .stepper-val {
+  width: 44px !important;
+  height: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  color: var(--color-text-white) !important;
+  font-family: var(--font-latin) !important;
+  font-size: 15px !important;
+  font-weight: var(--fw-bold) !important;
+  text-align: center !important;
+  outline: none !important;
+  padding: 0 !important;
+  -moz-appearance: textfield;
+}
+
+.console-stepper .stepper-val::-webkit-outer-spin-button,
+.console-stepper .stepper-val::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ===================================================================
+   STANDARDIZED SURFACES & CARDS
+   =================================================================== */
+
+.card,
+.nexa-card,
+.product-card,
+.console-pricing-card,
+.checkout-order-card,
+.widget-box {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-card) !important;
+  box-sizing: border-box !important;
+}
+
+/* ===================================================================
+   STANDARDIZED COMPACT MOBILE HEADER & TOPBAR
+   =================================================================== */
+
+.top-announcement-bar {
+  background: #020617 !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  padding: 6px 0 !important;
+  font-size: 12px !important;
+}
+
+.main-header {
+  background: rgba(3, 7, 18, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid var(--border-subtle) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 769px) {
+  .main-header {
+    height: 64px !important;
+  }
+  .header-inner {
+    height: 64px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-header {
+    height: auto !important;
+    min-height: 56px !important;
+  }
+  .header-inner {
+    height: 54px !important;
+  }
+}
+
+.header-inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: var(--space-3) !important;
+}
+
+.brand-logo-img {
+  height: 34px !important;
+  width: auto !important;
+  object-fit: contain !important;
+}
+
+.logo-title {
+  font-size: 18px !important;
+  font-weight: var(--fw-black) !important;
+  color: var(--color-text-white) !important;
+}
+
+.logo-subtitle {
+  font-size: 10.5px !important;
+  color: var(--color-text-muted) !important;
+}
+
+/* Standardized Mobile Action Buttons (38px Touch Targets) */
+.header-btn {
+  height: 38px !important;
+  min-width: 38px !important;
+  padding: 0 var(--space-2) !important;
+  border-radius: var(--radius-sm) !important;
+  background: rgba(15, 23, 42, 0.6) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 13px !important;
+  gap: 5px !important;
+}
+
+.header-btn:hover {
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  background: var(--color-primary-subtle) !important;
+}
+
+.mobile-menu-burger {
+  height: 38px !important;
+  width: 38px !important;
+  border-radius: var(--radius-md) !important;
+  background: rgba(14, 25, 48, 0.7) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-primary) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Cart Button with Subpixel Absolute Circular Badge */
+.header-btn.cart-toggle-btn {
+  position: relative !important;
+  width: 38px !important;
+  padding: 0 !important;
+}
+
+.cart-pill-count {
+  position: absolute !important;
+  top: -4px !important;
+  left: -4px !important;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  border-radius: 50% !important;
+  background: var(--color-primary) !important;
+  color: #030712 !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  border: 1.5px solid #030712 !important;
+  padding: 0 !important;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5) !important;
+  z-index: 5 !important;
+}
+
+/* ===================================================================
+   STANDARDIZED PRODUCT CARD BUTTONS (Catalog & Homepage)
+   Height: 40px, Radius: 10px, Aligned Side-by-Side
+   =================================================================== */
+
+.catalog-actions-cluster {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--space-2) !important;
+}
+
+.btn-card-action,
+.btn-card-details,
+.catalog-detail-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  height: var(--btn-h-sm) !important; /* 40px */
+  padding: 0 var(--space-4) !important;
+  border-radius: var(--radius-md) !important; /* 10px */
+  font-family: var(--font-arabic) !important;
+  font-size: 13px !important;
+  font-weight: var(--fw-bold) !important;
+  line-height: 1 !important;
+  background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(56, 189, 248, 0.4) !important;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3) !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-card-action:hover,
+.btn-card-details:hover,
+.catalog-detail-btn:hover {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9) !important;
+  color: #030712 !important;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.45) !important;
+}
+
+.btn-card-quick-cart,
+.btn-card-cart,
+.catalog-buy-btn {
+  width: var(--btn-h-sm) !important;  /* 40px */
+  height: var(--btn-h-sm) !important; /* 40px */
+  border-radius: var(--radius-md) !important; /* 10px */
+  background: rgba(14, 25, 48, 0.8) !important;
+  color: var(--color-primary) !important;
+  border: 1px solid var(--border-medium) !important;
+  box-shadow: var(--shadow-subtle) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+  padding: 0 !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-card-quick-cart:hover,
+.btn-card-cart:hover,
+.catalog-buy-btn:hover {
+  background: var(--color-primary-subtle) !important;
+  border-color: var(--color-primary) !important;
+  color: #ffffff !important;
+}
+
+.btn-card-quick-cart i,
+.btn-card-cart i,
+.catalog-buy-btn i {
+  font-size: 15px !important;
+}
+
+/* ===================================================================
+   STANDARDIZED HERO ACTION BUTTONS
+   =================================================================== */
+
+.hero-cta-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--space-3) !important;
+  margin-top: var(--space-4) !important;
+}
+
+.hero-cta-group .btn {
+  height: var(--btn-h-lg) !important; /* 48px */
+  border-radius: var(--radius-md) !important; /* 10px */
+  padding: 0 var(--space-5) !important;
+  font-size: 14.5px !important;
+  font-weight: var(--fw-bold) !important;
+}
+
+/* ===================================================================
+   STANDARDIZED CATEGORY FILTER PILLS
+   =================================================================== */
+
+.filter-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: var(--space-2) !important;
+  height: var(--btn-h-sm) !important; /* 40px */
+  padding: 0 var(--space-3) !important;
+  border-radius: var(--radius-md) !important; /* 10px */
+  background: rgba(14, 25, 48, 0.7) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--color-text-secondary) !important;
+  font-family: var(--font-arabic) !important;
+  font-size: var(--text-label) !important;
+  font-weight: var(--fw-semibold) !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.filter-pill:hover,
+.filter-pill.active {
+  background: var(--color-primary-subtle) !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-text-white) !important;
+}
+
+.filter-pill.active {
+  background: rgba(14, 165, 233, 0.2) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.25) !important;
+}
+
+/* ===================================================================
+   STANDARDIZED CHECKOUT STEP NAVIGATION & PROMO
+   =================================================================== */
+
+.step-nav-footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: var(--space-3) !important;
+  margin-top: var(--space-5) !important;
+  padding-top: var(--space-4) !important;
+  border-top: 1px solid var(--border-subtle) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.btn-step-next {
+  height: var(--btn-h-lg) !important; /* 48px */
+  border-radius: var(--radius-md) !important; /* 10px */
+  padding: 0 var(--space-5) !important;
+  font-size: 14.5px !important;
+  font-weight: var(--fw-black) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: var(--space-2) !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+}
+
+.btn-step-prev {
+  height: var(--btn-h-md) !important; /* 44px */
+  border-radius: var(--radius-md) !important; /* 10px */
+  padding: 0 var(--space-4) !important;
+  font-size: 13.5px !important;
+  font-weight: var(--fw-bold) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: var(--space-2) !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+}
+
+.clean-promo-input-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: var(--space-2) !important;
+  width: 100% !important;
+}
+
+.clean-promo-input-wrap input {
+  height: var(--input-h-md) !important; /* 44px */
+  border-radius: var(--radius-md) !important; /* 10px */
+  flex: 1 !important;
+}
+
+.btn-clean-promo {
+  height: var(--btn-h-md) !important; /* 44px */
+  border-radius: var(--radius-md) !important; /* 10px */
+  padding: 0 var(--space-4) !important;
+  font-size: 13.5px !important;
+  font-weight: var(--fw-bold) !important;
+  flex-shrink: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* ===================================================================
+   STANDARDIZED MOBILE TYPOGRAPHY, BUTTONS & SPACING RULES
+   =================================================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --text-page-title: 21px;
+    --text-section-title: 17px;
+    --text-product-title: 16px;
+    --space-5: 16px;
+    --space-6: 24px;
+    --space-7: 32px;
+  }
+
+  body {
+    font-size: 13.5px !important;
+    line-height: 1.5 !important;
+  }
+
+  .container {
+    padding-left: var(--gutter-mobile) !important;
+    padding-right: var(--gutter-mobile) !important;
+  }
+
+  /* Compact section vertical paddings (Shopify clean style) */
+  section,
+  .product-showcase-section,
+  .hero-section,
+  .clean-checkout-main {
+    padding-top: var(--space-4) !important;
+    padding-bottom: var(--space-5) !important;
+  }
+
+  /* Clean Compact Headings */
+  h1, .hero-headline, .hero-title, .mobile-title, .console-title, .category-hero-title {
+    font-size: var(--text-page-title) !important;
+    line-height: 1.3 !important;
+    margin-bottom: var(--space-2) !important;
+  }
+
+  h2, .section-title, .specs-card-title, .block-heading-title {
+    font-size: var(--text-section-title) !important;
+    line-height: 1.35 !important;
+    margin-bottom: var(--space-2) !important;
+  }
+
+  h3, .product-card-title, .prod-title-main, .catalog-card-title {
+    font-size: var(--text-product-title) !important;
+    line-height: 1.35 !important;
+  }
+
+  /* Compact Mobile Hero CTA Buttons */
+  .hero-cta-group {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: var(--space-3) auto 0 auto !important;
+    gap: var(--space-2) !important;
+  }
+
+  .hero-cta-group .btn {
+    width: 100% !important;
+    height: var(--btn-h-lg) !important; /* 48px */
+    font-size: 14px !important;
+  }
+
+  /* Compact Hero Search Bar on Mobile */
+  .mobile-search-bar-row {
+    padding: var(--space-2) 0 !important;
+  }
+
+  .mobile-search-box {
+    height: 42px !important;
+    border-radius: var(--radius-md) !important;
+  }
+
+  /* Compact Announcement Bar */
+  .top-announcement-bar {
+    height: 32px !important;
+    padding: 0 10px !important;
+    overflow: hidden !important;
+  }
+
+  .announcement-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+
+  .announcement-offer-capsule {
+    border-radius: var(--radius-sm) !important;
+    padding: 2px 7px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .announcement-msg {
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
+    color: var(--color-text-primary) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .announcement-countdown {
+    display: none !important;
+  }
+
+  /* Compact Category Page Hero & Stats */
+  .category-hero-header {
+    padding: 14px 0 10px 0 !important;
+  }
+
+  .category-hero-badge {
+    padding: 2.5px 8px !important;
+    font-size: 11px !important;
+    border-radius: var(--radius-sm) !important;
+    margin-bottom: 6px !important;
+  }
+
+  .category-hero-desc {
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+    max-width: 320px !important;
+    margin: 0 auto 10px auto !important;
+    color: var(--color-text-secondary) !important;
+  }
+
+  .category-quick-stats {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+
+  .quick-stat-pill {
+    padding: 3.5px 8px !important;
+    font-size: 11px !important;
+    border-radius: var(--radius-sm) !important;
+    background: rgba(14, 25, 48, 0.6) !important;
+    border: 1px solid var(--border-subtle) !important;
+  }
+
+  /* Compact Catalog Toolbar */
+  .catalog-toolbar-row {
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: stretch !important;
+  }
+
+  .catalog-search-wrap input,
+  .catalog-sort-select {
+    height: 40px !important;
+    border-radius: var(--radius-md) !important;
+    font-size: 13px !important;
+  }
+
+  .catalog-count-pill {
+    align-self: center !important;
+    font-size: 11.5px !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 3px 10px !important;
+  }
+
+  /* Compact Catalog Product Cards */
+  .catalog-card {
+    border-radius: var(--radius-lg) !important; /* 14px */
+    overflow: hidden !important;
+  }
+
+  .catalog-card-showcase {
+    height: 165px !important;
+  }
+
+  .catalog-card-hero-img {
+    max-height: 135px !important;
+    max-width: 160px !important;
+  }
+
+  .catalog-card-body {
+    padding: 10px 12px 6px 12px !important;
+  }
+
+  .catalog-card-title {
+    font-size: 15px !important;
+    line-height: 1.3 !important;
+  }
+
+  .catalog-card-desc {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+  }
+
+  .catalog-card-footer {
+    padding: 8px 12px 12px 12px !important;
+  }
+
+  .catalog-price-main {
+    font-size: 17px !important;
+    font-weight: 800 !important;
+  }
+
+  .catalog-price-secondary {
+    font-size: 11.5px !important;
+  }
+
+  /* Mobile Checkout Step Navigation */
+  .step-nav-footer {
+    flex-direction: column !important;
+    gap: var(--space-2) !important;
+  }
+
+  .btn-step-next {
+    order: 1 !important;
+    width: 100% !important;
+    height: var(--btn-h-lg) !important; /* 48px */
+  }
+
+  .btn-step-prev {
+    order: 2 !important;
+    width: 100% !important;
+    height: var(--btn-h-md) !important; /* 44px */
+  }
+}
+
+/* ===================================================================
+   15. GLOBAL CART DRAWER & Z-INDEX MASTER RULES
+   =================================================================== */
+.cart-drawer-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(0, 0, 0, 0.78) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  z-index: 99998 !important;
+}
+
+.cart-drawer {
+  position: fixed !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  z-index: 99999 !important;
+  background: rgba(7, 14, 26, 0.98) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  box-shadow: 10px 0 50px rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Ensure sticky buy bar on mobile is hidden when cart drawer is open */
+.cart-drawer.active ~ .mobile-sticky-buy-bar,
+body.cart-drawer-open .mobile-sticky-buy-bar {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+/* Ensure toast does not obstruct cart drawer header when cart is active */
+.cart-drawer.active ~ .toast-container,
+body.cart-drawer-open .toast-container {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+@media (max-width: 640px) {
+  .cart-drawer {
+    width: 100% !important;
+    max-width: 100% !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 100dvh !important;
+    border-right: none !important;
+  }
+
+  .cart-drawer-header {
+    padding-top: max(16px, env(safe-area-inset-top)) !important;
+    min-height: 58px !important;
+    background: rgba(8, 16, 32, 0.98) !important;
+  }
+
+  .cart-drawer-footer {
+    padding-bottom: max(20px, env(safe-area-inset-bottom)) !important;
+    background: rgba(5, 10, 20, 0.98) !important;
+  }
+}
+
+/* ===================================================================
+   16. SLEEK & COMPACT INTERNATIONAL PHONE INPUT
+   =================================================================== */
+.iti {
+  width: 100% !important;
+  display: block !important;
+  position: relative !important;
+}
+
+.iti__country-container {
+  left: 0 !important;
+  right: auto !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  z-index: 5 !important;
+}
+
+.clean-input-box.iti-input-container .iti__selected-country,
+.iti-delivery-phone-box .iti__selected-country,
+.iti--rtl .iti__selected-country,
+.iti__selected-country {
+  height: 100% !important;
+  background: rgba(14, 23, 42, 0.95) !important;
+  border: none !important;
+  border-right: 1.5px solid rgba(56, 189, 248, 0.3) !important;
+  border-radius: var(--radius-md) 0 0 var(--radius-md) !important;
+  padding: 0 8px !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  direction: ltr !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+}
+
+.iti__flag {
+  transform: scale(0.9) !important;
+}
+
+.iti__selected-dial-code {
+  color: var(--cyan-bright) !important;
+  font-weight: 700 !important;
+  font-family: var(--font-latin, sans-serif) !important;
+  font-size: 0.85rem !important;
+  margin-left: 2px !important;
+  direction: ltr !important;
+}
+
+.clean-input-box.iti-input-container input#customerPhone,
+.iti-delivery-phone-box input#deliveryWhatsappPhone,
+input#ticketPhone {
+  padding-left: var(--iti-phone-pad, 108px) !important;
+  padding-right: 12px !important;
+  height: 100% !important;
+  direction: ltr !important;
+  text-align: left !important;
+  font-family: var(--font-latin, sans-serif) !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem !important;
+}
+
+/* Prevent popup jumping to top; anchor directly under input */
+.iti__dropdown-content,
+.iti--fullscreen-popup .iti__dropdown-content {
+  position: absolute !important;
+  inset: auto !important;
+  top: calc(100% + 4px) !important;
+  left: 0 !important;
+  right: auto !important;
+  width: 310px !important;
+  max-width: calc(100vw - 32px) !important;
+  height: auto !important;
+  background: #091224 !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.4) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.9), 0 0 20px rgba(56, 189, 248, 0.2) !important;
+  color: #ffffff !important;
+  z-index: 999999 !important;
+  overflow: hidden !important;
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+.iti__search-input {
+  height: 38px !important;
+  background: #040814 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0 12px !important;
+  font-family: var(--font-arabic, sans-serif) !important;
+  font-size: 0.85rem !important;
+  outline: none !important;
+  width: calc(100% - 16px) !important;
+  margin: 8px auto !important;
+  display: block !important;
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+.iti__country-list {
+  max-height: 220px !important;
+  direction: rtl !important;
+}
+
+.iti__country {
+  padding: 8px 12px !important;
+  font-size: 0.85rem !important;
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* ===================================================================
+   17. CHECKOUT MOBILE HIERARCHY (Form First, Summary Second)
+   =================================================================== */
+@media (max-width: 992px) {
+  .clean-checkout-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: var(--space-4) !important;
+  }
+
+  .checkout-form-card {
+    order: 1 !important;
+    width: 100% !important;
+  }
+
+  .checkout-order-card {
+    order: 2 !important;
+    width: 100% !important;
+  }
+
+  .clean-header-actions .clean-back-btn,
+  .clean-header-actions .clean-wa-btn {
+    width: var(--btn-h-compact, 38px) !important;
+    height: var(--btn-h-compact, 38px) !important;
+    padding: 0 !important;
+    border-radius: var(--radius-md) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  .clean-header-actions .clean-back-btn i,
+  .clean-header-actions .clean-wa-btn i {
+    font-size: 1rem !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  .clean-header-actions .clean-back-btn span,
+  .clean-header-actions .clean-wa-btn span {
+    display: none !important;
+  }
+}
+
+/* ===================================================================
+   17. DISCREET FOOTER ADMIN PORTAL LINK
+   =================================================================== */
+.footer-admin-lock-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-dim, #64748b) !important;
+  font-size: 0.78rem !important;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+  margin-right: 4px;
+}
+
+.footer-admin-lock-link i {
+  font-size: 0.75rem;
+  color: var(--cyan-primary);
+  opacity: 0.8;
+}
+
+.footer-admin-lock-link:hover {
+  color: #ffffff !important;
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.footer-admin-lock-link:hover i {
+  opacity: 1;
+}
+
+

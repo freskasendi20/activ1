@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اتصل بنا ومركز المساعدة | Activkeyz</title>
+  <meta name="description"
+    content="تواصل مع فريق الدعم الفني في Activkeyz عبر واتساب، تليجرام، أو البريد الإلكتروني. متاحون 24/7 لمساعدتك في تفعيل اشتراكاتك.">
+  <meta name="google" content="notranslate">
+  <link rel="icon" type="image/png" href="logos/activkeyzsecondlogo.png">
+
+  <!-- Fonts: IBM Plex Sans Arabic (Primary) + Latin Complement -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&family=Cairo:wght@600;700;800&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/css/intlTelInput.min.css">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="site-pages.css">
+</head>
+
+<body>
+
+  <!-- BACKGROUND LAYERS -->
+  <div class="page-background" aria-hidden="true">
+    <div class="stars-layer"></div>
+    <div class="hero-bg-art" style="height: 520px; opacity: 0.8;"></div>
+    <div class="lower-bg-art" style="top: 450px; opacity: 0.2;"></div>
+    <div class="ambient-glow-top"></div>
+    <div class="ambient-glow-bottom"></div>
+  </div>
+
+  <!-- 1. ANNOUNCEMENT BAR -->
+  <div class="top-announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-spacer"></div>
+
+      <div class="announcement-msg">
+        <span class="gift-icon"><i class="fa-solid fa-headset"></i></span>
+        <span>فريق الدعم الفني متواجد الآن للرد على استفساراتكم ومساعدتكم في التفعيل!</span>
+      </div>
+
+      <div class="announcement-countdown" id="countdownTimer">
+        <div class="countdown-slot"><span class="countdown-num" id="hoursVal">11</span><span
+            class="countdown-txt">ساعة</span></div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-slot"><span class="countdown-num" id="minutesVal">45</span><span
+            class="countdown-txt">دقيقة</span></div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-slot"><span class="countdown-num" id="secondsVal">12</span><span
+            class="countdown-txt">ثانية</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MAIN HEADER -->
+  <header class="main-header" id="mainHeader">
+    <div class="container header-inner">
+
+      <!-- Brand Logo -->
+      <a href="./" class="brand-logo">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="brand-logo-img">
+        <div class="logo-text-group">
+          <span class="logo-title">Activkeyz</span>
+          <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu">
+        <a href="./" class="nav-item">الرئيسية</a>
+        <a href="category.html?cat=all" class="nav-item">المنتجات</a>
+        <a href="about.html" class="nav-item">من نحن</a>
+        <a href="reviews.html" class="nav-item">آراء العملاء</a>
+        <a href="blog.html" class="nav-item">المدونة</a>
+        <a href="policy.html" class="nav-item">السياسات والضمان</a>
+        <a href="contact.html" class="nav-item active">اتصل بنا</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="header-actions-wrap">
+        <a href="contact.html" class="header-btn user-btn" style="border-color:var(--cyan-bright);">
+          <i class="fa-solid fa-headset"></i>
+          <span>الدعم الفني</span>
+        </a>
+        <a href="category.html?cat=all" class="header-btn cart-toggle-btn" title="تصفح المنتجات">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-pill-count" id="cartBadgeCount">0</span>
+        </a>
+        <button class="mobile-menu-burger" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div class="mobile-drawer-layer" id="mobileDrawer">
+    <div class="mobile-drawer-top">
+      <div class="brand-logo">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="mobile-logo-img">
+        <span class="logo-title" style="font-size:1.05rem;">Activkeyz</span>
+      </div>
+      <button class="drawer-exit-btn" id="drawerCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mobile-links-col">
+      <a href="./" class="mobile-link"><i class="fa-solid fa-house"></i> الرئيسية</a>
+      <a href="category.html?cat=all" class="mobile-link"><i class="fa-solid fa-table-cells-large"></i> جميع المنتجات
+        والأقسام</a>
+      <a href="about.html" class="mobile-link"><i class="fa-solid fa-circle-info"></i> من نحن وقصة متجرنا</a>
+      <a href="reviews.html" class="mobile-link"><i class="fa-solid fa-star"></i> آراء وتقييمات العملاء</a>
+      <a href="blog.html" class="mobile-link"><i class="fa-solid fa-newspaper"></i> المدونة والشروحات</a>
+      <a href="policy.html" class="mobile-link"><i class="fa-solid fa-shield-halved"></i> سياسة الضمان والاسترجاع</a>
+      <a href="contact.html" class="mobile-link active"><i class="fa-solid fa-headset"></i> اتصل بنا والدعم الفني</a>
+    </div>
+  </div>
+
+  <main class="page-main-flow">
+
+    <!-- SUBPAGE HERO -->
+    <section class="subpage-hero-banner">
+      <div class="container">
+        <div class="subpage-hero-badge">
+          <i class="fa-solid fa-headset"></i>
+          <span>دعم عربي مباشر 24 ساعة طوال أيام الأسبوع</span>
+        </div>
+        <h1 class="subpage-hero-title">تواصل معنا، نحن هنا لمساعدتك دائماً</h1>
+        <p class="subpage-hero-desc">
+          هل تحتاج إلى مساعدة في تفعيل اشتراكك؟ هل لديك استفسار حول أحد المنتجات أو تفضل الدفع عبر طريقة خاصة؟ اختر
+          قناتك المفضلة وسنرد عليك في غضون دقائق.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTACT HUB GRID -->
+    <section class="container">
+      <div class="contact-hub-grid">
+
+        <!-- Channels Column -->
+        <div class="contact-channels-col">
+
+          <div
+            style="background: rgba(10, 20, 38, 0.7); border: 1px solid rgba(34, 197, 94, 0.4); border-radius: 16px; padding: 16px 20px; display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+            <span
+              style="display:inline-block; width:12px; height:12px; background:#22c55e; border-radius:50%; box-shadow:0 0 10px #22c55e; animation: pulse 2s infinite;"></span>
+            <span style="color:#ffffff; font-weight:700; font-size:0.92rem;">فريق الدعم الفني متصل الآن ومستعد
+              لخدمتك</span>
+          </div>
+
+          <!-- WhatsApp Direct -->
+          <a href="https://wa.me/201225106057?text=مرحبا%20ActivKeyz،%20أحتاج%20مساعدة%20بخصوص..." target="_blank"
+            class="channel-card-link">
+            <div class="channel-icon-wrap wa">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div class="channel-info-text">
+              <h4>محادثة فورية عبر واتساب</h4>
+              <p>01225106057</p>
+              <span style="font-size:0.75rem; color:#4ade80;">متوسط سرعة الرد: أقل من دقيقتين</span>
+            </div>
+            <i class="fa-solid fa-arrow-left" style="margin-right:auto; color:var(--text-dim);"></i>
+          </a>
+
+          <!-- Direct Phone Call -->
+          <a href="tel:01225106057" class="channel-card-link">
+            <div class="channel-icon-wrap"
+              style="background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.4); color:var(--cyan-primary);">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="channel-info-text">
+              <h4>الاتصال الهاتفي المباشر</h4>
+              <p>01225106057</p>
+              <span style="font-size:0.75rem; color:var(--cyan-bright);">متاح للمكالمات والاستفسارات العاجلة</span>
+            </div>
+            <i class="fa-solid fa-arrow-left" style="margin-right:auto; color:var(--text-dim);"></i>
+          </a>
+
+          <!-- Telegram Channel / Support -->
+          <a href="https://t.me/activkeyz_support" target="_blank" class="channel-card-link">
+            <div class="channel-icon-wrap tg">
+              <i class="fa-brands fa-telegram"></i>
+            </div>
+            <div class="channel-info-text">
+              <h4>دعم تليجرام المباشر</h4>
+              <p>@ActivKeyz_Support</p>
+              <span style="font-size:0.75rem; color:#38bdf8;">محادثات الدعم وقناة العروض والتحديثات</span>
+            </div>
+            <i class="fa-solid fa-arrow-left" style="margin-right:auto; color:var(--text-dim);"></i>
+          </a>
+
+          <!-- Email Support -->
+          <a href="mailto:support@activkeyz.com" class="channel-card-link">
+            <div class="channel-icon-wrap mail">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="channel-info-text">
+              <h4>البريد الإلكتروني الرسمي</h4>
+              <p>support@activkeyz.com</p>
+              <span style="font-size:0.75rem; color:#c084fc;">للشراكات المؤسسية والطلبات الكبرى</span>
+            </div>
+            <i class="fa-solid fa-arrow-left" style="margin-right:auto; color:var(--text-dim);"></i>
+          </a>
+
+          <!-- Working Hours & Location Box -->
+          <div
+            style="background: rgba(8, 16, 32, 0.85); border: 1.5px solid rgba(56, 189, 248, 0.2); border-radius: 18px; padding: 22px; margin-top: 10px;">
+            <h4 style="color:#ffffff; font-weight:700; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+              <i class="fa-regular fa-clock" style="color:var(--cyan-primary);"></i> ساعات العمل والتسليم
+            </h4>
+            <p style="color:#cbd5e1; font-size:0.88rem; line-height:1.7; margin-bottom:8px;">
+              ⚡ <strong>التسليم الآلي:</strong> يعمل 24 ساعة يومياً بدون انقطاع عبر الخوادم السحابية.
+            </p>
+            <p style="color:#cbd5e1; font-size:0.88rem; line-height:1.7;">
+              💬 <strong>الدعم الفني البشري:</strong> يومياً من الساعة 9:00 صباحاً حتى 2:00 بعد منتصف الليل بتوقيت مكة
+              المكرمة والقاهرة.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Ticket Form Column -->
+        <div class="contact-form-box">
+          <h3 style="color:#fff; font-size:1.4rem; font-weight:800; margin-bottom:8px;">أرسل تذكرة دعم فني</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:24px;">
+            سيقوم أحد مهندسي الدعم بمراجعة طلبك والتواصل معك عبر بريدك أو هاتفك خلال وقت وجيز.
+          </p>
+
+          <form id="contactSupportForm" onsubmit="handleSupportFormSubmit(event)">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>الاسم بالكامل *</label>
+                <input type="text" id="ticketName" placeholder="مثال: أحمد عبد الله" required>
+              </div>
+              <div class="form-group">
+                <label>البريد الإلكتروني *</label>
+                <input type="email" id="ticketEmail" placeholder="yourname@gmail.com" required>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label>رقم الواتساب أو الهاتف *</label>
+                <div class="iti-contact-wrapper" style="direction:ltr!important;">
+                  <input type="tel" id="ticketPhone" placeholder="01XXXXXXXXX" required dir="ltr" style="direction:ltr!important; text-align:left!important;">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>نوع الاستفسار أو المشكلة *</label>
+                <select id="ticketSubject"
+                  style="background:rgba(8,16,32,0.9); border:1px solid rgba(56,189,248,0.3); color:#fff; padding:12px; border-radius:12px; width:100%; outline:none;"
+                  required>
+                  <option value="activation">مساعدة في تفعيل كود ترخيص</option>
+                  <option value="presale">استفسار قبل إتمام الشراء</option>
+                  <option value="warranty">طلب استبدال بموجب الضمان</option>
+                  <option value="payment">استفسار حول طرق الدفع (فودافون كاش / إنستاباي)</option>
+                  <option value="enterprise">طلب ترخيص جماعي أو تجاري</option>
+                  <option value="other">استفسار آخر</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>رقم الطلب (إن وجد)</label>
+              <input type="text" id="ticketOrderId" placeholder="مثال: NXA-88231 (اختياري)">
+            </div>
+
+            <div class="form-group">
+              <label>تفاصيل الرسالة أو المشكلة *</label>
+              <textarea id="ticketMessage" rows="4"
+                placeholder="يرجى كتابة تفاصيل الاستفسار، أو رسالة الخطأ التي ظهرت لك أثناء التفعيل..." required
+                style="background:rgba(8,16,32,0.9); border:1px solid rgba(56,189,248,0.3); color:#fff; padding:12px; border-radius:12px; width:100%; outline:none; resize:vertical;"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-cyan-primary btn-block" style="padding:14px; font-size:1.05rem;">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>إرسال التذكرة الآن</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- QUICK FAQ ACCORDION -->
+    <section class="container" style="margin-bottom: 70px;">
+      <div
+        style="background: rgba(11, 20, 36, 0.85); border: 1.5px solid rgba(56, 189, 248, 0.25); border-radius: 24px; padding: 36px;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <span class="sub-badge" style="margin: 0 auto 10px auto;"><i class="fa-solid fa-circle-question"></i> إجابات
+            سريعة</span>
+          <h2 style="font-size: 1.75rem; color: #fff; font-weight: 800;">الأسئلة الأكثر شيوعاً قبل التواصل</h2>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px; max-width: 850px; margin: 0 auto;">
+          <div
+            style="background: rgba(8, 16, 32, 0.9); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 14px; padding: 18px 22px;">
+            <h4 style="color: var(--cyan-bright); font-size: 1.05rem; font-weight: 700; margin-bottom: 6px;">
+              كم يستغرق استلام كود التفعيل بعد الدفع؟
+            </h4>
+            <p style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.7;">
+              التسليم يتم تلقائياً وفورياً خلال أقل من 60 ثانية! يظهر لك الكود مباشرة على شاشة التأكيد بالإضافة إلى نسخة
+              مرسلة لبريدك الإلكتروني.
+            </p>
+          </div>
+
+          <div
+            style="background: rgba(8, 16, 32, 0.9); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 14px; padding: 18px 22px;">
+            <h4 style="color: var(--cyan-bright); font-size: 1.05rem; font-weight: 700; margin-bottom: 6px;">
+              ماذا أفعل إذا ظهرت رسالة خطأ أثناء إدخال الكود؟
+            </h4>
+            <p style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.7;">
+              قم بالتقاط لقطة شاشة للخطأ وتواصل مباشرة مع الدعم الفني عبر واتساب. في حالة ثبوت أي عطل في المفتاح يتم
+              تزويدك بكود بديل فوري معتمد طوال مدة الضمان.
+            </p>
+          </div>
+
+          <div
+            style="background: rgba(8, 16, 32, 0.9); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 14px; padding: 18px 22px;">
+            <h4 style="color: var(--cyan-bright); font-size: 1.05rem; font-weight: 700; margin-bottom: 6px;">
+              كيف أدفع عبر فودافون كاش أو إنستاباي؟
+            </h4>
+            <p style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.7;">
+              عند اختيار المنتج والضغط على "شراء الآن"، اختر خيار المحافظ الإلكترونية / إنستاباي، وسيظهر لك رقم المحفظة
+              المعتمد للتحويل الفوري.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"
+    style="position:fixed; bottom:24px; left:24px; z-index:9999; display:flex; flex-direction:column; gap:10px;"></div>
+
+  <!-- UNIFIED AUTH-AWARE FOOTER (PRIORITY 3) -->
+  <footer class="main-page-footer" id="mainFooter">
+    <div class="container footer-main-grid">
+
+      <!-- Column 1: Brand & Direct Support -->
+      <div class="footer-col-item brand-column">
+        <a href="./" class="brand-logo" aria-label="Activkeyz الرئيسية">
+          <img src="logos/activkeyzmainlogo.png" alt="Activkeyz" class="brand-logo-img footer-logo-img">
+          <div class="logo-text-group">
+            <span class="logo-title" style="font-size:1.15rem;">Activkeyz</span>
+            <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+          </div>
+        </a>
+        <p class="footer-tagline">
+          منصتك المعتمدة للاشتراكات والخدمات البرمجية بأسعار تنافسية وضمان شامل ودعم فني متواصل.
+        </p>
+        <div class="footer-contact-actions">
+          <a href="https://wa.me/201225106057" target="_blank" class="footer-contact-pill" title="واتساب المبيعات">
+            <i class="fa-brands fa-whatsapp" style="color: #22c55e;"></i>
+            <span>واتساب المبيعات</span>
+          </a>
+          <a href="contact.html" class="footer-contact-pill" title="مركز المساعدة">
+            <i class="fa-solid fa-headset"></i>
+            <span>الدعم الفني</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Public Products & Categories -->
+      <div class="footer-col-item">
+        <h4 class="footer-block-header">الأقسام والمنتجات</h4>
+        <ul class="footer-anchor-list">
+          <li><a href="category.html?cat=all"><i class="fa-solid fa-border-all"></i> جميع المنتجات والاشتراكات</a></li>
+          <li><a href="category.html?cat=ai"><i class="fa-solid fa-wand-magic-sparkles"></i> أدوات الذكاء الاصطناعي</a></li>
+          <li><a href="category.html?cat=creative"><i class="fa-solid fa-palette"></i> البرامج الإبداعية والتصميم</a></li>
+          <li><a href="category.html?cat=office"><i class="fa-solid fa-briefcase"></i> برامج المكتب والإنتاجية</a></li>
+          <li><a href="category.html?cat=streaming"><i class="fa-solid fa-play"></i> الترفيه والمشاهدة</a></li>
+          <li><a href="category.html?cat=gaming"><i class="fa-solid fa-shield-halved"></i> الألعاب وبطاقات الحماية</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Auth-Aware Customer Shortcuts & Public Support -->
+      <div class="footer-col-item footer-auth-col">
+        <h4 class="footer-block-header" id="footerAccountHeading">الحساب والخدمات</h4>
+        
+        <!-- Logged-Out Visitor Shortcuts -->
+        <ul class="footer-anchor-list footer-visitor-links" id="footerVisitorLinks">
+          <li><a href="account.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> تسجيل الدخول أو إنشاء حساب</a></li>
+          <li><a href="track-order.html"><i class="fa-solid fa-truck-fast"></i> تتبع الطلب بالرقم المرجعي</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-circle-question"></i> مركز المساعدة والاستفسارات</a></li>
+          <li><a href="policy.html"><i class="fa-solid fa-shield-halved"></i> شروط الضمان وسياسة الخصوصية</a></li>
+          <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> عن متجر Activkeyz</a></li>
+        </ul>
+
+        <!-- Logged-In Customer Shortcuts -->
+        <ul class="footer-anchor-list footer-customer-links" id="footerCustomerLinks" style="display: none;">
+          <li><a href="account.html?tab=dashboard"><i class="fa-solid fa-gauge-high"></i> لوحة تحكم حسابي</a></li>
+          <li><a href="account.html?tab=orders"><i class="fa-solid fa-box-archive"></i> طلباتي ومشترياتي</a></li>
+          <li><a href="account.html?tab=wallet"><i class="fa-solid fa-coins"></i> محفظة كوينز ActivKeyz</a></li>
+          <li><a href="account.html?tab=profile"><i class="fa-solid fa-id-card"></i> إعدادات وبيانات الحساب</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-headset"></i> تذاكر الدعم والمساعدة</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Authentic Horizontal Payment Logos Strip -->
+    <div class="footer-baseline-strip">
+      <div class="container baseline-strip-inner">
+        <div class="rights-copyright-text">جميع الحقوق محفوظة © 2026 Activkeyz</div>
+        <div class="payment-logos-strip" aria-label="طرق الدفع المعتمدة">
+          <span class="pay-strip-label">طرق الدفع المعتمدة:</span>
+          <img src="logos/vodafone.svg" alt="Vodafone Cash" class="pay-strip-img" loading="lazy" title="فودافون كاش">
+          <img src="logos/instapay.webp" alt="InstaPay" class="pay-strip-img" loading="lazy" title="شبكة إنستاباي مصر">
+          <img src="logos/tether-usdt.svg" alt="USDT TRC20" class="pay-strip-img" loading="lazy" title="Tether USDT TRC20">
+        </div>
+      </div>
+    </div>
+
+    <!-- META / FACEBOOK ADVERTISING COMPLIANCE & LEGAL DISCLAIMER -->
+    <div class="footer-meta-compliance-box">
+      <div class="container compliance-inner">
+        <div class="compliance-links-row">
+          <a href="privacy.html" class="compliance-link">سياسة الخصوصية</a>
+          <span class="compliance-dot">·</span>
+          <a href="terms.html" class="compliance-link">شروط الاستخدام والخدمة</a>
+          <span class="compliance-dot">·</span>
+          <a href="refund.html" class="compliance-link">الضمان والاسترجاع</a>
+          <span class="compliance-dot">·</span>
+          <a href="policy.html" class="compliance-link">مركز السياسات الشامل</a>
+          <span class="compliance-dot">·</span>
+          <a href="contact.html" class="compliance-link">اتصل بنا والدعم الفني</a>
+          <span class="compliance-dot">·</span>
+          <a href="dashboard.html" class="compliance-link footer-admin-lock-link" title="لوحة التحكم الإدارية" target="_blank"><i class="fa-solid fa-lock"></i> لوحة التحكم</a>
+        </div>
+
+        <p class="meta-disclaimer-text">
+          <strong>إخلاء مسؤولية الإعلانات وميتا (Meta / Facebook Disclaimer):</strong><br>
+          هذا الموقع ليس جزءاً من موقع فيسبوك (Facebook™) أو شركة ميتا بلاتفورمز (Meta Platforms, Inc.). بالإضافة إلى ذلك، فإن هذا الموقع غير معتمد أو مدعوم من قِبل فيسبوك بأي شكل من الأشكال. كلمة FACEBOOK هي علامة تجارية مسجلة ومملوكة قانونياً لشركة META PLATFORMS, INC.
+        </p>
+
+        <p class="meta-disclaimer-en">
+          <strong>Meta &amp; FTC Compliance Notice:</strong> This website is an independent e-commerce storefront and is NOT affiliated with, sponsored by, or endorsed by Facebook™ or Meta Platforms, Inc. FACEBOOK™ is a registered trademark of META PLATFORMS, INC. All trademarks, service marks, and company names are property of their respective owners. Activkeyz provides genuine digital subscription licenses under strict authorized reseller practices.
+        </p>
+
+        <p class="trademark-notice-text">
+          جميع أسماء المنتجات والبرامج والشعارات المعروضة هي علامات تجارية مملوكة حصرياً لأصحابها الرسميين (مثل OpenAI, Adobe, Microsoft, Google, CapCut وغيرها). Activkeyz منصة مستقلة توفر حلول واشتراكات رقمية مرخصة مع ضمان تشغيل شامل ودعم فني مخصص.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="nexa-ui.js"></script>
+  <script>
+    // Update Cart Badge Count
+    try {
+      const cart = JSON.parse(localStorage.getItem('nexa_cart') || '[]');
+      const countEl = document.getElementById('cartBadgeCount');
+      if (countEl) countEl.textContent = cart.reduce((acc, item) => acc + (item.qty || 1), 0);
+    } catch (e) { }
+  </script>
+
+  <!-- intl-tel-input scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/intlTelInput.min.js"></script>
+
+  <script>
+    let contactIti = null;
+    document.addEventListener('DOMContentLoaded', () => {
+      const phoneEl = document.getElementById('ticketPhone');
+      if (phoneEl && window.intlTelInput) {
+        try {
+          contactIti = window.intlTelInput(phoneEl, {
+            initialCountry: "eg",
+            separateDialCode: true,
+            countrySearch: true,
+            nationalMode: true,
+            formatOnDisplay: false,
+            useFullscreenPopup: false,
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/utils.js"
+          });
+
+          function syncPhonePadding() {
+            const itiContainer = phoneEl.closest('.iti');
+            if (!itiContainer) return;
+            const btn = itiContainer.querySelector('.iti__selected-country');
+            if (btn) {
+              const w = Math.ceil(btn.getBoundingClientRect().width || btn.offsetWidth || 93);
+              const pad = Math.max(w + 14, 108);
+              phoneEl.style.setProperty('--iti-phone-pad', pad + 'px');
+              phoneEl.style.setProperty('padding-left', pad + 'px', 'important');
+            }
+          }
+          phoneEl.addEventListener('countrychange', syncPhonePadding);
+          syncPhonePadding();
+          setTimeout(syncPhonePadding, 50);
+          setTimeout(syncPhonePadding, 200);
+
+          const btnCountry = phoneEl.closest('.iti')?.querySelector('.iti__selected-country');
+          if (btnCountry && window.ResizeObserver) {
+            new ResizeObserver(() => syncPhonePadding()).observe(btnCountry);
+          }
+
+          const normalizeDigits = (str) => {
+            if (!str) return '';
+            const arabicDigits = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+            const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+            let res = str;
+            for (let i = 0; i < 10; i++) {
+              res = res.replaceAll(arabicDigits[i], i.toString()).replaceAll(persianDigits[i], i.toString());
+            }
+            return res.replace(/\D/g, '');
+          };
+
+          phoneEl.addEventListener('keydown', function(e) {
+            if ([46, 8, 9, 27, 13].indexOf(e.keyCode) !== -1 ||
+                ((e.keyCode === 65 || e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 88) && (e.ctrlKey === true || e.metaKey === true)) ||
+                (e.keyCode >= 35 && e.keyCode <= 39)) {
+              return;
+            }
+            if (e.key && /^[0-9٠-٩۰-۹]$/.test(e.key)) {
+              return;
+            }
+            e.preventDefault();
+          });
+
+          phoneEl.addEventListener('input', function() {
+            const normalized = normalizeDigits(this.value);
+            if (this.value !== normalized) {
+              this.value = normalized;
+            }
+          });
+
+          phoneEl.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const pasted = (e.clipboardData || window.clipboardData).getData('text') || '';
+            const clean = normalizeDigits(pasted);
+            const start = this.selectionStart || 0;
+            const end = this.selectionEnd || 0;
+            const current = this.value || '';
+            this.value = current.substring(0, start) + clean + current.substring(end);
+            this.selectionStart = this.selectionEnd = start + clean.length;
+          });
+        } catch(e) {
+          console.warn('contact intl-tel-input error:', e);
+        }
+      }
+    });
+
+    // Mobile Drawer Toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const drawer = document.getElementById('mobileDrawer');
+    const drawerClose = document.getElementById('drawerCloseBtn');
+    if (mobileBtn && drawer) {
+      mobileBtn.addEventListener('click', () => {
+        drawer.classList.add('active');
+        drawer.classList.add('open');
+      });
+    }
+    if (drawerClose && drawer) {
+      drawerClose.addEventListener('click', () => {
+        drawer.classList.remove('active');
+        drawer.classList.remove('open');
+      });
+    }
+
+    // Support Form Handler
+    async function handleSupportFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('ticketName').value;
+      const email = document.getElementById('ticketEmail').value;
+      const phoneInput = document.getElementById('ticketPhone');
+      let phone = phoneInput ? phoneInput.value : '';
+      if (contactIti && typeof contactIti.getNumber === 'function') {
+        try {
+          phone = contactIti.getNumber() || phone;
+        } catch(err) {}
+      }
+      const subject = document.getElementById('ticketSubject').value;
+      const message = document.getElementById('ticketMessage').value;
+
+      let ticketNumber = Math.floor(100000 + Math.random() * 900000);
+
+      if (window.NexaSupabase && typeof window.NexaSupabase.tickets.create === 'function') {
+        try {
+          const res = await window.NexaSupabase.tickets.create({
+            name,
+            email,
+            phone,
+            subject,
+            message
+          });
+          if (res && res.ticketNumber) ticketNumber = res.ticketNumber;
+        } catch (err) {
+          console.warn('Supabase ticket create error:', err);
+        }
+      }
+
+      // Show toast
+      showToast(`تم استلام تذكرتك بنجاح يا ${name}! رقم التذكرة: #${ticketNumber}، سيتواصل معك فريق الدعم قريباً.`);
+
+      // Reset form
+      document.getElementById('contactSupportForm').reset();
+    }
+
+    function showToast(msg) {
+      const toast = document.createElement('div');
+      toast.style.background = 'rgba(8, 20, 38, 0.95)';
+      toast.style.border = '1.5px solid #00d2ff';
+      toast.style.color = '#ffffff';
+      toast.style.padding = '14px 20px';
+      toast.style.borderRadius = '12px';
+      toast.style.boxShadow = '0 10px 30px rgba(0, 210, 255, 0.4)';
+      toast.style.fontSize = '0.92rem';
+      toast.style.fontWeight = '600';
+      toast.style.display = 'flex';
+      toast.style.alignItems = 'center';
+      toast.style.gap = '10px';
+      toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:#00d2ff; font-size:1.2rem;"></i> <span>${msg}</span>`;
+
+      const container = document.getElementById('toastContainer');
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => toast.remove(), 500);
+      }, 5000);
+    }
+  </script>
+</body>
+
+</html>

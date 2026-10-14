@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>السياسات، الضمان الشامل، والشروط القانونية | Activkeyz</title>
+  <meta name="description" content="تعرف على سياسات الضمان الشامل، سياسة الخصوصية وحماية البيانات، شروط الاستخدام، وحقوق الاسترجاع والاستبدال الفوري في متجر Activkeyz.">
+  <meta name="google" content="notranslate">
+  <link rel="icon" type="image/png" href="logos/activkeyzsecondlogo.png">
+
+  <!-- Preconnect & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="design-system.css">
+  <link rel="stylesheet" href="site-pages.css">
+  <link rel="stylesheet" href="mobile-redesign.css">
+
+  <style>
+    /* Premium Policy Specific Styling */
+    .policy-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 28px 0 40px 0;
+    }
+    .policy-stat-card {
+      background: rgba(10, 20, 38, 0.85);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: var(--radius-lg, 16px);
+      padding: 18px 16px;
+      text-align: center;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+    .policy-stat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--cyan-primary);
+      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.2);
+    }
+    .policy-stat-icon {
+      font-size: 1.8rem;
+      color: var(--cyan-primary);
+      margin-bottom: 10px;
+    }
+    .policy-stat-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+    .policy-stat-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Policy Guarantee Table */
+    .policy-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: 14px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .policy-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: right;
+      font-size: 0.9rem;
+    }
+    .policy-table th {
+      background: rgba(14, 28, 54, 0.95);
+      color: var(--cyan-bright);
+      padding: 14px 16px;
+      font-weight: 800;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+    }
+    .policy-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      background: rgba(8, 16, 32, 0.6);
+    }
+    .policy-table tr:hover td {
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    /* Policy FAQ Accordions */
+    .policy-faq-item {
+      background: rgba(12, 22, 42, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+    .policy-faq-item.open {
+      border-color: var(--cyan-bright);
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.15);
+    }
+    .policy-faq-q {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-weight: 800;
+      color: #ffffff;
+      font-size: 0.98rem;
+      user-select: none;
+    }
+    .policy-faq-q i {
+      color: var(--cyan-primary);
+      transition: transform 0.3s ease;
+    }
+    .policy-faq-item.open .policy-faq-q i {
+      transform: rotate(180deg);
+    }
+    .policy-faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 20px;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      border-top: 1px solid transparent;
+    }
+    .policy-faq-item.open .policy-faq-a {
+      max-height: 400px;
+      padding: 14px 20px 20px 20px;
+      border-top-color: rgba(56, 189, 248, 0.15);
+    }
+
+    /* Fast Action Support Card */
+    .policy-cta-box {
+      background: linear-gradient(135deg, rgba(14, 28, 54, 0.95), rgba(8, 16, 32, 0.98));
+      border: 1.5px solid var(--cyan-bright);
+      border-radius: 18px;
+      padding: 28px;
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(56, 189, 248, 0.2);
+    }
+    .policy-cta-info h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    .policy-cta-info p {
+      color: #94a3b8;
+      font-size: 0.88rem;
+      margin: 0;
+    }
+    .policy-cta-btns {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    /* Mobile Responsive Specifics */
+    @media (max-width: 992px) {
+      .policy-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .policy-cta-box {
+        flex-direction: column;
+        text-align: center;
+      }
+      .policy-cta-btns {
+        width: 100%;
+        flex-direction: column;
+      }
+      .policy-cta-btns .btn {
+        width: 100%;
+      }
+    }
+    @media (max-width: 640px) {
+      .policy-stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .policy-content-article {
+        padding: 20px 16px;
+      }
+      .policy-sidebar-nav {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 10px;
+        gap: 8px;
+        position: sticky;
+        top: 60px;
+        z-index: 40;
+        background: rgba(7, 14, 26, 0.98);
+        border-radius: 12px;
+      }
+      .policy-nav-item {
+        flex-shrink: 0;
+        padding: 8px 14px;
+        font-size: 0.82rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- BACKGROUND LAYERS -->
+  <div class="page-background" aria-hidden="true">
+    <div class="stars-layer"></div>
+    <div class="hero-bg-art" style="height: 520px; opacity: 0.8;"></div>
+    <div class="lower-bg-art" style="top: 450px; opacity: 0.2;"></div>
+    <div class="ambient-glow-top"></div>
+    <div class="ambient-glow-bottom"></div>
+  </div>
+
+  <!-- 1. ANNOUNCEMENT BAR -->
+  <div class="top-announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-spacer"></div>
+
+      <div class="announcement-msg">
+        <span class="gift-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <span>ضمان استبدال معتمد ودعم فني متواصل لجميع مشترياتك في Activkeyz!</span>
+      </div>
+
+      <div class="announcement-countdown" id="countdownTimer">
+        <div class="countdown-slot"><span class="countdown-num" id="hoursVal">17</span><span class="countdown-txt">ساعة</span></div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-slot"><span class="countdown-num" id="minutesVal">59</span><span class="countdown-txt">دقيقة</span></div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-slot"><span class="countdown-num" id="secondsVal">23</span><span class="countdown-txt">ثانية</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MAIN HEADER -->
+  <header class="main-header" id="mainHeader">
+    <div class="container header-inner">
+
+      <!-- Brand Logo -->
+      <a href="./" class="brand-logo" aria-label="Activkeyz الرئيسية">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="brand-logo-img">
+        <div class="logo-text-group">
+          <span class="logo-title">Activkeyz</span>
+          <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu">
+        <a href="./" class="nav-item">الرئيسية</a>
+        <a href="category.html?cat=all" class="nav-item">المنتجات</a>
+        <a href="about.html" class="nav-item">من نحن</a>
+        <a href="reviews.html" class="nav-item">آراء العملاء</a>
+        <a href="blog.html" class="nav-item">المدونة</a>
+        <a href="policy.html" class="nav-item active">السياسات والضمان</a>
+        <a href="contact.html" class="nav-item">اتصل بنا</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="header-actions-wrap">
+        <a href="contact.html" class="header-btn user-btn">
+          <i class="fa-solid fa-headset"></i>
+          <span>الدعم الفني</span>
+        </a>
+        <a href="category.html?cat=all" class="header-btn cart-toggle-btn" title="تصفح المنتجات">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-pill-count" id="cartBadgeCount">0</span>
+        </a>
+        <button class="mobile-menu-burger" id="mobileMenuBtn" aria-label="القائمة"><i class="fa-solid fa-bars"></i></button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div class="mobile-drawer-layer" id="mobileDrawer">
+    <div class="mobile-drawer-top">
+      <div class="brand-logo">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="mobile-logo-img">
+        <span class="logo-title" style="font-size:1.05rem;">Activkeyz</span>
+      </div>
+      <button class="drawer-exit-btn" id="drawerCloseBtn" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mobile-links-col">
+      <a href="./" class="mobile-link"><i class="fa-solid fa-house"></i> الرئيسية</a>
+      <a href="category.html?cat=all" class="mobile-link"><i class="fa-solid fa-table-cells-large"></i> جميع المنتجات والأقسام</a>
+      <a href="about.html" class="mobile-link"><i class="fa-solid fa-circle-info"></i> من نحن وقصة متجرنا</a>
+      <a href="reviews.html" class="mobile-link"><i class="fa-solid fa-star"></i> آراء وتقييمات العملاء</a>
+      <a href="blog.html" class="mobile-link"><i class="fa-solid fa-newspaper"></i> المدونة والشروحات</a>
+      <a href="policy.html" class="mobile-link active"><i class="fa-solid fa-shield-halved"></i> السياسات والضمان والشروط</a>
+      <a href="contact.html" class="mobile-link"><i class="fa-solid fa-headset"></i> اتصل بنا والدعم الفني</a>
+    </div>
+  </div>
+
+  <main class="page-main-flow">
+
+    <!-- SUBPAGE HERO -->
+    <section class="subpage-hero-banner">
+      <div class="container">
+        <div class="subpage-hero-badge">
+          <i class="fa-solid fa-scale-balanced"></i>
+          <span>حقوقك مضمونة 100% وقوانين واضحة وشفافة</span>
+        </div>
+        <h1 class="subpage-hero-title">مركز السياسات، الضمان الشامل، والشروط</h1>
+        <p class="subpage-hero-desc">
+          الشفافية والالتزام هما سر ثقة آلاف العملاء في Activkeyz. إليك دليلك الموثق لحقوق الضمان الذهبي، سرعة الاستبدال، حماية خصوصية بياناتك، وشروط التراخيص الرسمية.
+        </p>
+
+        <!-- 4 Pillars Stat Row -->
+        <div class="policy-stats-grid">
+          <div class="policy-stat-card">
+            <div class="policy-stat-icon"><i class="fa-solid fa-shield-check"></i></div>
+            <div class="policy-stat-title">ضمان كامل المدة</div>
+            <div class="policy-stat-desc">تغطية تشغيلية 100% طوال فترة الاشتراك المشتراة</div>
+          </div>
+          <div class="policy-stat-card">
+            <div class="policy-stat-icon"><i class="fa-solid fa-bolt"></i></div>
+            <div class="policy-stat-title">استبدال فوري &lt; 15 دقيقة</div>
+            <div class="policy-stat-desc">حل فوري لأي عائق تقني بدون إجراءات معقدة</div>
+          </div>
+          <div class="policy-stat-card">
+            <div class="policy-stat-icon"><i class="fa-solid fa-rotate-left"></i></div>
+            <div class="policy-stat-title">استرداد أموال مضمون</div>
+            <div class="policy-stat-desc">استرجاع كامل المبلغ خلال 24 ساعة عند تعذر التفعيل</div>
+          </div>
+          <div class="policy-stat-card">
+            <div class="policy-stat-icon"><i class="fa-solid fa-user-shield"></i></div>
+            <div class="policy-stat-title">خصوصية وأمان 256-bit</div>
+            <div class="policy-stat-desc">تشفير تام لبياناتك وعدم مشاركتها مع أي طرف ثالث</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POLICY CONTENT WITH SIDEBAR TABS -->
+    <section class="container">
+      <div class="policy-page-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="policy-sidebar-nav">
+          <button class="policy-nav-item active" data-target="sec-warranty">
+            <i class="fa-solid fa-shield-check"></i>
+            <span>1. الضمان الشامل الذهبي</span>
+          </button>
+          <button class="policy-nav-item" data-target="sec-refund">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>2. الاسترجاع واسترداد الأموال</span>
+          </button>
+          <button class="policy-nav-item" data-target="sec-privacy">
+            <i class="fa-solid fa-user-shield"></i>
+            <span>3. الخصوصية وحماية البيانات</span>
+          </button>
+          <button class="policy-nav-item" data-target="sec-terms">
+            <i class="fa-solid fa-file-contract"></i>
+            <span>4. الشروط والأحكام العامة</span>
+          </button>
+          <button class="policy-nav-item" data-target="sec-security">
+            <i class="fa-solid fa-lock"></i>
+            <span>5. أمان الدفع والتراخيص</span>
+          </button>
+          <button class="policy-nav-item" data-target="sec-disclaimer">
+            <i class="fa-solid fa-scale-balanced"></i>
+            <span>6. إخلاء المسؤولية وميتا</span>
+          </button>
+          <button class="policy-nav-item" data-target="sec-faq">
+            <i class="fa-solid fa-circle-question"></i>
+            <span>7. الأسئلة الشائعة للسياسات</span>
+          </button>
+        </aside>
+
+        <!-- Main Content Area -->
+        <article class="policy-content-article">
+          
+          <!-- 1. WARRANTY -->
+          <div class="policy-section-block" id="sec-warranty">
+            <h2 class="policy-section-heading">
+              <i class="fa-solid fa-shield-check"></i>
+              <span>1. سياسة الضمان الشامل الذهبي (Full Warranty & SLA Policy)</span>
+            </h2>
+            <p>
+              تلتزم إدارة <strong>Activkeyz</strong> بتوفير <strong>ضمان رسمي 100%</strong> يغطي كافة الاشتراكات، مفاتيح التفعيل، والبرامج الرقمية المشتراة من متجرنا طوال مدة الباقة المحددة (سواء شهر، 3 شهور، 6 شهور، سنة، أو مدى الحياة).
+            </p>
+            
+            <div class="policy-callout-card">
+              <i class="fa-solid fa-circle-check"></i>
+              <div>
+                <strong>تعهد الضمان الذهبي (Activkeyz Golden SLA):</strong><br>
+                في حال حدوث أي توقف غير مقصود للحساب، خطأ سيرفر، أو انقطاع الصلاحيات، يلتزم فريق الدعم بالاستجابة والاستبدال الفوري خلال مدة تتراوح بين <strong>5 إلى 15 دقيقة فقط</strong> خلال ساعات العمل الرسمية.
+              </div>
+            </div>
+
+            <h4 style="color:#fff; margin:20px 0 10px 0;">جدول تفاصيل تغطية الضمان حسب فئة المنتج:</h4>
+            <div class="policy-table-wrap">
+              <table class="policy-table">
+                <thead>
+                  <tr>
+                    <th>فئة المنتج</th>
+                    <th>أمثلة الاشتراكات</th>
+                    <th>فترة تغطية الضمان</th>
+                    <th>آلية الدعم والاستبدال</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>أدوات الذكاء الاصطناعي</strong></td>
+                    <td>ChatGPT Plus, Gemini Advanced, Claude Pro</td>
+                    <td>كامل مدة الاشتراك المشتراة</td>
+                    <td>استبدال فوري أو تجديد الاشتراك خلال دقائق</td>
+                  </tr>
+                  <tr>
+                    <td><strong>البرامج الإبداعية والتصميم</strong></td>
+                    <td>Canva Pro, Adobe Creative Cloud, CapCut Pro</td>
+                    <td>كامل مدة الاشتراك المشتراة</td>
+                    <td>دعوة تفعيل جديدة أو معالجة الحساب فوراً</td>
+                  </tr>
+                  <tr>
+                    <td><strong>برامج المكتب وأنظمة التشغيل</strong></td>
+                    <td>Windows 11 Pro, Office 365, Office 2021</td>
+                    <td>مدى الحياة / مدة الرخصة</td>
+                    <td>مفتاح رقمي أصلي جديد في حال واجه التفعيل عائقاً</td>
+                  </tr>
+                  <tr>
+                    <td><strong>الترفيه والمشاهدة والحماية</strong></td>
+                    <td>Discord Nitro, NordVPN, Spotify Premium</td>
+                    <td>كامل مدة الاشتراك</td>
+                    <td>تجديد أو ترقية سريعة ومباشرة</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h4 style="color:#fff; margin:20px 0 10px 0;"><i class="fa-solid fa-circle-exclamation" style="color:var(--cyan-primary);"></i> شروط وضوابط استمرار سريان الضمان:</h4>
+            <ul style="padding-right:24px; color:#cbd5e1; line-height:2;">
+              <li><strong>عدم تعديل بيانات الأمان الأساسية:</strong> بالنسبة للباقات المشتركة، يُحظر تغيير البريد الإلكتروني أو كلمة السر دون إشعار الدعم الفني مسبقاً.</li>
+              <li><strong>الالتزام بعدد الأجهزة المصرح به:</strong> استخدام الحساب على عدد الأجهزة المسموح به للباقة وتجنب توزيع الحساب على أطراف ثالثة لتفادي حظر الأنظمة الآلية.</li>
+              <li><strong>الاستخدام المتوافق مع شروط الخدمة:</strong> تجنب الأنشطة المحظورة برمجياً (مثل محاولات الاستخراج غير القانوني للبيانات أو الـ Spam).</li>
+            </ul>
+          </div>
+
+          <hr style="border:none; border-top:1px solid rgba(56,189,248,0.15); margin:32px 0;">
+
+          <!-- 2. REFUND & REPLACEMENT -->
+          <div class="policy-section-block" id="sec-refund">
+            <h2 class="policy-section-heading">
+              <i class="fa-solid fa-rotate-left"></i>
+              <span>2. سياسة الاسترجاع واسترداد الأموال العادل (Fair Refund Policy)</span>
+            </h2>
+            <p>
+              نحن نضع راحة العميل وثقته فوق كل اعتبار. ولهذا نطبق سياسة استرداد أموال شفافة وعادلة للغاية:
+            </p>
+
+            <div class="policy-callout-card" style="border-color: rgba(74, 222, 128, 0.4); background: rgba(74, 222, 128, 0.08);">
+              <i class="fa-solid fa-hand-holding-dollar" style="color: #4ade80;"></i>
+              <div>
+                <strong style="color:#4ade80;">ضمان استرداد الأموال 100%:</strong><br>
+                إذا تعذر تسليم الخدمة المطلوبة، أو كان هناك خلل فني في الحساب أو الكود ولم يتمكن فريقنا من معالجته أو استبداله خلال 24 ساعة، يحق لك استرداد كامل المبلغ المدفوع فوراً وبدون أي خصومات.
+              </div>
+            </div>
+
+            <h4 style="color:#fff; margin:18px 0 8px 0;">الحالات التي يحق فيها طلب استرداد الأموال:</h4>
+            <ul style="padding-right:24px; color:#cbd5e1; line-height:2;">
+              <li>عدم استلام كود التفعيل أو بيانات الحساب في الموعد المحدد للتسليم.</li>
+              <li>عدم توافق الحساب مع الشروط الموضحة في صفحة المنتج في المتجر.</li>
+              <li>توقف الحساب أثناء فترة الضمان وعدم قدرة الدعم الفني على توفير بديل صالح خلال 24 ساعة عمل.</li>
+            </ul>
+
+            <h4 style="color:#fff; margin:18px 0 8px 0;">آلية وقنوات استرجاع المبالغ:</h4>
+            <p>
+              يتم رد الأموال عبر نفس وسيلة الدفع التي استخدمتها أو الوسيلة المفضلة لديك (محفظة فودافون كاش، محفظة إنستاباي، التحويل البنكي، أو رصيد إضافي في محفظة كوينز Activkeyz بزيادة 10% بونص). وتستغرق عملية التحويل من <strong>ساعة واحدة إلى 24 ساعة عمل بحد أقصى</strong>.
+            </p>
+          </div>
+
+          <hr style="border:none; border-top:1px solid rgba(56,189,248,0.15); margin:32px 0;">
+
+          <!-- 3. PRIVACY -->
+          <div class="policy-section-block" id="sec-privacy">
+            <h2 class="policy-section-heading">
+              <i class="fa-solid fa-user-shield"></i>
+              <span>3. سياسة الخصوصية وحماية البيانات (Privacy & Data Protection - GDPR Compliant)</span>
+            </h2>
+            <p>
+              خصوصيتك هي أمانة نعتز بها. يخضع موقع <strong>Activkeyz</strong> لأحدث بروتوكولات حماية وتشفير البيانات الرقمية بما يتوافق مع المعايير العالمية (GDPR و CCPA):
+            </p>
+
+            <div class="policy-callout-card">
+              <i class="fa-solid fa-lock"></i>
+              <div>
+                <strong>البيانات التي نجمعها ولماذا:</strong><br>
+                نجمع فقط الحد الأدنى اللازم لإتمام وتأكيد طلبك:
+                (1) الاسم الأول أو اللقب، (2) البريد الإلكتروني لإرسال الفاتورة وبيانات الاشتراك، (3) رقم الواتساب لخدمة الاستلام الفوري والمتابعة مع خدمة العملاء.
+              </div>
+            </div>
+
+            <h4 style="color:#fff; margin:18px 0 8px 0;">ما نلتزم به قطعيّاً لحماية خصوصيتك:</h4>
+            <ul style="padding-right:24px; color:#cbd5e1; line-height:2;">
+              <li><strong>عدم بيع أو مشاركة البيانات:</strong> لا نقوم مطلقاً ببيع، تأجير، أو مشاركة بياناتك الشخصية مع أي شركة تسويق أو جهة ثالثة خارج إطار تنفيذ طلبك.</li>
+              <li><strong>صفر تخزين للبيانات البنكية:</strong> لا يتم تخزين أي أرقام بطاقات ائتمانية، رموز سرية، أو بيانات مصرفية على خوادمنا نهائياً. كافة المعاملات مشفرة بالكامل.</li>
+              <li><strong>تشفير SSL 256-bit:</strong> جميع الاتصالات ونقل البيانات بين جهازك وموقعنا مشفرة عبر طبقات أمان SSL/TLS المشفرة قياسياً.</li>
+              <li><strong>حق الحذف والتعديل (Right to be Forgotten):</strong> يحق لأي عميل طلب حذف أو تعديل أو تصدير كافة بياناته من قاعدة البيانات لدينا فوراً عن طريق مراسلة الدعم الفني.</li>
+            </ul>
+
+            <h4 style="color:#fff; margin:18px 0 8px 0;">ملفات تعريف الارتباط (Cookies):</h4>
+            <p>
+              يستخدم الموقع ملفات تعريف ارتباط وظيفية خفيفة فقط لتذكر سلة مشترياتك، عملتك المختارة (جنيه أو دولار)، وحالة تسجيل الدخول لتوفير تجربة تصفح سلسة وسريعة.
+            </p>
+          </div>
+
+          <hr style="border:none; border-top:1px solid rgba(56,189,248,0.15); margin:32px 0;">
+
+          <!-- 4. TERMS -->
+          <div class="policy-section-block" id="sec-terms">
+            <h2 class="policy-section-heading">
+              <i class="fa-solid fa-file-contract"></i>
+              <span>4. الشروط والأحكام العامة والتراخيص الرقمية (Terms of Service)</span>
+            </h2>
+            <p>
+              باستخدامك لموقع Activkeyz وإتمامك لأي عملية شراء، فإنك تقر وتوافق على الالتزام بالشروط والأحكام الآتية:
+            </p>
+            <ul style="padding-right:24px; color:#cbd5e1; line-height:2;">
+              <li><strong>طبيعة المنتجات الرقمية:</strong> جميع المنتجات المباعة هي اشتراكات، تراخيص برمجية، وتفعيلات رقمية غير ملموسة، ويتم تسليمها إلكترونياً عبر البريد أو الواتساب أو صفحة الإيصال المباشر.</li>
+              <li><strong>الاستخدام المصرح به:</strong> الاشتراكات والتراخيص مخصصة للاستخدام الشخصي أو المهني للمشتري، ولا يجوز إعادة بيعها تجارياً دون ترخيص كتابي من الإدارة.</li>
+              <li><strong>تحديثات المنصات الأصلية:</strong> تخضع الاشتراكات للتحديثات والسياسات البرمجية التي تفرضها الشركات المطورة، ويتعهد متجرنا بمواكبة تلك التحديثات وتوفير الدعم الفني الكامل للحفاظ على استمرارية الخدمة.</li>
+            </ul>
+          </div>
+
+          <hr style="border:none; border-top:1px solid rgba(56,189,248,0.15); margin:32px 0;">
+
+          <!-- 5. SECURITY -->
+          <div class="policy-section-block" id="sec-security">
+            <h2 class="policy-section-heading">
+              <i class="fa-solid fa-lock"></i>
+              <span>5. أمان المدفوعات والاشتراكات الأصلية 100%</span>
+            </h2>
+            <p>
+              يضمن متجر <strong>Activkeyz</strong> شرعية وأصالة جميع التراخيص والخدمات المقدمة، والتي يتم شراؤها وتفعيلها عبر موزعِين رسميين وقنوات معتمدة بنسبة 100%. 
+              عمليات الدفع عبر المحافظ الإلكترونية المصرية (فودافون كاش، أورنج، اتصالات، وي كاش) وشبكة المدفوعات اللحظية (إنستاباي) والبطاقات البنكية تخضع لأعلى معايير المصادقة الثنائية وتدقيق الإيصالات لضمان عدم وجود أي احتيال مالي.
+            </p>
+          </div>
+
+          <hr style="border:none; border-top:1px solid rgba(56,189,248,0.15); margin:32px 0;">
+
+          <!-- 6. LEGAL & META ADS DISCLAIMER -->
+          <div class="policy-section-block" id="sec-disclaimer">
+            <h2 class="policy-section-heading">
+              <i class="fa-solid fa-scale-balanced"></i>
+              <span>6. إخلاء المسؤولية القانوني وسياسات الإعلانات (Meta Platforms & Google Ads Compliance)</span>
+            </h2>
+            <p>
+              تلتزم إدارة Activkeyz بأعلى معايير الشفافية والامتثال للسياسات الإعلانية والتجارية لمنصة Meta Platforms, Inc. (فيسبوك، إنستغرام، واتساب) ومنصة Google:
+            </p>
+            <div class="policy-callout-card">
+              <i class="fa-solid fa-circle-info"></i>
+              <div>
+                <strong>إقرار عدم التبعية لشركة ميتا (Non-Affiliation Notice):</strong><br>
+                هذا الموقع الإلكتروني (Activkeyz) هو منصة تجارية مستقلة، وليس جزءاً من موقع Facebook أو شركة Meta Platforms, Inc. ولا يرتبط بها أو بأي من شركاتها التابعة بأي شكل من الأشكال. كلمة Facebook™ و Instagram™ و WhatsApp™ هي علامات تجارية مسجلة ومملوكة قانونياً لشركة Meta Platforms, Inc.
+              </div>
+            </div>
+
+            <h4 style="color:#fff; margin:18px 0 8px 0;">استقلالية التوزيع والعلامات التجارية:</h4>
+            <ul style="padding-right:24px; color:#cbd5e1; line-height:2;">
+              <li>جميع أسماء البرامج، الشعارات، والعلامات التجارية المعروضة في المتجر (مثل OpenAI, ChatGPT, Canva, CapCut, Adobe, Microsoft, Discord, Spotify وغيرها) تعود ملكيتها الفكرية الكاملة لأصحابها والشركات المطورة لها.</li>
+              <li>يعمل متجر Activkeyz كمزود وموزع مستقل لخدمات وتراخيص واشتراكات رقمية أصلية وقانونية 100% دون أي ادعاء بالتمثيل الحصري للشركات الأم.</li>
+              <li>لا نقوم بالترويج لأي ادعاءات مضللة أو وعود غير واقعية؛ فجميع الأسعار، فترات الضمان، ومواصفات الباقات معلنة بوضوح وشفافية تامة دون أي تكاليف خفية أو تجديدات تلقائية غير مصرح بها.</li>
+            </ul>
+
+            <h4 style="color:#fff; margin:20px 0 8px 0;">Official Meta / Facebook Compliance Review Statement (English):</h4>
+            <p style="direction:ltr; text-align:left; font-size:0.88rem; color:#94a3b8; line-height:1.7; background:rgba(6,14,28,0.7); border:1px solid rgba(56,189,248,0.25); border-radius:12px; padding:16px 20px;">
+              This site is not a part of the Facebook website or Meta Platforms, Inc. Additionally, this site is NOT endorsed by Facebook in any way. FACEBOOK is a trademark of META PLATFORMS, INC. Activkeyz is an independent e-commerce storefront operating in full compliance with digital commerce laws, consumer protection standards, transparency regulations, and fair advertising practices.
+            </p>
+          </div>
+
+          <hr style="border:none; border-top:1px solid rgba(56,189,248,0.15); margin:32px 0;">
+
+          <!-- 7. INTERACTIVE FAQ -->
+          <div class="policy-section-block" id="sec-faq">
+            <h2 class="policy-section-heading">
+              <i class="fa-solid fa-circle-question"></i>
+              <span>7. الأسئلة الشائعة حول السياسات والضمان (Policy FAQ)</span>
+            </h2>
+            <p>إليك إجابات سريعة ومباشرة على أكثر استفسارات عملائنا شيوعاً:</p>
+
+            <div class="policy-faq-item open">
+              <div class="policy-faq-q">
+                <span>ماذا أفعل لو واجهت أي توقف مفاجئ في حسابي؟</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="policy-faq-a">
+                كل ما عليك فعله هو إرسال رقم طلبك أو بريدك لفريق الدعم عبر الواتساب أو فتح تذكرة دعم فني سريعة. سيقوم الفريق فوراً بفحص المشكلة واستبدال الحساب أو معالجة التفعيل في أقل من 15 دقيقة طوال فترة سريان الضمان.
+              </div>
+            </div>
+
+            <div class="policy-faq-item">
+              <div class="policy-faq-q">
+                <span>هل اشتراكاتكم أصلية وقانونية ولا تسبب حظر أجهزتي؟</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="policy-faq-a">
+                نعم، جميع اشتراكاتنا وتراخيصنا أصلية 100% ومستخرجة عبر موزعين معتمدين رسمياً. لا نستخدم أي برامج كراك أو طرق مشبوهة، واستخدامك للترخيص آمن وقانوني بالكامل على جميع أجهزتك.
+              </div>
+            </div>
+
+            <div class="policy-faq-item">
+              <div class="policy-faq-q">
+                <span>كم تستغرق عملية استرجاع أموالي إذا لم يعمل الاشتراك؟</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="policy-faq-a">
+                إذا لم يتمكن الدعم الفني من توفير اشتراك بديل يعمل بكفاءة خلال 24 ساعة، يتم تحويل المبلغ بالكامل فوراً إلى محفظتك الإلكترونية أو حسابك البنكي خلال مدة أقصاها 24 ساعة عمل دون أي خصم.
+              </div>
+            </div>
+
+            <div class="policy-faq-item">
+              <div class="policy-faq-q">
+                <span>هل معلوماتي ورقم هاتفي في أمان تام لديكم؟</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+              <div class="policy-faq-a">
+                نعم بنسبة 100%. نستخدم تشفير SSL 256-bit ونلتزم بسياسة خصوصية صارمة تمنع مشاركة بيانات العملاء مع أي طرف ثالث. ولا نقوم بطلب أو تخزين أي بيانات بطاقات بنكية نهائياً.
+              </div>
+            </div>
+          </div>
+
+          <!-- Fast CTA Support Card -->
+          <div class="policy-cta-box">
+            <div class="policy-cta-info">
+              <h3>هل لديك أي استفسار حول الضمان أو السياسات؟</h3>
+              <p>فريق خدمة العملاء والضمان المعتمد متواجد لمساعدتك والرد على استفساراتك على مدار الساعة.</p>
+            </div>
+            <div class="policy-cta-btns">
+              <a href="https://wa.me/201225106057" target="_blank" class="btn btn-whatsapp" style="padding:12px 24px; font-weight:800; border-radius:12px; display:inline-flex; align-items:center; gap:8px;">
+                <i class="fa-brands fa-whatsapp" style="font-size:1.2rem;"></i>
+                <span>مسؤول الضمان بالواتساب</span>
+              </a>
+              <a href="contact.html" class="btn btn-translucent" style="padding:12px 20px; font-weight:700; border-radius:12px;">
+                <i class="fa-solid fa-headset"></i>
+                <span>فتح تذكرة دعم</span>
+              </a>
+            </div>
+          </div>
+
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- UNIFIED AUTH-AWARE FOOTER (WITH DISCREET ADMIN LINK) -->
+  <footer class="main-page-footer" id="mainFooter">
+    <div class="container footer-main-grid">
+
+      <!-- Column 1: Brand & Direct Support -->
+      <div class="footer-col-item brand-column">
+        <a href="./" class="brand-logo" aria-label="Activkeyz الرئيسية">
+          <img src="logos/activkeyzmainlogo.png" alt="Activkeyz" class="brand-logo-img footer-logo-img">
+          <div class="logo-text-group">
+            <span class="logo-title" style="font-size:1.15rem;">Activkeyz</span>
+            <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+          </div>
+        </a>
+        <p class="footer-tagline">
+          منصتك المعتمدة للاشتراكات والخدمات البرمجية بأسعار تنافسية وضمان شامل ودعم فني متواصل.
+        </p>
+        <div class="footer-contact-actions">
+          <a href="https://wa.me/201225106057" target="_blank" class="footer-contact-pill" title="واتساب المبيعات">
+            <i class="fa-brands fa-whatsapp" style="color: #22c55e;"></i>
+            <span>واتساب المبيعات</span>
+          </a>
+          <a href="contact.html" class="footer-contact-pill" title="مركز المساعدة">
+            <i class="fa-solid fa-headset"></i>
+            <span>الدعم الفني</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Public Products & Categories -->
+      <div class="footer-col-item">
+        <h4 class="footer-block-header">الأقسام والمنتجات</h4>
+        <ul class="footer-anchor-list">
+          <li><a href="category.html?cat=all"><i class="fa-solid fa-border-all"></i> جميع المنتجات والاشتراكات</a></li>
+          <li><a href="category.html?cat=ai"><i class="fa-solid fa-wand-magic-sparkles"></i> أدوات الذكاء الاصطناعي</a></li>
+          <li><a href="category.html?cat=creative"><i class="fa-solid fa-palette"></i> البرامج الإبداعية والتصميم</a></li>
+          <li><a href="category.html?cat=office"><i class="fa-solid fa-briefcase"></i> برامج المكتب والإنتاجية</a></li>
+          <li><a href="category.html?cat=streaming"><i class="fa-solid fa-play"></i> الترفيه والمشاهدة</a></li>
+          <li><a href="category.html?cat=gaming"><i class="fa-solid fa-shield-halved"></i> الألعاب وبطاقات الحماية</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Customer Shortcuts & Policies -->
+      <div class="footer-col-item footer-auth-col">
+        <h4 class="footer-block-header" id="footerAccountHeading">السياسات والخدمات</h4>
+        <ul class="footer-anchor-list">
+          <li><a href="account.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> تسجيل الدخول أو إنشاء حساب</a></li>
+          <li><a href="track-order.html"><i class="fa-solid fa-truck-fast"></i> تتبع الطلب بالرقم المرجعي</a></li>
+          <li><a href="policy.html?tab=warranty"><i class="fa-solid fa-shield-check"></i> سياسة الضمان والاستبدال الذهبي</a></li>
+          <li><a href="policy.html?tab=refund"><i class="fa-solid fa-rotate-left"></i> سياسة الاسترجاع واسترداد الأموال</a></li>
+          <li><a href="policy.html?tab=privacy"><i class="fa-solid fa-user-shield"></i> سياسة الخصوصية وأمان البيانات</a></li>
+          <li><a href="policy.html?tab=terms"><i class="fa-solid fa-file-contract"></i> الشروط والأحكام والتراخيص</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Trust & Secure Payments -->
+      <div class="footer-col-item">
+        <h4 class="footer-block-header">وسائل دفع معتمدة وآمنة</h4>
+        <p class="footer-payment-text">
+          مدفوعاتك مشفرة ومحمية 100% عبر بوابات معتمدة ومعالجة فورية لكافة الطلبات:
+        </p>
+        <div class="footer-payment-badges">
+          <div class="payment-badge-pill" title="فودافون كاش ومحافظ المحمول"><i class="fa-solid fa-wallet"></i> فودافون كاش</div>
+          <div class="payment-badge-pill" title="شبكة المدفوعات اللحظية إنستاباي"><i class="fa-solid fa-bolt"></i> إنستاباي InstaPay</div>
+          <div class="payment-badge-pill" title="البطاقات البنكية"><i class="fa-regular fa-credit-card"></i> فيزا / ماستركارد</div>
+          <div class="payment-badge-pill" title="العملات الرقمية"><i class="fa-solid fa-coins"></i> USDT الرقمي</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar with Discreet Admin Portal Link -->
+    <div class="footer-bottom-bar">
+      <div class="container footer-bottom-inner">
+        <div class="footer-copy-text">
+          <span>&copy; 2026 Activkeyz. جميع الحقوق محفوظة لمتجر التراخيص الرقمية المعتمد.</span>
+        </div>
+        <div class="footer-bottom-links">
+          <a href="privacy.html">الخصوصية</a>
+          <span>&bull;</span>
+          <a href="terms.html">الشروط</a>
+          <span>&bull;</span>
+          <a href="refund.html">الاسترجاع والضمان</a>
+          <span>&bull;</span>
+          <a href="dashboard.html" class="footer-admin-lock-link" title="بوابة إدارة المتجر (Admin Dashboard)" target="_blank">
+            <i class="fa-solid fa-lock"></i>
+            <span>لوحة التحكم الإدارية</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="nexa-ui.js"></script>
+
+  <script>
+    // Clean URL Helper: Automatically clean /index.html from URL bar
+    if (window.location.pathname.endsWith('/index.html')) {
+      const cleanUrl = window.location.pathname.replace(/\/index\.html$/, '/') + window.location.search + window.location.hash;
+      window.history.replaceState(null, '', cleanUrl);
+    }
+
+    // Live Countdown Timer
+    let h = 17, m = 59, s = 23;
+    setInterval(() => {
+      s--;
+      if (s < 0) { s = 59; m--; if (m < 0) { m = 59; h--; if (h < 0) h = 23; } }
+      const hEl = document.getElementById('hoursVal');
+      const mEl = document.getElementById('minutesVal');
+      const sEl = document.getElementById('secondsVal');
+      if (hEl) hEl.textContent = String(h).padStart(2, '0');
+      if (mEl) mEl.textContent = String(m).padStart(2, '0');
+      if (sEl) sEl.textContent = String(s).padStart(2, '0');
+    }, 1000);
+
+    // Sidebar tab scroll and active state
+    const navItems = document.querySelectorAll('.policy-nav-item');
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navItems.forEach(n => n.classList.remove('active'));
+        item.classList.add('active');
+        const targetId = item.getAttribute('data-target');
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Handle URL parameters (e.g. policy.html?tab=privacy)
+    const p = new URLSearchParams(window.location.search);
+    const tabParam = p.get('tab');
+    if (tabParam) {
+      const targetId = 'sec-' + tabParam;
+      const match = document.getElementById(targetId);
+      const matchingBtn = document.querySelector(`.policy-nav-item[data-target="${targetId}"]`);
+      if (matchingBtn) {
+        navItems.forEach(n => n.classList.remove('active'));
+        matchingBtn.classList.add('active');
+      }
+      if (match) {
+        setTimeout(() => match.scrollIntoView({ behavior: 'smooth', block: 'start' }), 250);
+      }
+    }
+
+    // Interactive FAQ Accordion
+    document.querySelectorAll('.policy-faq-q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.closest('.policy-faq-item');
+        if (item) {
+          item.classList.toggle('open');
+        }
+      });
+    });
+
+    // Mobile Drawer
+    document.getElementById('mobileMenuBtn')?.addEventListener('click', () => {
+      document.getElementById('mobileDrawer')?.classList.add('active');
+    });
+    document.getElementById('drawerCloseBtn')?.addEventListener('click', () => {
+      document.getElementById('mobileDrawer')?.classList.remove('active');
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+# Activkeyz Robots.txt
+User-agent: *
+Allow: /
+Disallow: /dashboard.html
+Disallow: /supabase/
+Disallow: /checkout.html
+Disallow: /order-receipt.html
+Disallow: /.env
+Disallow: /scratch/
+
+# Sitemap
+Sitemap: https://activkeyz.com/sitemap.xml

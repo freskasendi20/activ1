@@ -1,0 +1,9 @@
+# Redirects for Cloudflare Pages / Netlify
+/admin        /dashboard.html   200
+/dashboard    /dashboard.html   200
+/login        /account.html     200
+/register     /account.html     200
+/privacy      /privacy.html     200
+/terms        /terms.html       200
+/refund       /refund.html      200
+/policy       /policy.html      200

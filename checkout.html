@@ -1,0 +1,577 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إتمام الطلب والدفع الآمن | Activkeyz</title>
+  <meta name="description" content="إتمام طلبك بسرعة وأمان في متجر Activkeyz. تسليم فوري وتفعيل رسمي مباشر لاشتراكاتك الرقمية.">
+  <meta name="google" content="notranslate">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logos/activkeyzsecondlogo.png">
+  <link rel="apple-touch-icon" href="logos/activkeyzsecondlogo.png">
+
+  <!-- Fonts: IBM Plex Sans Arabic + Cairo + Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/css/intlTelInput.min.css">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="checkout.css">
+  <link rel="stylesheet" href="mobile-redesign.css">
+</head>
+
+<body class="checkout-page-body">
+
+  <!-- Background Ambience -->
+  <div class="page-background" aria-hidden="true">
+    <div class="stars-layer"></div>
+    <div class="ambient-glow-top"></div>
+    <div class="ambient-glow-bottom"></div>
+  </div>
+
+  <!-- CLEAN LUXURY HEADER -->
+  <header class="clean-checkout-header">
+    <div class="container clean-header-inner">
+      <a href="./" class="checkout-brand-logo" aria-label="Activkeyz الرئيسية">
+        <img src="logos/activkeyzmainlogo.png" alt="Activkeyz" class="brand-logo-img checkout-brand-img">
+        <div class="logo-text-group">
+          <span class="logo-title">Activkeyz</span>
+          <span class="logo-subtitle">إتمام الطلب والدفع المعتمد</span>
+        </div>
+      </a>
+
+      <!-- Trust / Actions -->
+      <div class="clean-header-actions">
+        <a href="track-order.html" class="clean-back-btn" title="تتبع واستلام الطلب">
+          <i class="fa-solid fa-truck-fast"></i>
+          <span>تتبع طلبك</span>
+        </a>
+        <a href="https://wa.me/201225106057?text=مرحباً%20Activkeyz،%20أحتاج%20مساعدة%20في%20صفحة%20الدفع..." target="_blank" class="clean-wa-btn">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>مساعدة واتساب</span>
+        </a>
+        <a href="./" class="clean-back-btn">
+          <i class="fa-solid fa-arrow-right"></i>
+          <span>العودة للمتجر</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CHECKOUT WRAPPER -->
+  <main class="clean-checkout-main">
+    <div class="container">
+      <form id="checkoutForm" onsubmit="event.preventDefault();" class="clean-checkout-grid">
+
+        <!-- RIGHT: ORDER DETAILS & PREMIUM SUMMARY CARD -->
+        <aside class="checkout-order-card">
+          <div class="order-card-inner">
+            
+            <div class="order-card-header">
+              <div class="order-card-title">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <h3>ملخص طلبك</h3>
+              </div>
+              <span class="order-card-badge" id="orderItemsCountBadge">1 باقة</span>
+            </div>
+
+            <!-- Dynamic Product Items Section (Rendered with VIP styling by checkout.js) -->
+            <div class="order-product-section" id="orderProductSection">
+              <!-- Rendered Dynamically -->
+            </div>
+
+            <!-- REVOLUTIONIZED COUPON SECTION -->
+            <div class="checkout-premium-widget-box" id="checkoutCouponWrap">
+              <div class="widget-box-header">
+                <div class="widget-box-title">
+                  <i class="fa-solid fa-ticket-simple" style="color:var(--cyan-bright);"></i>
+                  <span>كود الخصم الإضافي</span>
+                </div>
+              </div>
+              
+              <div class="clean-promo-input-wrap">
+                <i class="fa-solid fa-tag"></i>
+                <input type="text" id="couponCodeInput" placeholder="أدخل كود الخصم (مثال: ACTIV20)" autocomplete="off">
+                <button type="button" class="btn-clean-apply-coupon" onclick="applyPromoCoupon()">تطبيق</button>
+              </div>
+
+              <div class="clean-promo-quick">
+                <span class="promo-quick-hint">كوبون متاح:</span>
+                <button type="button" class="clean-chip-btn" onclick="quickApplyCoupon('ACTIV20')">
+                  <i class="fa-solid fa-bolt"></i> ACTIV20 (-20%)
+                </button>
+              </div>
+
+              <div class="clean-coupon-msg" id="couponFeedbackMsg" style="display:none;"></div>
+            </div>
+
+            <!-- REVOLUTIONIZED ACTIVKEYZ COINS SECTION -->
+            <div class="checkout-premium-widget-box coins-widget" id="checkoutCoinsWrap">
+              <div class="widget-box-header">
+                <div class="widget-box-title">
+                  <i class="fa-solid fa-coins" style="color:#fbbf24;"></i>
+                  <span>استخدام رصيد Activkeyz Coins</span>
+                </div>
+                <span class="coins-pill-available" id="checkoutUserCoinsAvailable">0 كوين متاح</span>
+              </div>
+
+              <div class="coins-input-row">
+                <input type="number" id="coinsToRedeemInput" min="0" step="10" placeholder="عدد الكوينز المراد استخدامها" class="coins-num-input">
+                <button type="button" class="btn-coins-max" onclick="applyMaxEligibleCoins()">أقصى حد</button>
+                <button type="button" class="btn-coins-apply" onclick="applyCoinsRedemption()">استبدال</button>
+              </div>
+
+              <div id="coinsRedemptionFeedback" class="coins-feedback-note" style="display:none;"></div>
+            </div>
+
+            <!-- Transparent Financial Breakdown -->
+            <div class="order-pricing-breakdown">
+              <div class="price-row">
+                <span>سعر الباقة الأساسي:</span>
+                <strong id="checkoutSubtotalEgp">0 ج.م</strong>
+              </div>
+              <div class="price-row discount-row" style="display:none;">
+                <span>خصم المتجر المباشر:</span>
+                <strong id="checkoutDiscountEgp">-0 ج.م</strong>
+              </div>
+              <div class="price-row extra-coupon-row" id="extraCouponRow" style="display:none;">
+                <span>خصم الكوبون الترويجي:</span>
+                <strong id="checkoutExtraDiscount">-0 ج.م</strong>
+              </div>
+              <div class="price-row coins-discount-row" id="coinsDiscountRow" style="display:none; color:#fbbf24;">
+                <span><i class="fa-solid fa-coins"></i> خصم Activkeyz Coins:</span>
+                <strong id="checkoutCoinsDiscount">-0 ج.م</strong>
+              </div>
+              
+              <div class="price-divider"></div>
+
+              <div class="price-total-row">
+                <div class="total-label-wrap">
+                  <span class="total-label">المبلغ الإجمالي للدفع:</span>
+                </div>
+                <div class="total-values-wrap">
+                  <span class="total-egp" id="checkoutTotalFinalEgp">0 ج.م</span>
+                  <span class="total-usd" id="checkoutTotalFinalUsd">($0.00)</span>
+                </div>
+              </div>
+
+              <!-- Estimated Coins to Earn -->
+              <div class="coins-earn-estimate-row" id="coinsEarnEstimateRow">
+                <span><i class="fa-solid fa-coins"></i> كوينز تكسبها بعد اكتمال الطلب:</span>
+                <strong id="checkoutCoinsToEarn">+0 كوين</strong>
+              </div>
+            </div>
+
+            <!-- Reassurance Note -->
+            <div class="clean-order-guarantee">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>ضمان كامل طوال فترة الاشتراك مع دعم فني متواصل</span>
+            </div>
+
+          </div>
+        </aside>
+
+        <!-- LEFT: CLEAN PROGRESSIVE PURCHASING FORM -->
+        <section class="checkout-form-card">
+          <div class="form-card-inner">
+
+            <!-- STAGE INDICATOR RIBBON -->
+            <div class="checkout-stepper-nav" id="checkoutStepperNav">
+              <div class="stepper-item active" id="stepIndicator1" onclick="goToStep(1)">
+                <span class="stepper-num">1</span>
+                <span class="stepper-title">بيانات التواصل</span>
+              </div>
+              <i class="fa-solid fa-chevron-left stepper-arrow"></i>
+              <div class="stepper-item" id="stepIndicator2" onclick="validateStep1AndProceed()">
+                <span class="stepper-num">2</span>
+                <span class="stepper-title">الدفع وتأكيد الطلب</span>
+              </div>
+            </div>
+
+            <!-- Mobile Quick Order Summary Preview -->
+            <div class="checkout-mobile-order-pill" id="checkoutMobileMiniSummary">
+              <div class="mini-summary-info">
+                <i class="fa-solid fa-bag-shopping" style="color:var(--cyan-bright);"></i>
+                <span id="mobileMiniSummaryProd">طلبك: باقة رقمية معتمدة</span>
+              </div>
+              <div class="mini-summary-price" id="mobileMiniSummaryPrice">0 ج.م</div>
+            </div>
+
+            <!-- STEP 1: CUSTOMER CONTACT & DELIVERY PREFERENCE -->
+            <div class="checkout-step-block" id="checkoutStep1">
+              <div class="step-header">
+                <span class="step-circle">1</span>
+                <div>
+                  <h2 class="step-title">بيانات التواصل والاستلام الفوري</h2>
+                  <p class="step-desc">أدخل بياناتك المعتمدة واختر الوسيلة التي تفضل استلام الاشتراك من خلالها.</p>
+                </div>
+              </div>
+
+              <!-- Customer Account Gate Banner -->
+              <div class="account-auth-gate-banner" id="checkoutAuthGateBanner">
+                <div class="auth-gate-info">
+                  <i class="fa-solid fa-user-check" id="authGateIcon"></i>
+                  <div>
+                    <strong id="authGateStatusTitle">سجّل دخولك لحفظ الطلب ومضاعفة كوينزك</strong>
+                    <span id="authGateStatusDesc">تسجيل الدخول يربط طلبك بحسابك وكسب واستخدام Activkeyz Coins.</span>
+                  </div>
+                </div>
+                <button type="button" class="btn-clean-chip" id="authGateActionBtn" onclick="openCheckoutAuthModal()">
+                  <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                  <span>تسجيل الدخول</span>
+                </button>
+              </div>
+
+              <!-- Contact Fields: Email & WhatsApp (BOTH MANDATORY) -->
+              <div class="step-fields-grid">
+                <!-- Customer Email -->
+                <div class="clean-field">
+                  <label for="customerEmail" class="clean-label">
+                    <span>البريد الإلكتروني للاستلام والتفعيل</span>
+                  </label>
+                  <div class="clean-input-box">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="customerEmail" required placeholder="name@example.com" autocomplete="email">
+                  </div>
+                </div>
+
+                <!-- Customer WhatsApp Phone (Official International intl-tel-input) -->
+                <div class="clean-field" id="fieldCustomerPhoneWrap">
+                  <label for="customerPhone" class="clean-label">
+                    <span>رقم واتساب للتواصل والاستلام</span>
+                  </label>
+                  <div class="clean-input-box iti-input-container" id="phoneInputContainer" dir="ltr">
+                    <input type="tel" id="customerPhone" required placeholder="01XXXXXXXXX" autocomplete="tel" inputmode="numeric" pattern="[0-9]*" dir="ltr">
+                  </div>
+                  <span class="clean-field-hint" id="phoneValidationFeedback" style="display:none;"></span>
+                </div>
+              </div>
+
+              <!-- Optional Customer Name & Note -->
+              <div class="step-fields-grid" style="margin-top: 14px;">
+                <div class="clean-field">
+                  <label for="customerName" class="clean-label">
+                    <span>الاسم بالكامل</span>
+                  </label>
+                  <div class="clean-input-box">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" id="customerName" placeholder="مثال: أحمد محمود">
+                  </div>
+                </div>
+
+                <div class="clean-field">
+                  <label for="orderNotes" class="clean-label">
+                    <span>ملاحظات إضافية</span>
+                  </label>
+                  <div class="clean-input-box">
+                    <i class="fa-regular fa-comment-dots"></i>
+                    <input type="text" id="orderNotes" placeholder="أي تعليمات أو ملاحظات خاصة بالطلب...">
+                  </div>
+                </div>
+              </div>
+
+              <!-- INTERACTIVE DELIVERY METHOD SELECTOR -->
+              <div class="checkout-delivery-selector-section" id="deliveryMethodSelector">
+                <div class="delivery-selector-header">
+                  <div class="clean-label">
+                    <i class="fa-solid fa-paper-plane" style="color:var(--cyan-bright); margin-left:6px;"></i>
+                    <span>طريقة استلام طلبك المعتمدة</span>
+                  </div>
+                </div>
+
+                <div class="delivery-options-grid">
+                  <!-- Option 1: WhatsApp (Recommended & Fastest) -->
+                  <div class="delivery-option-card active" id="deliveryCardWa" onclick="selectDeliveryMethod('whatsapp')">
+                    <div class="delivery-radio-wrap">
+                      <span class="delivery-radio-circle"><i class="fa-solid fa-check"></i></span>
+                    </div>
+                    <div class="delivery-card-ico-box wa">
+                      <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div class="delivery-card-info">
+                      <div class="delivery-card-heading">
+                        <strong class="delivery-card-title">استلام فوري عبر الواتساب</strong>
+                        <span class="delivery-fast-badge"><i class="fa-solid fa-bolt"></i> الأسرع</span>
+                      </div>
+                      <p class="delivery-card-desc">إرسال كود التفعيل وبيانات الحساب فوراً عبر رسالة واتساب</p>
+                    </div>
+                  </div>
+
+                  <!-- Option 2: Email -->
+                  <div class="delivery-option-card" id="deliveryCardEmail" onclick="selectDeliveryMethod('email')">
+                    <div class="delivery-radio-wrap">
+                      <span class="delivery-radio-circle"><i class="fa-solid fa-check"></i></span>
+                    </div>
+                    <div class="delivery-card-ico-box email">
+                      <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <div class="delivery-card-info">
+                      <div class="delivery-card-heading">
+                        <strong class="delivery-card-title">تسليم عبر البريد الإلكتروني</strong>
+                        <span class="delivery-official-badge"><i class="fa-solid fa-file-invoice"></i> فاتورة وترخيص</span>
+                      </div>
+                      <p class="delivery-card-desc">إرسال الترخيص الرسمي وتفاصيل الحساب إلى بريدك الإلكتروني</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Footer Navigation -->
+              <div class="step-nav-footer" style="margin-top:24px;">
+                <a href="./" class="btn-step-prev">
+                  <i class="fa-solid fa-store"></i>
+                  <span>العودة للمتجر</span>
+                </a>
+                <button type="button" class="btn-step-next" onclick="validateStep1AndProceed()">
+                  <span>المتابعة لوسيلة الدفع ورفع الإيصال</span>
+                  <i class="fa-solid fa-arrow-left"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 2: PAYMENT METHOD & RECEIPT UPLOAD & CONFIRMATION -->
+            <div class="checkout-step-block" id="checkoutStep2" style="display:none;">
+              <div class="step-header">
+                <span class="step-circle">2</span>
+                <div>
+                  <h2 class="step-title">طريقة التحويل وإرفاق الإيصال والتأكيد</h2>
+                  <p class="step-desc">اختر وسيلتك المفضلة، وحوّل المبلغ المطلوب، ثم أرفق لقطة الشاشة للتأكيد الفوري.</p>
+                </div>
+              </div>
+
+              <!-- Payment Tabs (Vodafone Cash, InstaPay, USDT) -->
+              <div class="clean-pay-tabs">
+                <!-- Rendered dynamically from Supabase active payment methods -->
+              </div>
+
+              <!-- Transfer Callout Box -->
+              <div class="clean-transfer-box">
+                <div class="transfer-box-info">
+                  <div class="transfer-label-group">
+                    <span class="transfer-badge-tag" id="transferMethodLabel"><i class="fa-solid fa-mobile-retro"></i> فودافون كاش / المحافظ الإلكترونية</span>
+                    <span class="transfer-sub-desc" id="transferInstructions">حوّل من أي محفظة إلكترونية (فودافون، أورنج، اتصالات، وي باي، كاش كول)</span>
+                  </div>
+
+                  <div class="transfer-number-cluster">
+                    <span class="transfer-number" id="officialTransferNumber">01225106057</span>
+                    <button type="button" class="btn-clean-copy" onclick="copyTransferNumber()">
+                      <i class="fa-regular fa-copy"></i>
+                      <span id="copyBtnText">نسخ الرقم</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="transfer-box-due">
+                  <span class="due-label">المبلغ المطلوب تحويله:</span>
+                  <span class="due-amount" id="checkoutTransferAmountEgp">0 ج.م</span>
+                  <span class="due-usd" id="checkoutTransferAmountUsd">($0.00)</span>
+                </div>
+              </div>
+
+              <!-- Screenshot Upload Dropzone -->
+              <div style="margin-top: 18px;">
+                <label class="clean-label" style="margin-bottom:8px;">
+                  <span>إرفاق إيصال التحويل (سكرين شوت)</span>
+                  <span class="tag-required">إلزامي للمطابقة</span>
+                </label>
+                <div class="clean-uploader-zone" id="receiptDropzone" onclick="triggerReceiptFileInput()">
+                  <input type="file" id="receiptFileInput" accept="image/*" class="receipt-file-hidden" onchange="handleReceiptFileSelected(event)">
+
+                  <div class="uploader-idle-content" id="dropzoneDefaultView">
+                    <div class="uploader-icon-orb">
+                      <i class="fa-solid fa-cloud-arrow-up"></i>
+                    </div>
+                    <div class="uploader-text-block">
+                      <span class="uploader-primary-txt">اضغط لاختيار صورة الإيصال أو اسحبها هنا</span>
+                      <span class="uploader-secondary-txt">يمكنك أيضاً اللصق مباشرة من الحافظة بالضغط على <kbd>Ctrl + V</kbd></span>
+                    </div>
+                    <span class="btn-browse-file"><i class="fa-solid fa-image"></i> اختر الإيصال</span>
+                  </div>
+
+                  <div class="uploader-preview-content" id="dropzonePreviewView" style="display:none;">
+                    <img id="receiptImagePreview" src="" alt="الإيصال" class="clean-receipt-thumb">
+                    <div class="clean-receipt-meta">
+                      <span class="clean-receipt-name" id="previewFileName">receipt.jpg</span>
+                      <span class="clean-receipt-status"><i class="fa-solid fa-circle-check"></i> تم إرفاق صورة الإيصال بنجاح</span>
+                    </div>
+                    <button type="button" class="btn-clean-remove-receipt" onclick="removeUploadedReceipt(event)" title="حذف وتغيير الصورة">
+                      <i class="fa-solid fa-trash-can"></i>
+                      <span>تغيير</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="clean-receipt-error" id="receiptErrorMsg" style="display:none;">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                  <span>⚠️ إرفاق إيصال التحويل إلزامي لتأكيد الطلب والتحقق منه!</span>
+                </div>
+              </div>
+
+              <!-- Direct Commit Action Block -->
+              <div class="checkout-submit-block" style="margin-top:24px;">
+                <button type="button" class="btn-clean-submit" id="submitOrderBtn" onclick="handleFinalOrderCommit()">
+                  <i class="fa-solid fa-shield-halved"></i>
+                  <span>تأكيد وإرسال الطلب نهائياً</span>
+                </button>
+
+                <div class="clean-submit-footer">
+                  <span><i class="fa-solid fa-lock"></i> طلب رسمي ومؤمن بالكامل</span>
+                  <span>•</span>
+                  <span><i class="fa-solid fa-bolt"></i> تسليم سريع خلال 15 - 30 دقيقة</span>
+                  <span>•</span>
+                  <span><i class="fa-solid fa-headset"></i> دعم فني مباشر على الواتساب</span>
+                </div>
+              </div>
+
+              <div class="step-nav-footer" style="margin-top:16px;">
+                <button type="button" class="btn-step-prev" onclick="goToStep(1)">
+                  <i class="fa-solid fa-arrow-right"></i>
+                  <span>السابق (تعديل بيانات الاستلام)</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </form>
+    </div>
+  </main>
+
+  <!-- ORDER CREATION CONFIRMATION MODAL -->
+  <div class="clean-modal-overlay" id="orderSuccessOverlay"></div>
+  <div class="clean-modal-box" id="orderSuccessModal">
+    <div class="modal-body-content">
+      <div style="text-align:center; margin-bottom:14px;">
+        <img src="logos/activkeyzmainlogo.png" alt="Activkeyz" style="height:48px; object-fit:contain; filter:drop-shadow(0 0 15px rgba(0,210,255,0.4));">
+      </div>
+
+      <div class="modal-success-orb">
+        <i class="fa-solid fa-hourglass-half" style="color:var(--cyan-primary);"></i>
+      </div>
+
+      <h2 class="modal-title">تم تسجيل طلبك بنجاح!</h2>
+      <p class="modal-desc" style="color:#cbd5e1; font-size:0.95rem; line-height:1.6;">
+        شكراً لطلبك من متجر Activkeyz. تم تسجيل بيانات طلبك وهو الآن <strong style="color:#f59e0b;">في انتظار مراجعة وتأكيد الدفع</strong> من قبل فريق العمل.
+      </p>
+
+      <div class="modal-order-number-box">
+        <span class="modal-label">رقم الطلب:</span>
+        <div class="modal-order-id" id="createdOrderId">AK-000000</div>
+        <button type="button" class="btn-modal-copy" onclick="copyCreatedOrderId()">
+          <i class="fa-regular fa-copy"></i>
+          <span>نسخ رقم الطلب</span>
+        </button>
+      </div>
+
+      <div class="modal-info-summary">
+        <div class="modal-info-row">
+          <span>الواتساب للاستلام والتواصل:</span>
+          <strong id="successCustomerPhone" style="color:#25d366;">-</strong>
+        </div>
+        <div class="modal-info-row">
+          <span>البريد الإلكتروني المعتمد:</span>
+          <strong id="successCustomerEmail">-</strong>
+        </div>
+        <div class="modal-info-row">
+          <span>طريقة الاستلام المحددة:</span>
+          <strong id="successDeliveryPref" style="color:var(--cyan-bright);">-</strong>
+        </div>
+        <div class="modal-info-row">
+          <span>المبلغ المطلوب سداده:</span>
+          <strong id="successTotalPaid" style="color:var(--cyan-bright);">-</strong>
+        </div>
+        <div class="modal-info-row">
+          <span>حالة الدفع:</span>
+          <strong style="color:#f59e0b;"><i class="fa-solid fa-clock"></i> قيد المراجعة والتحقق</strong>
+        </div>
+      </div>
+
+      <div class="modal-notice-banner">
+        <i class="fa-solid fa-shield-check" style="color:var(--cyan-bright);"></i>
+        <span>يقوم فريق الدعم بمطابقة إيصال التحويل، وسيتم تجهيز وإرسال اشتراكك الرقمي فور تأكيد الدفع عبر وسيلة الاستلام التي اخترتها.</span>
+      </div>
+
+      <div class="modal-actions-list">
+        <a href="#" target="_blank" class="btn-modal-primary" id="sendOrderToWhatsAppBtn" style="background:linear-gradient(135deg, #25d366, #128c7e); color:#fff; border:none; box-shadow:0 0 20px rgba(37,211,102,0.35);">
+          <i class="fa-brands fa-whatsapp" style="font-size:1.15rem;"></i>
+          <span>إرسال تفاصيل الطلب والإيصال للواتساب</span>
+        </a>
+        <a href="track-order.html" class="btn-modal-secondary" id="trackOrderReceiptLink">
+          <i class="fa-solid fa-truck-fast"></i>
+          <span>متابعة حالة الطلب</span>
+        </a>
+        <a href="./" class="btn-modal-secondary">
+          <i class="fa-solid fa-house"></i>
+          <span>العودة للمتجر</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT AUTH GATE MODAL -->
+  <div class="clean-modal-overlay" id="checkoutAuthModalOverlay"></div>
+  <div class="clean-modal-box" id="checkoutAuthModal" style="max-width:440px;">
+    <div class="modal-body-content" style="padding:24px 20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 style="color:#fff; font-size:1.15rem; font-weight:800; margin:0;" id="authModalTitle">تسجيل الدخول السريع</h3>
+        <button type="button" onclick="closeCheckoutAuthModal()" style="background:none; border:none; color:#94a3b8; font-size:1.1rem; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <p style="color:#94a3b8; font-size:0.84rem; line-height:1.5; margin-bottom:16px;">
+        سجل دخولك لحفظ الطلب في حسابك والاستفادة من محفظة Activkeyz Coins. يمكنك أيضاً المتابعة كزائر.
+      </p>
+
+      <form id="checkoutAuthForm" onsubmit="handleCheckoutAuthSubmit(event)">
+        <div class="clean-field" style="margin-bottom:12px;">
+          <label class="clean-label">البريد الإلكتروني</label>
+          <div class="clean-input-box">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" id="authModalEmail" required placeholder="name@example.com">
+          </div>
+        </div>
+
+        <div class="clean-field" style="margin-bottom:16px;">
+          <label class="clean-label">كلمة المرور</label>
+          <div class="clean-input-box">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="authModalPassword" required placeholder="••••••••">
+          </div>
+        </div>
+
+        <div id="authModalFeedback" style="display:none; font-size:0.8rem; margin-bottom:12px;"></div>
+
+        <button type="submit" class="btn-clean-submit" id="authModalSubmitBtn" style="padding:12px;">
+          <span>دخول ومتابعة الطلب</span>
+        </button>
+
+        <div style="text-align:center; margin-top:14px;">
+          <button type="button" onclick="closeCheckoutAuthModal()" style="background:none; border:none; color:#94a3b8; font-size:0.82rem; cursor:pointer; text-decoration:underline;">
+            المتابعة كزائر بدون تسجيل
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/intlTelInput.min.js"></script>
+  <script src="products-data.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="nexa-ui.js"></script>
+  <script src="checkout.js"></script>
+</body>
+
+</html>

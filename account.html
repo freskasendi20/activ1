@@ -1,0 +1,1288 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حسابي | Activkeyz</title>
+  <meta name="description" content="إدارة حسابك ومتابعة طلباتك الرقمية ومكافآت Activkeyz Coins في متجر Activkeyz">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logos/activkeyzsecondlogo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --acc-card-bg: rgba(11, 20, 36, 0.85);
+      --acc-border: rgba(56, 189, 248, 0.22);
+      --acc-border-active: #38bdf8;
+      --gold-accent: #fbbf24;
+    }
+
+    body.account-page-body {
+      background-color: #030712;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(14, 165, 233, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(3, 7, 18, 0.95) 0%, #030712 100%),
+        url('hero_bg_ultra.jpg');
+      background-attachment: fixed;
+      background-size: cover;
+      color: #f1f5f9;
+      font-family: 'Cairo', 'IBM Plex Sans Arabic', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .account-wrapper {
+      max-width: 1200px;
+      margin: 30px auto 80px auto;
+      padding: 0 20px;
+      width: 100%;
+      box-sizing: border-box;
+      flex: 1;
+    }
+
+    /* Auth Screen (Logged Out) */
+    .auth-container {
+      max-width: 460px;
+      margin: 40px auto;
+      background: var(--acc-card-bg);
+      border: 1px solid var(--acc-border);
+      border-radius: 24px;
+      padding: 36px 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.12);
+      backdrop-filter: blur(20px);
+      text-align: center;
+    }
+
+    .auth-logo-badge {
+      width: 62px;
+      height: 62px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(2, 132, 199, 0.4));
+      border: 2px solid var(--cyan-bright);
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--cyan-bright);
+      margin-bottom: 16px;
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
+    }
+
+    .auth-title {
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: #fff;
+      margin: 0 0 6px 0;
+    }
+
+    .auth-subtitle {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .auth-tabs {
+      display: flex;
+      background: rgba(15, 23, 42, 0.85);
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .auth-tab-btn {
+      flex: 1;
+      padding: 10px;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .auth-tab-btn.active {
+      background: rgba(56, 189, 248, 0.2);
+      color: var(--cyan-bright);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    .auth-input-group {
+      text-align: right;
+      margin-bottom: 16px;
+    }
+
+    .auth-input-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+    }
+
+    .auth-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .auth-input-wrap i {
+      position: absolute;
+      right: 14px;
+      color: var(--cyan-bright);
+      font-size: 1rem;
+    }
+
+    .auth-input-wrap input {
+      width: 100%;
+      padding: 12px 42px 12px 14px;
+      background: rgba(6, 12, 24, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 12px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.92rem;
+      outline: none;
+      transition: all 0.2s;
+      box-sizing: border-box;
+    }
+
+    .auth-input-wrap input:focus {
+      border-color: var(--cyan-bright);
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.25);
+    }
+
+    .auth-submit-btn {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, var(--cyan-bright), #0284c7);
+      border: none;
+      border-radius: 12px;
+      color: #030712;
+      font-family: inherit;
+      font-size: 0.98rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.35);
+      transition: all 0.2s;
+      margin-top: 10px;
+    }
+
+    .auth-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 35px rgba(0, 210, 255, 0.5);
+    }
+
+    /* Portal Grid Layout */
+    .portal-grid {
+      display: grid;
+      grid-template-columns: 270px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .portal-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Sidebar Navigation */
+    .portal-sidebar {
+      background: var(--acc-card-bg);
+      border: 1px solid var(--acc-border);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 90px;
+    }
+
+    .user-mini-profile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 16px;
+    }
+
+    .user-avatar-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(14, 165, 233, 0.4));
+      border: 2px solid var(--cyan-bright);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      color: var(--cyan-bright);
+      flex-shrink: 0;
+    }
+
+    .user-meta-info {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .user-display-name {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 2px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-display-email {
+      font-size: 0.76rem;
+      color: #94a3b8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      direction: ltr;
+      text-align: right;
+    }
+
+    .portal-nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .portal-nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 14px;
+      border-radius: 12px;
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      transition: all 0.2s;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid transparent;
+      width: 100%;
+      text-align: right;
+    }
+
+    .portal-nav-link-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .portal-nav-link i {
+      font-size: 1rem;
+      color: #94a3b8;
+      width: 20px;
+      text-align: center;
+    }
+
+    .portal-nav-link:hover {
+      background: rgba(56, 189, 248, 0.08);
+      color: #fff;
+    }
+
+    .portal-nav-link:hover i {
+      color: var(--cyan-bright);
+    }
+
+    .portal-nav-link.active {
+      background: rgba(56, 189, 248, 0.16);
+      color: var(--cyan-bright);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    .portal-nav-link.active i {
+      color: var(--cyan-bright);
+    }
+
+    .portal-badge {
+      padding: 2px 8px;
+      border-radius: 8px;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .badge-coins {
+      background: rgba(251, 191, 36, 0.2);
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.4);
+    }
+
+    .badge-count {
+      background: rgba(56, 189, 248, 0.2);
+      color: var(--cyan-bright);
+    }
+
+    /* Main Content Area */
+    .portal-main {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .portal-tab-content {
+      display: none;
+      animation: fadeInTab 0.2s ease-out;
+    }
+
+    .portal-tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeInTab {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards */
+    .portal-card {
+      background: var(--acc-card-bg);
+      border: 1px solid var(--acc-border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(16px);
+      margin-bottom: 20px;
+    }
+
+    .portal-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .portal-card-title {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #fff;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .portal-card-title i {
+      color: var(--cyan-bright);
+    }
+
+    /* Overview Stats */
+    .overview-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card-luxury {
+      background: var(--acc-card-bg);
+      border: 1px solid var(--acc-border);
+      border-radius: 18px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(14px);
+      transition: all 0.2s;
+    }
+
+    .stat-card-luxury:hover {
+      border-color: var(--cyan-bright);
+      transform: translateY(-2px);
+    }
+
+    .stat-card-luxury.coins-card {
+      border-color: rgba(251, 191, 36, 0.4);
+      background: linear-gradient(135deg, rgba(11, 20, 36, 0.9), rgba(251, 191, 36, 0.08));
+    }
+
+    .stat-icon-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      flex-shrink: 0;
+    }
+
+    .icon-cyan {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--cyan-bright);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .icon-gold {
+      background: rgba(251, 191, 36, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.4);
+    }
+
+    .icon-green {
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .stat-data {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+
+    .stat-number {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: #fff;
+      font-family: var(--font-latin);
+      margin-top: 2px;
+    }
+
+    /* Orders Item Card */
+    .order-item-card {
+      background: rgba(15, 26, 48, 0.6);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.2s;
+    }
+
+    .order-item-card:hover {
+      border-color: var(--cyan-bright);
+      background: rgba(15, 26, 48, 0.85);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    .order-item-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .order-id-badge {
+      font-family: var(--font-latin);
+      font-weight: 900;
+      color: var(--cyan-bright);
+      font-size: 1rem;
+    }
+
+    .order-date-text {
+      font-size: 0.78rem;
+      color: #94a3b8;
+    }
+
+    .order-badges-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .order-badge-pill {
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .pill-verified {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #4ade80;
+    }
+
+    .pill-unverified {
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      color: #fbbf24;
+    }
+
+    .pill-fulfilled {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: var(--cyan-bright);
+    }
+
+    .pill-unfulfilled {
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      color: #c084fc;
+    }
+
+    .order-item-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .order-products-summary {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .order-prod-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      object-fit: cover;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: #0b1424;
+    }
+
+    .order-prod-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .order-prod-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .order-prod-meta {
+      font-size: 0.74rem;
+      color: #94a3b8;
+    }
+
+    .order-item-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .order-price-display {
+      font-family: var(--font-latin);
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #fff;
+      text-align: left;
+    }
+
+    .btn-view-order {
+      padding: 8px 16px;
+      background: linear-gradient(135deg, var(--cyan-bright), #0284c7);
+      border: none;
+      border-radius: 10px;
+      color: #030712;
+      font-family: inherit;
+      font-size: 0.84rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.25);
+      transition: all 0.2s;
+    }
+
+    .btn-view-order:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.45);
+    }
+
+    /* Loyalty Guide Cards */
+    .loyalty-step-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .loyalty-step-card {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: right;
+    }
+
+    .loyalty-step-icon {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .loyalty-step-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .loyalty-step-desc {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Empty state */
+    .empty-state-box {
+      text-align: center;
+      padding: 36px 20px;
+    }
+
+    .empty-icon {
+      font-size: 2.5rem;
+      color: rgba(56, 189, 248, 0.3);
+      margin-bottom: 12px;
+    }
+
+    .empty-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 4px 0;
+    }
+
+    .empty-desc {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      max-width: 340px;
+      margin: 0 auto 16px auto;
+    }
+  </style>
+</head>
+<body class="site-body account-page-body">
+
+  <!-- 1. TOP TICKER ANNOUNCEMENT BAR -->
+  <div class="top-ticker" id="topTickerBar">
+    <div class="container ticker-container">
+      <div class="ticker-content">
+        <span class="ticker-badge">عروض حصرية</span>
+        <span class="ticker-text" id="tickerAnnouncementText">خصومات تصل إلى 60% على اشتراكات برامج التصميم والذكاء الاصطناعي — تسليم فوري وضمان كامل!</span>
+      </div>
+      <div class="ticker-contact">
+        <a href="https://wa.me/201225106057" target="_blank" class="ticker-link" title="تواصل معنا عبر واتساب">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>خدمة العملاء: 01225106057</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MAIN HEADER -->
+  <header class="main-header" id="mainHeader">
+    <div class="container header-inner">
+
+      <!-- Brand Logo -->
+      <a href="./" class="brand-logo">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="brand-logo-img">
+        <div class="logo-text-group">
+          <span class="logo-title">Activkeyz</span>
+          <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu">
+        <a href="./" class="nav-item">الرئيسية</a>
+        <a href="category.html?cat=all" class="nav-item">المنتجات</a>
+        <a href="about.html" class="nav-item">من نحن</a>
+        <a href="reviews.html" class="nav-item">آراء العملاء</a>
+        <a href="contact.html" class="nav-item">اتصل بنا</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions-wrap">
+
+        <!-- Account Button & Dropdown -->
+        <div class="user-menu-wrapper" id="userMenuWrapper">
+          <a href="account.html" class="header-btn user-btn" id="accountBtn">
+            <i class="fa-regular fa-user"></i>
+            <span id="accountBtnText">حسابي</span>
+          </a>
+          <div class="user-dropdown-popover" id="userDropdownMenu">
+            <div class="user-dropdown-header">
+              <span class="user-dropdown-name" id="dropdownUserName">حسابي</span>
+              <span class="user-dropdown-email" id="dropdownUserEmail"></span>
+            </div>
+            <a href="account.html?tab=dashboard" class="user-dropdown-link">
+              <i class="fa-solid fa-gauge-high"></i>
+              <span>نظرة عامة</span>
+            </a>
+            <a href="account.html?tab=orders" class="user-dropdown-link">
+              <i class="fa-solid fa-box-archive"></i>
+              <span>طلباتي</span>
+            </a>
+            <a href="account.html?tab=wallet" class="user-dropdown-link">
+              <i class="fa-solid fa-coins"></i>
+              <span>Activkeyz Coins</span>
+            </a>
+            <a href="account.html?tab=profile" class="user-dropdown-link">
+              <i class="fa-solid fa-id-card"></i>
+              <span>بيانات الحساب</span>
+            </a>
+            <div class="user-dropdown-divider"></div>
+            <button type="button" class="user-dropdown-link text-danger" onclick="handleStoreLogout(event)">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+              <span>تسجيل الخروج</span>
+            </button>
+          </div>
+        </div>
+
+        <a href="checkout.html" class="header-btn cart-toggle-btn" title="عرض السلة">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+
+        <button class="mobile-menu-burger" id="mobileMenuBtn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div class="mobile-drawer-layer" id="mobileDrawer">
+    <div class="mobile-drawer-top">
+      <div class="brand-logo">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="mobile-logo-img">
+        <span class="logo-title" style="font-size:1.05rem;">Activkeyz</span>
+      </div>
+      <button class="drawer-exit-btn" id="drawerCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mobile-links-col">
+      <a href="./" class="mobile-link"><i class="fa-solid fa-house"></i> الرئيسية</a>
+      <a href="category.html?cat=all" class="mobile-link"><i class="fa-solid fa-table-cells-large"></i> جميع المنتجات</a>
+      <a href="track-order.html" class="mobile-link"><i class="fa-solid fa-truck-fast"></i> تتبع الطلب</a>
+      
+      <div class="mobile-nav-divider"></div>
+
+      <a href="account.html" class="mobile-link" id="mobileAccountLink">
+        <i class="fa-solid fa-user"></i>
+        <span id="mobileAccountText">تسجيل الدخول / حسابي</span>
+      </a>
+      <a href="account.html?tab=orders" class="mobile-link logged-in-only" id="mobileOrdersLink" style="display:none;">
+        <i class="fa-solid fa-box-archive"></i> طلباتي
+      </a>
+      <a href="account.html?tab=wallet" class="mobile-link logged-in-only" id="mobileWalletLink" style="display:none;">
+        <i class="fa-solid fa-coins"></i> Activkeyz Coins
+      </a>
+
+      <div class="mobile-nav-divider"></div>
+
+      <a href="about.html" class="mobile-link"><i class="fa-solid fa-circle-info"></i> من نحن</a>
+      <a href="reviews.html" class="mobile-link"><i class="fa-solid fa-star"></i> آراء العملاء</a>
+      <a href="policy.html" class="mobile-link"><i class="fa-solid fa-shield-halved"></i> الضمان والسياسات</a>
+      <a href="contact.html" class="mobile-link"><i class="fa-solid fa-headset"></i> اتصل بنا</a>
+    </div>
+  </div>
+
+  <!-- MAIN ACCOUNT WRAPPER -->
+  <main class="account-wrapper" id="accountMainWrapper">
+
+    <!-- Loading State during session check -->
+    <div id="accountLoadingState" style="text-align:center; padding: 70px 20px;">
+      <i class="fa-solid fa-circle-notch fa-spin" style="font-size:2.2rem; color:var(--cyan-primary);"></i>
+      <p style="color:#94a3b8; margin-top:16px; font-weight:600; font-size:0.95rem;">جارٍ التحقق من الحساب...</p>
+    </div>
+
+    <!-- 1. AUTH SCREEN (Visible when Logged Out) -->
+    <div class="auth-container" id="authSection" style="display:none;">
+      <div style="text-align:center;margin-bottom:14px;">
+        <img src="logos/activkeyzmainlogo.png" alt="Activkeyz" style="width:58px;height:58px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(56,189,248,0.45));">
+      </div>
+      <h1 class="auth-title" id="authTitle">تسجيل الدخول إلى حسابك</h1>
+      <p class="auth-subtitle" id="authSubtitle">
+        استعرض طلباتك، استلم اشتراكاتك فوراً، وتابع رصيدك من مكافآت Activkeyz Coins.
+      </p>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab-btn active" id="tabOtpLoginBtn" onclick="switchAuthMode('login')">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> تسجيل الدخول
+        </button>
+        <button type="button" class="auth-tab-btn" id="tabRegisterBtn" onclick="switchAuthMode('register')">
+          <i class="fa-solid fa-user-plus"></i> إنشاء حساب
+        </button>
+      </div>
+
+      <!-- Inline Error Feedback -->
+      <div id="authInlineError" style="display:none; background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.3); color:#fca5a5; padding:10px 14px; border-radius:8px; font-size:0.86rem; margin-bottom:14px; text-align:right;"></div>
+
+      <!-- AUTH FORM: Email + Password (Login / Register) -->
+      <form id="authEmailPasswordForm" onsubmit="handleAuthSubmit(event)">
+        <!-- Full Name (Register Mode Only) -->
+        <div class="auth-input-group" id="fullNameInputGroup" style="display:none;">
+          <label for="authFullName">الاسم بالكامل <span style="color:#f87171;">*</span></label>
+          <div class="auth-input-wrap">
+            <i class="fa-regular fa-user"></i>
+            <input type="text" id="authFullName" placeholder="محمد أحمد" autocomplete="name">
+          </div>
+        </div>
+
+        <!-- Email (Login & Register) -->
+        <div class="auth-input-group">
+          <label for="authEmail">البريد الإلكتروني <span style="color:#f87171;">*</span></label>
+          <div class="auth-input-wrap">
+            <i class="fa-regular fa-envelope"></i>
+            <input type="email" id="authEmail" placeholder="yourname@gmail.com" required autocomplete="email" dir="ltr">
+          </div>
+        </div>
+
+        <!-- Password (Login & Register) -->
+        <div class="auth-input-group">
+          <label for="authPassword">كلمة المرور <span style="color:#f87171;">*</span></label>
+          <div class="auth-input-wrap" style="position:relative;">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="authPassword" placeholder="••••••••" required autocomplete="current-password" dir="ltr" style="padding-left:42px;">
+            <button type="button" onclick="togglePasswordVisibility('authPassword', this)" title="إظهار / إخفاء كلمة المرور" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); background:none; border:none; color:#94a3b8; cursor:pointer; font-size:0.95rem; padding:4px;">
+              <i class="fa-regular fa-eye" style="position:static; color:inherit;"></i>
+            </button>
+          </div>
+          <small id="authPasswordHint" style="display:none; color:#94a3b8; font-size:0.75rem; margin-top:4px;">كلمة المرور يجب ألا تقل عن 6 أحرف.</small>
+        </div>
+
+        <!-- WhatsApp Phone (Register Mode Only) -->
+        <div class="auth-input-group" id="phoneInputGroup" style="display:none;">
+          <label for="authPhone">رقم واتساب للتواصل والاستلام <span style="color:#f87171;">*</span></label>
+          <div class="phone-input-combo">
+            <select id="authCountryCode" class="phone-country-select" title="اختر رمز الدولة">
+              <option value="+20" selected>🇪🇬 +20 (مصر)</option>
+              <option value="+966">🇸🇦 +966 (السعودية)</option>
+              <option value="+971">🇦🇪 +971 (الإمارات)</option>
+              <option value="+965">🇰🇼 +965 (الكويت)</option>
+              <option value="+974">🇶🇦 +974 (قطر)</option>
+              <option value="+968">🇴🇲 +968 (عُمان)</option>
+              <option value="+973">🇧🇭 +973 (البحرين)</option>
+              <option value="+962">🇯🇴 +962 (الأردن)</option>
+              <option value="+964">🇮🇶 +964 (العراق)</option>
+              <option value="+218">🇱🇾 +218 (ليبيا)</option>
+              <option value="+216">🇹🇳 +216 (تونس)</option>
+              <option value="+213">🇩🇿 +213 (الجزائر)</option>
+              <option value="+212">🇲🇦 +212 (المغرب)</option>
+              <option value="+1">🇺🇸 +1 (أمريكا/كندا)</option>
+              <option value="+44">🇬🇧 +44 (بريطانيا)</option>
+              <option value="">🌐 دولة أخرى</option>
+            </select>
+            <div class="auth-input-wrap phone-input-wrap">
+              <i class="fa-brands fa-whatsapp"></i>
+              <input type="tel" id="authPhone" placeholder="01XXXXXXXXX" autocomplete="tel" dir="ltr">
+            </div>
+          </div>
+          <small style="color:#94a3b8; font-size:0.75rem; margin-top:4px; display:block;">إلزامي لإرسال بيانات تفعيل الاشتراكات والتواصل الفوري.</small>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="auth-submit-btn" id="authSubmitBtn">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span>تسجيل الدخول</span>
+        </button>
+
+        <!-- Toggle Switch Text Helper -->
+        <div style="text-align:center; margin-top:16px;">
+          <span id="authToggleHintText" style="color:#94a3b8; font-size:0.85rem;">ليس لديك حساب بعد؟</span>
+          <button type="button" id="authToggleActionBtn" onclick="toggleAuthMode()" style="background:none; border:none; color:var(--cyan-bright); font-weight:700; font-size:0.85rem; cursor:pointer; text-decoration:underline; margin-right:6px;">
+            إنشاء حساب جديد
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- 2. FULL CUSTOMER PORTAL (Visible when Authenticated) -->
+    <div class="portal-grid" id="portalSection" style="display:none;">
+
+      <!-- Sidebar -->
+      <aside class="portal-sidebar">
+        <div class="user-mini-profile">
+          <div class="user-avatar-circle" id="userAvatar">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="user-meta-info">
+            <div class="user-display-name" id="userDisplayName">عميل Activkeyz</div>
+            <div class="user-display-email" id="userDisplayEmail">user@example.com</div>
+          </div>
+        </div>
+
+        <nav class="portal-nav-menu">
+          <button type="button" class="portal-nav-link active" onclick="switchPortalTab('dashboard')">
+            <div class="portal-nav-link-left">
+              <i class="fa-solid fa-gauge-high"></i>
+              <span>نظرة عامة</span>
+            </div>
+          </button>
+
+          <button type="button" class="portal-nav-link" onclick="switchPortalTab('orders')">
+            <div class="portal-nav-link-left">
+              <i class="fa-solid fa-box-open"></i>
+              <span>طلباتي</span>
+            </div>
+            <span class="portal-badge badge-count" id="ordersCountBadge">0</span>
+          </button>
+
+          <button type="button" class="portal-nav-link" onclick="switchPortalTab('wallet')">
+            <div class="portal-nav-link-left">
+              <i class="fa-solid fa-coins"></i>
+              <span>Activkeyz Coins</span>
+            </div>
+            <span class="portal-badge badge-coins" id="sidebarCoinsBadge">0 كوين</span>
+          </button>
+
+          <button type="button" class="portal-nav-link" onclick="switchPortalTab('profile')">
+            <div class="portal-nav-link-left">
+              <i class="fa-solid fa-id-card"></i>
+              <span>بيانات الحساب</span>
+            </div>
+          </button>
+
+          <button type="button" class="portal-nav-link" onclick="handleLogout()" style="color:#f87171; margin-top:10px; border-top:1px solid rgba(255,255,255,0.06); padding-top:12px;">
+            <div class="portal-nav-link-left">
+              <i class="fa-solid fa-arrow-right-from-bracket" style="color:#f87171;"></i>
+              <span>تسجيل الخروج</span>
+            </div>
+          </button>
+        </nav>
+      </aside>
+
+      <!-- Main Content Tabs -->
+      <section class="portal-main">
+
+        <!-- TAB 1: DASHBOARD OVERVIEW -->
+        <div class="portal-tab-content active" id="tab-dashboard">
+          
+          <div class="overview-stats-grid">
+            <div class="stat-card-luxury coins-card" onclick="switchPortalTab('wallet')" style="cursor:pointer;">
+              <div class="stat-icon-wrap icon-gold">
+                <i class="fa-solid fa-coins"></i>
+              </div>
+              <div class="stat-data">
+                <span class="stat-label">رصيد Activkeyz Coins</span>
+                <span class="stat-number" id="dashCoinsAvailable">0</span>
+                <span style="font-size:0.72rem; color:#fbbf24; margin-top:2px;" id="dashCoinsEgpValue">يعادل 0 ج.م خصم</span>
+              </div>
+            </div>
+
+            <div class="stat-card-luxury" onclick="switchPortalTab('orders')" style="cursor:pointer;">
+              <div class="stat-icon-wrap icon-cyan">
+                <i class="fa-solid fa-receipt"></i>
+              </div>
+              <div class="stat-data">
+                <span class="stat-label">إجمالي الطلبات</span>
+                <span class="stat-number" id="dashTotalOrders">0</span>
+                <span style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">مسجلة في حسابك</span>
+              </div>
+            </div>
+
+            <a href="https://wa.me/201225106057?text=مرحباً%20ActivKeyz،%20أحتاج%20مساعدة%20بخصوص%20حسابي" target="_blank" class="stat-card-luxury" style="text-decoration:none; cursor:pointer;">
+              <div class="stat-icon-wrap icon-green">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div class="stat-data">
+                <span class="stat-label">الدعم الفني المباشر</span>
+                <span class="stat-number" style="font-size:1.05rem; color:#4ade80;">تواصل معنا</span>
+                <span style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">مساعدة عبر الواتساب</span>
+              </div>
+            </a>
+          </div>
+
+          <!-- Recent Orders Banner -->
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2 class="portal-card-title">
+                <i class="fa-solid fa-clock"></i>
+                <span>أحدث الطلبات</span>
+              </h2>
+              <button type="button" class="btn-view-order" onclick="switchPortalTab('orders')" style="font-size:0.8rem; padding:6px 14px;">
+                <span>عرض جميع الطلبات</span>
+                <i class="fa-solid fa-arrow-left"></i>
+              </button>
+            </div>
+
+            <div id="dashRecentOrdersList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Loyalty Program Quick Guide -->
+          <div class="portal-card" style="background:linear-gradient(135deg, rgba(11,20,36,0.9), rgba(251,191,36,0.06)); border-color:rgba(251,191,36,0.25);">
+            <div style="display:flex; align-items:flex-start; gap:16px;">
+              <div style="width:48px; height:48px; border-radius:14px; background:rgba(251,191,36,0.15); border:1px solid rgba(251,191,36,0.4); display:flex; align-items:center; justify-content:center; color:#fbbf24; font-size:1.4rem; flex-shrink:0;">
+                <i class="fa-solid fa-trophy"></i>
+              </div>
+              <div>
+                <strong style="color:#fff; font-size:1.05rem; display:block; margin-bottom:4px;">
+                  برنامج الولاء والمكافآت Activkeyz Coins 💎
+                </strong>
+                <p style="color:#cbd5e1; font-size:0.85rem; line-height:1.6; margin:0 0 12px 0;">
+                  كل عملية شراء تمنحك كوينز تلقائياً بعد تأكيد الدفع. يمكنك استبدال الكوينز بخصم مباشر في أي طلب جديد أو الشراء بها بالكامل!
+                </p>
+                <button type="button" class="btn-view-order" onclick="switchPortalTab('wallet')" style="background:rgba(251,191,36,0.2); border:1px solid rgba(251,191,36,0.4); color:#fbbf24; box-shadow:none;">
+                  <i class="fa-solid fa-wallet"></i>
+                  <span>تفاصيل محفظة الكوينز</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- TAB 2: MY ORDERS -->
+        <div class="portal-tab-content" id="tab-orders">
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2 class="portal-card-title">
+                <i class="fa-solid fa-box-open"></i>
+                <span>طلباتي</span>
+              </h2>
+              <button type="button" onclick="loadAccountOrders()" class="btn-view-order" style="background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.3); color:#fff; padding:6px 14px; font-size:0.8rem; box-shadow:none;">
+                <i class="fa-solid fa-rotate-right"></i> <span>تحديث</span>
+              </button>
+            </div>
+
+            <div id="accountOrdersList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Link Previous Guest Order -->
+          <div class="portal-card" style="background:rgba(12,22,40,0.6); border-color:rgba(56,189,248,0.18);">
+            <div class="portal-card-header">
+              <h2 class="portal-card-title" style="font-size:1rem;">
+                <i class="fa-solid fa-link"></i>
+                <span>هل لديك طلب سابق كزائر؟</span>
+              </h2>
+            </div>
+            <p style="color:#94a3b8; font-size:0.82rem; line-height:1.6; margin:0 0 14px 0;">
+              إذا قمت بطلب سابق قبل تسجيل الدخول، يمكنك ربطه بحسابك هنا برقم الطلب ورمز الوصول:
+            </p>
+
+            <form id="claimOrderForm" onsubmit="handleClaimOrderSubmit(event)" style="max-width:500px; display:flex; flex-direction:column; gap:12px;">
+              <div class="auth-input-group" style="margin-bottom:0;">
+                <label for="claimOrderId">رقم الطلب</label>
+                <div class="auth-input-wrap">
+                  <i class="fa-solid fa-receipt"></i>
+                  <input type="text" id="claimOrderId" placeholder="مثال: NXA-123456" required style="text-transform:uppercase;">
+                </div>
+              </div>
+
+              <div class="auth-input-group" style="margin-bottom:0;">
+                <label for="claimAccessToken">رمز الوصول للطلب</label>
+                <div class="auth-input-wrap">
+                  <i class="fa-solid fa-key"></i>
+                  <input type="text" id="claimAccessToken" placeholder="رمز الوصول الممنوح عند الطلب..." required>
+                </div>
+              </div>
+
+              <button type="submit" class="auth-submit-btn" id="claimSubmitBtn" style="width:auto; align-self:flex-start; padding:10px 20px; font-size:0.88rem; margin-top:4px;">
+                <i class="fa-solid fa-check"></i>
+                <span>ربط الطلب بالحساب</span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- TAB 3: Activkeyz Coins -->
+        <div class="portal-tab-content" id="tab-wallet">
+          <div class="portal-card" style="background:linear-gradient(135deg, rgba(11,20,36,0.95), rgba(251,191,36,0.08)); border-color:rgba(251,191,36,0.35);">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+              <div>
+                <span style="font-size:0.82rem; color:#94a3b8; font-weight:700;">الرصيد المتاح للاستخدام</span>
+                <div style="display:flex; align-items:baseline; gap:10px; margin-top:4px;">
+                  <span style="font-size:2.2rem; font-weight:900; color:#fbbf24; font-family:var(--font-latin);" id="walletAvailableBalance">0</span>
+                  <span style="color:#fbbf24; font-size:1.1rem; font-weight:800;">Activkeyz Coins</span>
+                </div>
+                <span style="font-size:0.85rem; color:#cbd5e1;" id="walletEgpEquivalent">يعادل 0 ج.م خصم مباشر عند الدفع</span>
+              </div>
+
+              <div style="border-right:1px solid rgba(255,255,255,0.08); padding-right:16px;">
+                <span style="font-size:0.76rem; color:#94a3b8;">إجمالي ما تم كسبه</span>
+                <div style="font-size:1.2rem; font-weight:800; color:#4ade80; font-family:var(--font-latin);" id="walletLifetimeEarned">0 كوين</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- How to use coins (3 steps) -->
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2 class="portal-card-title">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>كيف تستفيد من Activkeyz Coins؟</span>
+              </h2>
+            </div>
+            
+            <div class="loyalty-step-grid">
+              <div class="loyalty-step-card">
+                <div class="loyalty-step-icon">🛍️</div>
+                <div class="loyalty-step-title">1. اطلب أي اشتراك</div>
+                <p class="loyalty-step-desc">كل عملية شراء تدفعها تمنحك 10% من قيمتها كوينز تضاف لحسابك فور تأكيد الدفع.</p>
+              </div>
+
+              <div class="loyalty-step-card">
+                <div class="loyalty-step-icon">💰</div>
+                <div class="loyalty-step-title">2. قيمة الخصم المباشر</div>
+                <p class="loyalty-step-desc">كل 10 كوينز تمنحك 5 جنيه خصم فوري. يمكنك تجميع الكوينز واستخدامها في أي وقت.</p>
+              </div>
+
+              <div class="loyalty-step-card">
+                <div class="loyalty-step-icon">🚀</div>
+                <div class="loyalty-step-title">3. استخدمها عند الدفع</div>
+                <p class="loyalty-step-desc">في صفحة الدفع، حدد عدد الكوينز المراد استخدامها لتحصل على خصم فوري يصل إلى 50% أو دفع كامل للطلب.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity List -->
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2 class="portal-card-title">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>سجل نشاط النقاط</span>
+              </h2>
+            </div>
+
+            <div style="overflow-x:auto;">
+              <table style="width:100%; border-collapse:collapse; font-size:0.86rem; text-align:right;">
+                <thead>
+                  <tr style="border-bottom:1px solid rgba(255,255,255,0.08); color:#94a3b8;">
+                    <th style="padding:10px 12px;">التاريخ</th>
+                    <th style="padding:10px 12px;">العملية</th>
+                    <th style="padding:10px 12px;">الكوينز</th>
+                    <th style="padding:10px 12px;">التفاصيل</th>
+                  </tr>
+                </thead>
+                <tbody id="walletLedgerTbody">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: PROFILE DATA -->
+        <div class="portal-tab-content" id="tab-profile">
+          <div class="portal-card">
+            <div class="portal-card-header">
+              <h2 class="portal-card-title">
+                <i class="fa-solid fa-id-card"></i>
+                <span>بيانات الحساب</span>
+              </h2>
+            </div>
+
+            <form id="profileForm" onsubmit="handleUpdateProfile(event)" style="max-width:480px;">
+              <div class="auth-input-group">
+                <label for="profileEmail">البريد الإلكتروني</label>
+                <div class="auth-input-wrap">
+                  <i class="fa-regular fa-envelope"></i>
+                  <input type="email" id="profileEmail" disabled style="opacity:0.7; cursor:not-allowed;" dir="ltr">
+                </div>
+                <span style="font-size:0.75rem; color:#4ade80; display:block; margin-top:4px;">
+                  <i class="fa-solid fa-circle-check"></i> البريد مؤكد ومسجل
+                </span>
+              </div>
+
+              <div class="auth-input-group">
+                <label for="profileFullName">الاسم بالكامل</label>
+                <div class="auth-input-wrap">
+                  <i class="fa-regular fa-user"></i>
+                  <input type="text" id="profileFullName" placeholder="الاسم بالكامل...">
+                </div>
+              </div>
+
+              <div class="auth-input-group">
+                <label for="profilePhone">رقم واتساب للتواصل</label>
+                <div class="phone-input-combo">
+                  <select id="profileCountryCode" class="phone-country-select" title="اختر رمز الدولة">
+                    <option value="+20" selected>🇪🇬 +20 (مصر)</option>
+                    <option value="+966">🇸🇦 +966 (السعودية)</option>
+                    <option value="+971">🇦🇪 +971 (الإمارات)</option>
+                    <option value="+965">🇰🇼 +965 (الكويت)</option>
+                    <option value="+974">🇶🇦 +974 (قطر)</option>
+                    <option value="+968">🇴🇲 +968 (عُمان)</option>
+                    <option value="+973">🇧🇭 +973 (البحرين)</option>
+                    <option value="+962">🇯🇴 +962 (الأردن)</option>
+                    <option value="+964">🇮🇶 +964 (العراق)</option>
+                    <option value="+218">🇱🇾 +218 (ليبيا)</option>
+                    <option value="+216">🇹🇳 +216 (تونس)</option>
+                    <option value="+213">🇩🇿 +213 (الجزائر)</option>
+                    <option value="+212">🇲🇦 +212 (المغرب)</option>
+                    <option value="+1">🇺🇸 +1 (أمريكا/كندا)</option>
+                    <option value="+44">🇬🇧 +44 (بريطانيا)</option>
+                    <option value="">🌐 دولة أخرى</option>
+                  </select>
+                  <div class="auth-input-wrap phone-input-wrap">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <input type="tel" id="profilePhone" placeholder="01XXXXXXXXX" dir="ltr">
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="auth-submit-btn" id="profileSaveBtn" style="margin-top:14px;">
+                <i class="fa-solid fa-floppy-disk"></i>
+                <span>حفظ التعديلات</span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+  </main>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="products-data.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="nexa-ui.js"></script>
+  <script src="account.js"></script>
+</body>
+</html>

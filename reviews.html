@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>آراء وتقييمات العملاء | Activkeyz</title>
+  <meta name="description" content="تصفح تجارب وآراء العملاء في متجر Activkeyz للاشتراكات الرقمية والخدمات السحابية.">
+  <meta name="google" content="notranslate">
+  <link rel="icon" type="image/png" href="logos/activkeyzsecondlogo.png">
+
+  <!-- Fonts: IBM Plex Sans Arabic (Primary) + Latin Complement -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&family=Cairo:wght@600;700;800&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="site-pages.css">
+</head>
+
+<body>
+
+  <!-- BACKGROUND LAYERS -->
+  <div class="page-background" aria-hidden="true">
+    <div class="stars-layer"></div>
+    <div class="hero-bg-art" style="height: 520px; opacity: 0.8;"></div>
+    <div class="lower-bg-art" style="top: 450px; opacity: 0.2;"></div>
+    <div class="ambient-glow-top"></div>
+    <div class="ambient-glow-bottom"></div>
+  </div>
+
+  <!-- 1. ANNOUNCEMENT BAR -->
+  <div class="top-announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-spacer"></div>
+
+      <div class="announcement-msg">
+        <span class="gift-icon"><i class="fa-solid fa-gift"></i></span>
+        <span>خصم 20% على جميع الاشتراكات السنوية لفترة محدودة!</span>
+      </div>
+
+      <div class="announcement-countdown" id="countdownTimer">
+        <div class="countdown-slot">
+          <span class="countdown-num" id="hoursVal">17</span>
+          <span class="countdown-txt">ساعة</span>
+        </div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-slot">
+          <span class="countdown-num" id="minutesVal">59</span>
+          <span class="countdown-txt">دقيقة</span>
+        </div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-slot">
+          <span class="countdown-num" id="secondsVal">23</span>
+          <span class="countdown-txt">ثانية</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MAIN HEADER -->
+  <header class="main-header" id="mainHeader">
+    <div class="container header-inner">
+
+      <!-- Brand Logo -->
+      <a href="./" class="brand-logo">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="brand-logo-img">
+        <div class="logo-text-group">
+          <span class="logo-title">Activkeyz</span>
+          <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu">
+        <a href="./" class="nav-item">الرئيسية</a>
+        <a href="category.html?cat=all" class="nav-item">المنتجات</a>
+        <a href="about.html" class="nav-item">من نحن</a>
+        <a href="reviews.html" class="nav-item active">آراء العملاء</a>
+        <a href="blog.html" class="nav-item">المدونة</a>
+        <a href="contact.html" class="nav-item">اتصل بنا</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="header-actions-wrap">
+        <a href="contact.html" class="header-btn user-btn" title="تواصل معنا">
+          <i class="fa-regular fa-comment-dots"></i>
+          <span>الدعم الفني</span>
+        </a>
+
+        <a href="category.html?cat=all" class="header-btn cart-toggle-btn" title="تصفح المنتجات">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-pill-count" id="cartBadgeCount">0</span>
+        </a>
+
+        <button class="mobile-menu-burger" id="mobileMenuBtn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div class="mobile-drawer-layer" id="mobileDrawer">
+    <div class="mobile-drawer-top">
+      <div class="brand-logo">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="mobile-logo-img">
+        <span class="logo-title" style="font-size:1.05rem;">Activkeyz</span>
+      </div>
+      <button class="drawer-exit-btn" id="drawerCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mobile-links-col">
+      <a href="./" class="mobile-link"><i class="fa-solid fa-house"></i> الرئيسية</a>
+      <a href="category.html?cat=all" class="mobile-link"><i class="fa-solid fa-table-cells-large"></i> جميع المنتجات
+        والأقسام</a>
+      <a href="about.html" class="mobile-link"><i class="fa-solid fa-circle-info"></i> من نحن وقصة متجرنا</a>
+      <a href="reviews.html" class="mobile-link active"><i class="fa-solid fa-star"></i> آراء وتقييمات العملاء</a>
+      <a href="blog.html" class="mobile-link"><i class="fa-solid fa-newspaper"></i> المدونة والشروحات</a>
+      <a href="policy.html" class="mobile-link"><i class="fa-solid fa-shield-halved"></i> سياسة الضمان والاسترجاع</a>
+      <a href="contact.html" class="mobile-link"><i class="fa-solid fa-headset"></i> اتصل بنا والدعم الفني</a>
+    </div>
+  </div>
+
+  <main class="page-main-flow">
+
+    <!-- SUBPAGE HERO -->
+    <section class="subpage-hero-banner">
+      <div class="container">
+        <div class="subpage-hero-badge">
+          <i class="fa-solid fa-certificate"></i>
+          <span>تقييمات موثقة من مشترين حقيقيين</span>
+        </div>
+        <h1 class="subpage-hero-title">ماذا يقول عملاؤنا عن Activkeyz؟</h1>
+        <p class="subpage-hero-desc">
+          تجارب حقيقية ومشاركات موثقة من عملاء متجر Activkeyz للاشتراكات والخدمات الرقمية مع ضمان الخدمة ودعم فني متواصل.
+        </p>
+      </div>
+    </section>
+
+    <!-- REVIEWS METRICS & RATING DISTRIBUTION -->
+    <section class="container">
+      <div class="reviews-metrics-bar">
+
+        <div class="overall-score-box">
+          <div class="big-rating-number">4.9</div>
+          <div class="rating-stars-gold">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <span style="font-weight:700; color:#fff; font-size:1.05rem;">متوسط تقييم ممتاز</span>
+          <span class="reviews-verified-tag"><i class="fa-solid fa-circle-check"></i> تجارب مشترين موثقة</span>
+        </div>
+
+        <div class="rating-breakdown-col">
+          <div class="breakdown-row">
+            <span class="breakdown-star-label">5 نجوم</span>
+            <div class="breakdown-bar-track">
+              <div class="breakdown-bar-fill" style="width: 92%;"></div>
+            </div>
+            <span class="breakdown-pct">92%</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="breakdown-star-label">4 نجوم</span>
+            <div class="breakdown-bar-track">
+              <div class="breakdown-bar-fill" style="width: 6%;"></div>
+            </div>
+            <span class="breakdown-pct">6%</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="breakdown-star-label">3 نجوم</span>
+            <div class="breakdown-bar-track">
+              <div class="breakdown-bar-fill" style="width: 1.2%;"></div>
+            </div>
+            <span class="breakdown-pct">1.2%</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="breakdown-star-label">نجمتان</span>
+            <div class="breakdown-bar-track">
+              <div class="breakdown-bar-fill" style="width: 0.5%;"></div>
+            </div>
+            <span class="breakdown-pct">0.5%</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="breakdown-star-label">نجمة واحدة</span>
+            <div class="breakdown-bar-track">
+              <div class="breakdown-bar-fill" style="width: 0.3%;"></div>
+            </div>
+            <span class="breakdown-pct">0.3%</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FILTER CONTROLS & ADD REVIEW CTA -->
+      <div class="reviews-controls-row">
+        <div class="review-filter-pills">
+          <button class="review-pill-btn active" onclick="filterReviews('all', this)">جميع التقييمات</button>
+          <button class="review-pill-btn" onclick="filterReviews('ai', this)">أدوات الذكاء الاصطناعي</button>
+          <button class="review-pill-btn" onclick="filterReviews('creative', this)">البرامج الإبداعية والتصميم</button>
+          <button class="review-pill-btn" onclick="filterReviews('office', this)">برامج المكتب والأعمال</button>
+          <button class="review-pill-btn" onclick="filterReviews('streaming', this)">الترفيه والبث</button>
+          <button class="review-pill-btn" onclick="filterReviews('gaming', this)">الألعاب والـ VPN</button>
+        </div>
+
+        <button class="btn-add-review" onclick="openAddReviewModal()">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <span>شاركنا تجربتك وتقييمك</span>
+        </button>
+      </div>
+
+      <!-- REVIEWS CARDS GRID -->
+      <div class="reviews-cards-grid" id="reviewsGrid">
+
+        <!-- Review 1 -->
+        <div class="review-card-item" data-category="ai">
+          <div class="review-user-row">
+            <div class="user-avatar-initials">مه</div>
+            <div class="user-meta-info">
+              <span class="user-full-name">م. هشام العمري</span>
+              <span class="user-prod-badge"><i class="fa-solid fa-shield-check"></i> اشترى: ChatGPT Plus 1M</span>
+            </div>
+          </div>
+          <div class="rating-stars-gold" style="font-size:0.95rem; margin:0;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+              class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text-body">
+            "تجربة تفوق الوصف! تم إرسال الحساب وتفعيله خلال 3 دقائق بالضبط بعد الدفع عبر إنستاباي. الموديل GPT-4o شغال
+            بكامل كفاءته والسرعة خيالية، والدعم الفني قمة في الذوق والاحترام."
+          </p>
+          <div class="review-card-footer">
+            <span>منذ يومين</span>
+            <span style="color:#10b981;"><i class="fa-solid fa-circle-check"></i> عملية شراء موثقة 100%</span>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card-item" data-category="creative">
+          <div class="review-user-row">
+            <div class="user-avatar-initials">سا</div>
+            <div class="user-meta-info">
+              <span class="user-full-name">سارة إبراهيم</span>
+              <span class="user-prod-badge"><i class="fa-solid fa-shield-check"></i> اشترت: Adobe Creative Cloud
+                1Y</span>
+            </div>
+          </div>
+          <div class="rating-stars-gold" style="font-size:0.95rem; margin:0;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+              class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text-body">
+            "أنا مصممة جرافيك وكنت قلقانة من الاشتراكات غير الرسمية، بس أدوبي تفعل على إيميلي الشخصي ومساحة الكلاود
+            100GB شغالة زي الفل وتحديثات الفوتوشوب والاليستريتور شغالة بدون أدنى مشكلة. شكراً Activkeyz!"
+          </p>
+          <div class="review-card-footer">
+            <span>منذ 4 أيام</span>
+            <span style="color:#10b981;"><i class="fa-solid fa-circle-check"></i> عملية شراء موثقة 100%</span>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card-item" data-category="streaming">
+          <div class="review-user-row">
+            <div class="user-avatar-initials">كر</div>
+            <div class="user-meta-info">
+              <span class="user-full-name">كريم الدسوقي</span>
+              <span class="user-prod-badge"><i class="fa-solid fa-shield-check"></i> اشترى: YouTube Premium 1Y</span>
+            </div>
+          </div>
+          <div class="rating-stars-gold" style="font-size:0.95rem; margin:0;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+              class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text-body">
+            "يوتيوب بريميوم بدون إعلانات وتفعيل عائلي رسمي بضمان سنة كاملة بسعر لا يقارن بالاشتراك المباشر. استلمت
+            الدعوة وفعلت حسابي في ثواني. أوصي بالتعامل معهم بشدة."
+          </p>
+          <div class="review-card-footer">
+            <span>منذ أسبوع</span>
+            <span style="color:#10b981;"><i class="fa-solid fa-circle-check"></i> عملية شراء موثقة 100%</span>
+          </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="review-card-item" data-category="office">
+          <div class="review-user-row">
+            <div class="user-avatar-initials">طا</div>
+            <div class="user-meta-info">
+              <span class="user-full-name">د. طارق المنشاوي</span>
+              <span class="user-prod-badge"><i class="fa-solid fa-shield-check"></i> اشترى: Office 365 Pro Plus</span>
+            </div>
+          </div>
+          <div class="rating-stars-gold" style="font-size:0.95rem; margin:0;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+              class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text-body">
+            "اشتريت ترخيص مايكروسوفت أوفيس لـ 5 أجهزة مع مساحة ون درايف سحابية. البيانات أصلية وتم التفعيل على ويندوز
+            وماك بدون أي عقبات. الدعم الفني ساعدني في تثبيت الأوفيس حتى النهاية."
+          </p>
+          <div class="review-card-footer">
+            <span>منذ أسبوعين</span>
+            <span style="color:#10b981;"><i class="fa-solid fa-circle-check"></i> عملية شراء موثقة 100%</span>
+          </div>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="review-card-item" data-category="gaming">
+          <div class="review-user-row">
+            <div class="user-avatar-initials">عا</div>
+            <div class="user-meta-info">
+              <span class="user-full-name">عادل الشريف</span>
+              <span class="user-prod-badge"><i class="fa-solid fa-shield-check"></i> اشترى: Discord Nitro 1M</span>
+            </div>
+          </div>
+          <div class="rating-stars-gold" style="font-size:0.95rem; margin:0;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+              class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text-body">
+            "ديسكورد نيترو اشتغل علطول مع 2 سيرفر بوست وبث 4K للألعاب والستيكرات كلها اتفتحت بدون أي باند. أحسن متجر
+            تعاملت معاه في الألعاب والـ VPN."
+          </p>
+          <div class="review-card-footer">
+            <span>منذ 3 أسابيع</span>
+            <span style="color:#10b981;"><i class="fa-solid fa-circle-check"></i> عملية شراء موثقة 100%</span>
+          </div>
+        </div>
+
+        <!-- Review 6 -->
+        <div class="review-card-item" data-category="ai">
+          <div class="review-user-row">
+            <div class="user-avatar-initials">يو</div>
+            <div class="user-meta-info">
+              <span class="user-full-name">يوسف الكيلاني</span>
+              <span class="user-prod-badge"><i class="fa-solid fa-shield-check"></i> اشترى: Perplexity PRO 12M</span>
+            </div>
+          </div>
+          <div class="rating-stars-gold" style="font-size:0.95rem; margin:0;">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+              class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text-body">
+            "بيربلكسيتي برو سنوي كان ضروري لأبحاث الماجستير عندي، وبيجمع كل موديلات كلود وجي بي تي في مكان واحد. السعر
+            في Activkeyz وفر عليا آلاف الجنيهات والتفعيل رسمي مع ضمان."
+          </p>
+          <div class="review-card-footer">
+            <span>منذ شهر</span>
+            <span style="color:#10b981;"><i class="fa-solid fa-circle-check"></i> عملية شراء موثقة 100%</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ADD REVIEW MODAL -->
+  <div class="modal-overlay-custom" id="addReviewModalOverlay" onclick="closeAddReviewModal()"></div>
+  <div class="modal-box-custom" id="addReviewModal" role="dialog" aria-modal="true" aria-labelledby="reviewModalTitle">
+    <button class="modal-close-btn" onclick="closeAddReviewModal()" title="إغلاق النافذة"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-head">
+      <i class="fa-solid fa-star"></i>
+      <h3 id="reviewModalTitle">شارك تقييمك وتجربتك مع Activkeyz</h3>
+    </div>
+    <form id="addReviewForm" onsubmit="event.preventDefault(); submitReview();" class="modal-form-grid" style="margin-top:14px;">
+      <div class="form-group">
+        <label for="revName"><span>اسمك الكريم</span> <span style="color:var(--cyan-bright); font-size:0.75rem;">إلزامي *</span></label>
+        <input type="text" id="revName" placeholder="مثال: م. أحمد سامي" required autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label for="revPhone"><span>رقم الواتساب للتوثيق</span> <span style="color:#22c55e; font-weight:800; font-size:0.75rem;">إلزامي *</span></label>
+        <div class="phone-input-combo">
+          <select id="revCountryCode" class="phone-country-select" title="اختر رمز الدولة">
+            <option value="+20" selected>🇪🇬 +20 (مصر)</option>
+            <option value="+966">🇸🇦 +966 (السعودية)</option>
+            <option value="+971">🇦🇪 +971 (الإمارات)</option>
+            <option value="+965">🇰🇼 +965 (الكويت)</option>
+            <option value="+974">🇶🇦 +974 (قطر)</option>
+            <option value="+968">🇴🇲 +968 (عُمان)</option>
+            <option value="+973">🇧🇭 +973 (البحرين)</option>
+            <option value="+962">🇯🇴 +962 (الأردن)</option>
+            <option value="+964">🇮🇶 +964 (العراق)</option>
+            <option value="+218">🇱🇾 +218 (ليبيا)</option>
+            <option value="+216">🇹🇳 +216 (تونس)</option>
+            <option value="+213">🇩🇿 +213 (الجزائر)</option>
+            <option value="+212">🇲🇦 +212 (المغرب)</option>
+            <option value="+1">🇺🇸 +1 (أمريكا/كندا)</option>
+            <option value="+44">🇬🇧 +44 (بريطانيا)</option>
+            <option value="">🌐 دولة أخرى</option>
+          </select>
+          <div style="position:relative; display:flex; align-items:center; flex:1;">
+            <i class="fa-brands fa-whatsapp" style="position:absolute; right:14px; color:#22c55e; font-size:1.15rem; pointer-events:none;"></i>
+            <input type="tel" id="revPhone" placeholder="01XXXXXXXXX" required autocomplete="tel" style="padding-right:42px;">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="revProd"><span>الاشتراك المشترى</span> <span style="color:var(--cyan-bright); font-size:0.75rem;">إلزامي *</span></label>
+        <input type="text" id="revProd" placeholder="مثال: ChatGPT Plus أو Adobe CC" required>
+      </div>
+      <div class="form-group">
+        <label for="revCat">القسم التابع له *</label>
+        <select id="revCat">
+          <option value="ai">أدوات الذكاء الاصطناعي</option>
+          <option value="creative">البرامج الإبداعية والتصميم</option>
+          <option value="office">برامج المكتب والإنتاجية</option>
+          <option value="streaming">الترفيه والاشتراكات</option>
+          <option value="gaming">الألعاب والاتصال الآمن</option>
+        </select>
+      </div>
+      <div class="form-group modal-form-full">
+        <label for="revStars">التقييم بالنجوم *</label>
+        <select id="revStars" style="color:var(--gold-star); font-weight:800; font-size:0.95rem;">
+          <option value="5">⭐⭐⭐⭐⭐ 5 نجوم (ممتاز جداً - تجربة استثنائية)</option>
+          <option value="4">⭐⭐⭐⭐ 4 نجوم (جيد جداً - خدمة ممتازة)</option>
+          <option value="3">⭐⭐⭐ 3 نجوم (متوسط - أداء جيد)</option>
+        </select>
+      </div>
+      <div class="form-group modal-form-full">
+        <label for="revComment"><span>تفاصيل تجربتك وتقييمك</span> <span style="color:var(--cyan-bright); font-size:0.75rem;">إلزامي *</span></label>
+        <textarea id="revComment" rows="2" placeholder="اكتب رأيك الصادق في سرعة التسليم وجودة الخدمة والدعم الفني..." required></textarea>
+        <span style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">يستخدم رقم الواتساب لتوثيق تقييمك فقط ولا ينشر للعامة أبداً.</span>
+      </div>
+      <div class="modal-form-full">
+        <button type="submit" class="btn btn-cyan-primary btn-block" style="padding:14px; font-weight:800; font-size:1.05rem; border-radius:12px;">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>نشر التقييم فوراً</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- FOOTER -->
+  <!-- UNIFIED AUTH-AWARE FOOTER (PRIORITY 3) -->
+  <footer class="main-page-footer" id="mainFooter">
+    <div class="container footer-main-grid">
+
+      <!-- Column 1: Brand & Direct Support -->
+      <div class="footer-col-item brand-column">
+        <a href="./" class="brand-logo" aria-label="Activkeyz الرئيسية">
+          <img src="logos/activkeyzmainlogo.png" alt="Activkeyz" class="brand-logo-img footer-logo-img">
+          <div class="logo-text-group">
+            <span class="logo-title" style="font-size:1.15rem;">Activkeyz</span>
+            <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+          </div>
+        </a>
+        <p class="footer-tagline">
+          منصتك المعتمدة للاشتراكات والخدمات البرمجية بأسعار تنافسية وضمان شامل ودعم فني متواصل.
+        </p>
+        <div class="footer-contact-actions">
+          <a href="https://wa.me/201225106057" target="_blank" class="footer-contact-pill" title="واتساب المبيعات">
+            <i class="fa-brands fa-whatsapp" style="color: #22c55e;"></i>
+            <span>واتساب المبيعات</span>
+          </a>
+          <a href="contact.html" class="footer-contact-pill" title="مركز المساعدة">
+            <i class="fa-solid fa-headset"></i>
+            <span>الدعم الفني</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Public Products & Categories -->
+      <div class="footer-col-item">
+        <h4 class="footer-block-header">الأقسام والمنتجات</h4>
+        <ul class="footer-anchor-list">
+          <li><a href="category.html?cat=all"><i class="fa-solid fa-border-all"></i> جميع المنتجات والاشتراكات</a></li>
+          <li><a href="category.html?cat=ai"><i class="fa-solid fa-wand-magic-sparkles"></i> أدوات الذكاء الاصطناعي</a></li>
+          <li><a href="category.html?cat=creative"><i class="fa-solid fa-palette"></i> البرامج الإبداعية والتصميم</a></li>
+          <li><a href="category.html?cat=office"><i class="fa-solid fa-briefcase"></i> برامج المكتب والإنتاجية</a></li>
+          <li><a href="category.html?cat=streaming"><i class="fa-solid fa-play"></i> الترفيه والمشاهدة</a></li>
+          <li><a href="category.html?cat=gaming"><i class="fa-solid fa-shield-halved"></i> الألعاب وبطاقات الحماية</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Auth-Aware Customer Shortcuts & Public Support -->
+      <div class="footer-col-item footer-auth-col">
+        <h4 class="footer-block-header" id="footerAccountHeading">الحساب والخدمات</h4>
+        
+        <!-- Logged-Out Visitor Shortcuts -->
+        <ul class="footer-anchor-list footer-visitor-links" id="footerVisitorLinks">
+          <li><a href="account.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> تسجيل الدخول أو إنشاء حساب</a></li>
+          <li><a href="track-order.html"><i class="fa-solid fa-truck-fast"></i> تتبع الطلب بالرقم المرجعي</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-circle-question"></i> مركز المساعدة والاستفسارات</a></li>
+          <li><a href="policy.html"><i class="fa-solid fa-shield-halved"></i> شروط الضمان وسياسة الخصوصية</a></li>
+          <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> عن متجر Activkeyz</a></li>
+        </ul>
+
+        <!-- Logged-In Customer Shortcuts -->
+        <ul class="footer-anchor-list footer-customer-links" id="footerCustomerLinks" style="display: none;">
+          <li><a href="account.html?tab=dashboard"><i class="fa-solid fa-gauge-high"></i> لوحة تحكم حسابي</a></li>
+          <li><a href="account.html?tab=orders"><i class="fa-solid fa-box-archive"></i> طلباتي ومشترياتي</a></li>
+          <li><a href="account.html?tab=wallet"><i class="fa-solid fa-coins"></i> محفظة Activkeyz Coins</a></li>
+          <li><a href="account.html?tab=profile"><i class="fa-solid fa-id-card"></i> إعدادات وبيانات الحساب</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-headset"></i> تذاكر الدعم والمساعدة</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Authentic Horizontal Payment Logos Strip -->
+    <div class="footer-baseline-strip">
+      <div class="container baseline-strip-inner">
+        <div class="rights-copyright-text">جميع الحقوق محفوظة © 2026 Activkeyz</div>
+        <div class="payment-logos-strip" aria-label="طرق الدفع المعتمدة">
+          <span class="pay-strip-label">طرق الدفع المعتمدة:</span>
+          <img src="logos/vodafone.svg" alt="Vodafone Cash" class="pay-strip-img" loading="lazy" title="فودافون كاش">
+          <img src="logos/instapay.webp" alt="InstaPay" class="pay-strip-img" loading="lazy" title="شبكة إنستاباي مصر">
+          <img src="logos/tether-usdt.svg" alt="USDT TRC20" class="pay-strip-img" loading="lazy" title="Tether USDT TRC20">
+        </div>
+      </div>
+    </div>
+
+    <!-- META / FACEBOOK ADVERTISING COMPLIANCE & LEGAL DISCLAIMER -->
+    <div class="footer-meta-compliance-box">
+      <div class="container compliance-inner">
+        <div class="compliance-links-row">
+          <a href="privacy.html" class="compliance-link">سياسة الخصوصية</a>
+          <span class="compliance-dot">·</span>
+          <a href="terms.html" class="compliance-link">شروط الاستخدام والخدمة</a>
+          <span class="compliance-dot">·</span>
+          <a href="refund.html" class="compliance-link">الضمان والاسترجاع</a>
+          <span class="compliance-dot">·</span>
+          <a href="policy.html" class="compliance-link">مركز السياسات الشامل</a>
+          <span class="compliance-dot">·</span>
+          <a href="contact.html" class="compliance-link">اتصل بنا والدعم الفني</a>
+          <span class="compliance-dot">·</span>
+          <a href="dashboard.html" class="compliance-link footer-admin-lock-link" title="لوحة التحكم الإدارية" target="_blank"><i class="fa-solid fa-lock"></i> لوحة التحكم</a>
+        </div>
+
+        <p class="meta-disclaimer-text">
+          <strong>إخلاء مسؤولية الإعلانات وميتا (Meta / Facebook Disclaimer):</strong><br>
+          هذا الموقع ليس جزءاً من موقع فيسبوك (Facebook™) أو شركة ميتا بلاتفورمز (Meta Platforms, Inc.). بالإضافة إلى ذلك، فإن هذا الموقع غير معتمد أو مدعوم من قِبل فيسبوك بأي شكل من الأشكال. كلمة FACEBOOK هي علامة تجارية مسجلة ومملوكة قانونياً لشركة META PLATFORMS, INC.
+        </p>
+
+        <p class="meta-disclaimer-en">
+          <strong>Meta &amp; FTC Compliance Notice:</strong> This website is an independent e-commerce storefront and is NOT affiliated with, sponsored by, or endorsed by Facebook™ or Meta Platforms, Inc. FACEBOOK™ is a registered trademark of META PLATFORMS, INC. All trademarks, service marks, and company names are property of their respective owners. Activkeyz provides genuine digital subscription licenses under strict authorized reseller practices.
+        </p>
+
+        <p class="trademark-notice-text">
+          جميع أسماء المنتجات والبرامج والشعارات المعروضة هي علامات تجارية مملوكة حصرياً لأصحابها الرسميين (مثل OpenAI, Adobe, Microsoft, Google, CapCut وغيرها). Activkeyz منصة مستقلة توفر حلول واشتراكات رقمية مرخصة مع ضمان تشغيل شامل ودعم فني مخصص.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="nexa-ui.js"></script>
+  <script>
+    // Live Countdown Timer
+    let h = 17, m = 59, s = 23;
+    setInterval(() => {
+      s--;
+      if (s < 0) { s = 59; m--; if (m < 0) { m = 59; h--; if (h < 0) h = 23; } }
+      document.getElementById('hoursVal').textContent = String(h).padStart(2, '0');
+      document.getElementById('minutesVal').textContent = String(m).padStart(2, '0');
+      document.getElementById('secondsVal').textContent = String(s).padStart(2, '0');
+    }, 1000);
+
+    // Filter Reviews
+    function filterReviews(category, btn) {
+      document.querySelectorAll('.review-pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cards = document.querySelectorAll('.review-card-item');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Modal Handlers
+    function openAddReviewModal() {
+      document.getElementById('addReviewModal')?.classList.add('active');
+      document.getElementById('addReviewModalOverlay')?.classList.add('active');
+      document.body.style.overflow = 'hidden';
+
+      // Pre-fill user contact info if available
+      try {
+        const rawUser = localStorage.getItem('nexa_customer_user');
+        const u = rawUser ? JSON.parse(rawUser) : {};
+        const savedPhone = localStorage.getItem('activkeyz_customer_phone') || u.phone || '';
+        const savedName = u.full_name || u.name || '';
+        const phoneInput = document.getElementById('revPhone');
+        const nameInput = document.getElementById('revName');
+        if (phoneInput && !phoneInput.value && savedPhone) phoneInput.value = savedPhone;
+        if (nameInput && !nameInput.value && savedName) nameInput.value = savedName;
+      } catch(e) {}
+    }
+
+    function closeAddReviewModal() {
+      document.getElementById('addReviewModal')?.classList.remove('active');
+      document.getElementById('addReviewModalOverlay')?.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAddReviewModal();
+    });
+
+    function getRevFullPhone() {
+      const codeEl = document.getElementById('revCountryCode');
+      const phoneEl = document.getElementById('revPhone');
+      if (!phoneEl) return '';
+      const raw = phoneEl.value.trim();
+      if (!raw) return '';
+      const code = codeEl ? codeEl.value : '+20';
+      if (raw.startsWith('+')) return raw;
+      if (code && raw.startsWith(code.replace('+', ''))) return '+' + raw;
+      const digitsOnly = raw.replace(/^0+/, '');
+      return code ? `${code}${digitsOnly}` : raw;
+    }
+
+    async function submitReview() {
+      const nameInput = document.getElementById('revName');
+      const phoneInput = document.getElementById('revPhone');
+      const prodInput = document.getElementById('revProd');
+      const catInput = document.getElementById('revCat');
+      const starsInput = document.getElementById('revStars');
+      const commentInput = document.getElementById('revComment');
+
+      const name = nameInput.value.trim();
+      const phone = getRevFullPhone();
+      const prod = prodInput.value.trim();
+      const cat = catInput.value;
+      const stars = parseInt(starsInput.value) || 5;
+      const comment = commentInput.value.trim();
+
+      const phoneClean = phone.replace(/\D/g, '');
+
+      if (!name) {
+        showToast('⚠️ يرجى كتابة اسمك الكريم لنشر التقييم.');
+        nameInput.focus();
+        nameInput.style.borderColor = '#ef4444';
+        return;
+      }
+      nameInput.style.borderColor = '';
+
+      if (!phoneClean || phoneClean.length < 8) {
+        showToast('⚠️ يرجى إدخال رقم واتساب صحيح لتوثيق تقييمك واستلام الهدايا!');
+        phoneInput.focus();
+        phoneInput.style.borderColor = '#ef4444';
+        return;
+      }
+      phoneInput.style.borderColor = '';
+
+      if (!prod) {
+        showToast('⚠️ يرجى تحديد اسم الاشتراك الذي قمت بشرائه.');
+        prodInput.focus();
+        prodInput.style.borderColor = '#ef4444';
+        return;
+      }
+      prodInput.style.borderColor = '';
+
+      if (!comment) {
+        showToast('⚠️ يرجى كتابة رأيك وتفاصيل تجربتك مع الخدمة.');
+        commentInput.focus();
+        commentInput.style.borderColor = '#ef4444';
+        return;
+      }
+      commentInput.style.borderColor = '';
+
+      // Persist customer inputs
+      try {
+        localStorage.setItem('activkeyz_customer_phone', phone);
+        const rawUser = localStorage.getItem('nexa_customer_user');
+        const u = rawUser ? JSON.parse(rawUser) : {};
+        u.phone = phone;
+        if (name && !u.full_name) u.full_name = name;
+        localStorage.setItem('nexa_customer_user', JSON.stringify(u));
+      } catch (e) {}
+
+      // Save to Supabase if available
+      if (window.NexaSupabase && typeof window.NexaSupabase.reviews?.create === 'function') {
+        try {
+          await window.NexaSupabase.reviews.create({
+            name,
+            phone,
+            productName: prod,
+            category: cat,
+            rating: stars,
+            comment
+          });
+        } catch (e) {
+          console.warn('Supabase review create error:', e);
+        }
+      }
+
+      const revObj = {
+        name,
+        phone,
+        prod,
+        cat,
+        stars,
+        comment,
+        time: 'الآن'
+      };
+
+      // Persist to local reviews list so it survives reload
+      try {
+        const stored = JSON.parse(localStorage.getItem('activkeyz_local_reviews') || '[]');
+        stored.unshift(revObj);
+        localStorage.setItem('activkeyz_local_reviews', JSON.stringify(stored.slice(0, 50)));
+      } catch (e) {}
+
+      const grid = document.getElementById('reviewsGrid');
+      if (grid) {
+        const newCard = createReviewElement(revObj);
+        newCard.style.animation = 'fadeInUp 0.4s ease forwards';
+        grid.prepend(newCard);
+      }
+
+      closeAddReviewModal();
+      document.getElementById('addReviewForm')?.reset();
+      showToast('شكراً لمشاركتك! تم توثيق ونشر تقييمك في المتجر بنجاح ⭐');
+    }
+
+    function createReviewElement(rev) {
+      const stars = parseInt(rev.stars) || 5;
+      let starIcons = '';
+      for (let i = 0; i < stars; i++) {
+        starIcons += '<i class="fa-solid fa-star"></i>';
+      }
+      const initials = (rev.name || 'عميل').slice(0, 2);
+      const newCard = document.createElement('div');
+      newCard.className = 'review-card-item';
+      newCard.setAttribute('data-category', rev.cat || 'all');
+      newCard.innerHTML = `
+        <div class="review-user-row">
+          <div class="user-avatar-initials">${escapeHtml(initials)}</div>
+          <div class="user-meta-info">
+            <span class="user-full-name">${escapeHtml(rev.name)}</span>
+            <span class="user-prod-badge"><i class="fa-solid fa-shield-check"></i> اشترى: ${escapeHtml(rev.prod)}</span>
+          </div>
+        </div>
+        <div class="rating-stars-gold" style="font-size:0.95rem; margin:0;">
+          ${starIcons}
+        </div>
+        <p class="review-text-body">"${escapeHtml(rev.comment)}"</p>
+        <div class="review-card-footer">
+          <span>${escapeHtml(rev.time || 'الآن')}</span>
+          <span style="color:#10b981;"><i class="fa-solid fa-circle-check"></i> تقييم موثق عبر الواتساب</span>
+        </div>
+      `;
+      return newCard;
+    }
+
+    function loadLocalReviews() {
+      try {
+        const grid = document.getElementById('reviewsGrid');
+        if (!grid) return;
+        const stored = JSON.parse(localStorage.getItem('activkeyz_local_reviews') || '[]');
+        stored.forEach(rev => {
+          const card = createReviewElement(rev);
+          grid.prepend(card);
+        });
+      } catch (e) {}
+    }
+
+    document.addEventListener('DOMContentLoaded', loadLocalReviews);
+
+    function showToast(msg) {
+      const c = document.getElementById('toastContainer');
+      if (!c) return;
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.innerHTML = `<i class="fa-solid fa-circle-check" style="color:var(--cyan-primary);"></i><span>${msg}</span>`;
+      c.appendChild(t);
+      setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 3500);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Mobile Drawer
+    document.getElementById('mobileMenuBtn')?.addEventListener('click', () => {
+      document.getElementById('mobileDrawer')?.classList.add('active');
+    });
+    document.getElementById('drawerCloseBtn')?.addEventListener('click', () => {
+      document.getElementById('mobileDrawer')?.classList.remove('active');
+    });
+  </script>
+</body>
+
+</html>

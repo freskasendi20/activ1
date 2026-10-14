@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تتبع واستلام الطلب | Activkeyz</title>
+  <meta name="description" content="تتبع حالة طلبك الرقمي ومتابعة التفعيل والاستلام الآمن في متجر Activkeyz">
+  <link rel="icon" type="image/png" href="logos/activkeyzsecondlogo.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&family=Cairo:wght@600;700;800&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="checkout.css">
+  <style>
+    .track-page-container {
+      max-width: 780px;
+      margin: 40px auto 80px auto;
+      padding: 0 20px;
+    }
+    .track-main-card {
+      background: rgba(11, 20, 36, 0.95);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 0 40px rgba(56, 189, 248, 0.15), 0 25px 60px rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(20px);
+    }
+    .track-header-wrap {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .track-badge-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 18px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1.5px solid var(--cyan-bright);
+      color: var(--cyan-bright);
+      font-size: 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.3);
+    }
+    .track-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #fff;
+      margin: 0 0 6px 0;
+    }
+    .track-desc {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      line-height: 1.6;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+    .track-form-box {
+      background: rgba(15, 26, 48, 0.5);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+    .track-input-group {
+      margin-bottom: 16px;
+    }
+    .track-input-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin-bottom: 6px;
+    }
+    .track-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .track-input-wrap i {
+      position: absolute;
+      right: 14px;
+      color: var(--cyan-bright);
+      font-size: 1rem;
+    }
+    .track-input-wrap input {
+      width: 100%;
+      padding: 13px 44px 13px 14px;
+      background: rgba(6, 12, 24, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .track-input-wrap input:focus {
+      border-color: var(--cyan-bright);
+      box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+    }
+    .track-btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--cyan-bright), #0284c7);
+      border: none;
+      border-radius: 12px;
+      color: #030712;
+      font-size: 1.05rem;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
+      transition: all 0.2s;
+    }
+    .track-btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 35px rgba(0, 210, 255, 0.6);
+    }
+
+    /* Saved Orders on This Device */
+    .saved-orders-section {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 24px;
+      margin-top: 20px;
+    }
+    .saved-orders-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .saved-orders-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .saved-order-item-card {
+      background: rgba(14, 25, 45, 0.5);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      transition: all 0.2s;
+    }
+    .saved-order-item-card:hover {
+      border-color: var(--cyan-bright);
+      background: rgba(14, 25, 45, 0.8);
+    }
+    .saved-order-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .saved-order-id {
+      font-family: var(--font-latin);
+      font-weight: 800;
+      color: var(--cyan-bright);
+      font-size: 0.95rem;
+    }
+    .saved-order-name {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+    }
+    .saved-order-date {
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+    .btn-view-saved-order {
+      padding: 8px 16px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-view-saved-order:hover {
+      background: var(--cyan-bright);
+      color: #030712;
+    }
+
+    /* Help & Recovery Callout */
+    .track-help-callout {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .track-help-callout i {
+      color: #fbbf24;
+      font-size: 1.3rem;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .checkout-minimal-header .container.header-inner-flex {
+        padding: 8px 12px;
+        gap: 8px;
+      }
+      .checkout-return-btn span {
+        display: none;
+      }
+      .checkout-return-btn {
+        padding: 8px 12px;
+      }
+    }
+    .checkout-minimal-header {
+      background: rgba(6, 12, 24, 0.95);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      backdrop-filter: blur(12px);
+    }
+    .checkout-minimal-header .header-inner-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+  </style>
+</head>
+<body class="site-body">
+
+  <!-- TOP HEADER -->
+  <header class="checkout-minimal-header">
+    <div class="container header-inner-flex">
+      <div class="checkout-brand-area">
+        <a href="./" class="brand-logo">
+          <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="brand-logo-img">
+          <div class="logo-text-group">
+            <span class="logo-title">Activkeyz</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="checkout-return-btn-wrap" style="display:flex; gap:10px;">
+        <a href="account.html?tab=orders" class="checkout-return-btn" style="border-color:rgba(56,189,248,0.4); color:var(--cyan-bright);">
+          <i class="fa-solid fa-box-open"></i>
+          <span>طلباتي في حسابي</span>
+        </a>
+        <a href="./" class="checkout-return-btn">
+          <i class="fa-solid fa-arrow-right"></i>
+          <span>العودة للمتجر</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="track-page-container">
+    <div class="track-main-card">
+      
+      <div class="track-header-wrap">
+        <div class="track-badge-icon">
+          <i class="fa-solid fa-truck-fast"></i>
+        </div>
+        <h1 class="track-title">تتبع واستلام طلبك الرقمي</h1>
+        <p class="track-desc">
+          أدخل رقم طلبك ورمز الوصول الآمن لاستعراض حالة التحويل، محادثات الدعم، واستلام بيانات التفعيل فوراً.
+        </p>
+      </div>
+
+      <form id="trackOrderForm" onsubmit="handleTrackSubmit(event)" class="track-form-box">
+        <div class="track-input-group">
+          <label for="trackOrderIdInput">رقم الطلب <span style="color:#f87171;">*</span></label>
+          <div class="track-input-wrap">
+            <i class="fa-solid fa-receipt"></i>
+            <input type="text" id="trackOrderIdInput" placeholder="مثال: ACTIV-123456" required autocomplete="off" style="text-transform:uppercase;">
+          </div>
+        </div>
+
+        <div class="track-input-group">
+          <label for="trackTokenInput">رمز الأمان للطلب <span style="color:#94a3b8; font-size:0.75rem; font-weight:normal;">(اختياري إذا تم الطلب من هذا الجهاز)</span></label>
+          <div class="track-input-wrap">
+            <i class="fa-solid fa-shield-halved"></i>
+            <input type="text" id="trackTokenInput" placeholder="أدخل رمز الأمان الخاص بالطلب إن توفر لديك..." autocomplete="off">
+          </div>
+          <span style="display:block; font-size:0.75rem; color:#94a3b8; margin-top:4px;">
+            لحماية خصوصية الاشتراكات الرقمية، يلزم توفر رمز الأمان للاطلاع على التراخيص والحسابات.
+          </span>
+        </div>
+
+        <button type="submit" class="track-btn-submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>عرض تفاصيل واستلام الطلب</span>
+        </button>
+      </form>
+
+      <!-- SAVED ORDERS ON THIS BROWSER -->
+      <div class="saved-orders-section" id="savedOrdersSection" style="display:none;">
+        <div class="saved-orders-title">
+          <i class="fa-solid fa-clock-rotate-left" style="color:var(--cyan-bright);"></i>
+          <span>طلباتك السابقة على هذا المتصفح:</span>
+        </div>
+        <div class="saved-orders-list" id="savedOrdersList">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- SECURITY & RECOVERY INFO -->
+      <div class="track-help-callout">
+        <i class="fa-solid fa-shield-halved"></i>
+        <div>
+          <strong style="color:#fff; font-size:0.88rem; display:block; margin-bottom:4px;">
+            حماية خصوصية بيانات اشتراكك
+          </strong>
+          <p style="color:#cbd5e1; font-size:0.82rem; line-height:1.6; margin:0 0 8px 0;">
+            لأمانك، لا تظهر بيانات التفعيل إلا بعد التحقق من رقم الطلب. إذا واجهتك أي مشكلة في فتح طلبك أو نسيت بياناتك، كلمنا مباشرة على واتساب مع صورة التحويل وهنساعدك في ثواني:
+          </p>
+          <a href="https://wa.me/201225106057?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20Activkeyz%D8%8C%20%D8%A3%D8%AD%D8%AA%D8%A7%D8%AC%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9%20%D9%81%D9%8A%20%D9%81%D8%AA%D8%AD%20%D8%B7%D9%84%D8%A8%D9%8A..." target="_blank" style="background:#22c55e; color:#fff; padding:6px 14px; border-radius:8px; font-weight:800; font-size:0.8rem; text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+            <i class="fa-brands fa-whatsapp"></i> خدمة الدعم الفني عبر الواتساب (01225106057)
+          </a>
+        </div>
+      </div>
+
+      <!-- Account Portal Callout -->
+      <div style="background:rgba(56,189,248,0.08); border:1px solid rgba(56,189,248,0.25); border-radius:14px; padding:16px; margin-top:20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:40px; height:40px; border-radius:10px; background:rgba(56,189,248,0.15); display:flex; align-items:center; justify-content:center; color:var(--cyan-bright); font-size:1.1rem;">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <div>
+            <div style="font-weight:800; color:#fff; font-size:0.95rem;">هل تملك حساباً معتمداً في متجر Activkeyz؟</div>
+            <div style="color:#94a3b8; font-size:0.8rem;">سجّل دخولك الآن لاستعراض كافة طلباتك ومحفظة Activkeyz Coins دون الحاجة لإدخال رموز الوصول يدوياً.</div>
+          </div>
+        </div>
+        <a href="account.html?tab=orders" class="btn-view-saved-order" style="padding:8px 18px; font-weight:800; text-decoration:none;">
+          <i class="fa-solid fa-arrow-left"></i> الانتقال لطلباتي في حسابي
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="nexa-ui.js"></script>
+  
+
+  <!-- UNIFIED AUTH-AWARE FOOTER (PRIORITY 3) -->
+  <footer class="main-page-footer" id="mainFooter">
+    <div class="container footer-main-grid">
+
+      <!-- Column 1: Brand & Direct Support -->
+      <div class="footer-col-item brand-column">
+        <a href="./" class="brand-logo" aria-label="Activkeyz الرئيسية">
+          <img src="logos/activkeyzmainlogo.png" alt="Activkeyz" class="brand-logo-img footer-logo-img">
+          <div class="logo-text-group">
+            <span class="logo-title" style="font-size:1.15rem;">Activkeyz</span>
+            <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+          </div>
+        </a>
+        <p class="footer-tagline">
+          منصتك المعتمدة للاشتراكات والخدمات البرمجية بأسعار تنافسية وضمان شامل ودعم فني متواصل.
+        </p>
+        <div class="footer-contact-actions">
+          <a href="https://wa.me/201225106057" target="_blank" class="footer-contact-pill" title="واتساب المبيعات">
+            <i class="fa-brands fa-whatsapp" style="color: #22c55e;"></i>
+            <span>واتساب المبيعات</span>
+          </a>
+          <a href="contact.html" class="footer-contact-pill" title="مركز المساعدة">
+            <i class="fa-solid fa-headset"></i>
+            <span>الدعم الفني</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Public Products & Categories -->
+      <div class="footer-col-item">
+        <h4 class="footer-block-header">الأقسام والمنتجات</h4>
+        <ul class="footer-anchor-list">
+          <li><a href="category.html?cat=all"><i class="fa-solid fa-border-all"></i> جميع المنتجات والاشتراكات</a></li>
+          <li><a href="category.html?cat=ai"><i class="fa-solid fa-wand-magic-sparkles"></i> أدوات الذكاء الاصطناعي</a></li>
+          <li><a href="category.html?cat=creative"><i class="fa-solid fa-palette"></i> البرامج الإبداعية والتصميم</a></li>
+          <li><a href="category.html?cat=office"><i class="fa-solid fa-briefcase"></i> برامج المكتب والإنتاجية</a></li>
+          <li><a href="category.html?cat=streaming"><i class="fa-solid fa-play"></i> الترفيه والمشاهدة</a></li>
+          <li><a href="category.html?cat=gaming"><i class="fa-solid fa-shield-halved"></i> الألعاب وبطاقات الحماية</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Auth-Aware Customer Shortcuts & Public Support -->
+      <div class="footer-col-item footer-auth-col">
+        <h4 class="footer-block-header" id="footerAccountHeading">الحساب والخدمات</h4>
+        
+        <!-- Logged-Out Visitor Shortcuts -->
+        <ul class="footer-anchor-list footer-visitor-links" id="footerVisitorLinks">
+          <li><a href="account.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> تسجيل الدخول أو إنشاء حساب</a></li>
+          <li><a href="track-order.html"><i class="fa-solid fa-truck-fast"></i> تتبع الطلب بالرقم المرجعي</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-circle-question"></i> مركز المساعدة والاستفسارات</a></li>
+          <li><a href="policy.html"><i class="fa-solid fa-shield-halved"></i> شروط الضمان وسياسة الخصوصية</a></li>
+          <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> عن متجر Activkeyz</a></li>
+        </ul>
+
+        <!-- Logged-In Customer Shortcuts -->
+        <ul class="footer-anchor-list footer-customer-links" id="footerCustomerLinks" style="display: none;">
+          <li><a href="account.html?tab=dashboard"><i class="fa-solid fa-gauge-high"></i> لوحة تحكم حسابي</a></li>
+          <li><a href="account.html?tab=orders"><i class="fa-solid fa-box-archive"></i> طلباتي ومشترياتي</a></li>
+          <li><a href="account.html?tab=wallet"><i class="fa-solid fa-coins"></i> محفظة كوينز Activkeyz</a></li>
+          <li><a href="account.html?tab=profile"><i class="fa-solid fa-id-card"></i> إعدادات وبيانات الحساب</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-headset"></i> تذاكر الدعم والمساعدة</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Authentic Horizontal Payment Logos Strip -->
+    <div class="footer-baseline-strip">
+      <div class="container baseline-strip-inner">
+        <div class="rights-copyright-text">جميع الحقوق محفوظة © 2026 Activkeyz</div>
+        <div class="payment-logos-strip" aria-label="طرق الدفع المعتمدة">
+          <span class="pay-strip-label">طرق الدفع المعتمدة:</span>
+          <img src="logos/vodafone.svg" alt="Vodafone Cash" class="pay-strip-img" loading="lazy" title="فودافون كاش">
+          <img src="logos/instapay.webp" alt="InstaPay" class="pay-strip-img" loading="lazy" title="شبكة إنستاباي مصر">
+          <img src="logos/tether-usdt.svg" alt="USDT TRC20" class="pay-strip-img" loading="lazy" title="Tether USDT TRC20">
+        </div>
+      </div>
+    </div>
+
+    <!-- META / FACEBOOK ADVERTISING COMPLIANCE & LEGAL DISCLAIMER -->
+    <div class="footer-meta-compliance-box">
+      <div class="container compliance-inner">
+        <div class="compliance-links-row">
+          <a href="privacy.html" class="compliance-link">سياسة الخصوصية</a>
+          <span class="compliance-dot">·</span>
+          <a href="terms.html" class="compliance-link">شروط الاستخدام والخدمة</a>
+          <span class="compliance-dot">·</span>
+          <a href="refund.html" class="compliance-link">الضمان والاسترجاع</a>
+          <span class="compliance-dot">·</span>
+          <a href="policy.html" class="compliance-link">مركز السياسات الشامل</a>
+          <span class="compliance-dot">·</span>
+          <a href="contact.html" class="compliance-link">اتصل بنا والدعم الفني</a>
+          <span class="compliance-dot">·</span>
+          <a href="dashboard.html" class="compliance-link footer-admin-lock-link" title="لوحة التحكم الإدارية" target="_blank"><i class="fa-solid fa-lock"></i> لوحة التحكم</a>
+        </div>
+
+        <p class="meta-disclaimer-text">
+          <strong>إخلاء مسؤولية الإعلانات وميتا (Meta / Facebook Disclaimer):</strong><br>
+          هذا الموقع ليس جزءاً من موقع فيسبوك (Facebook™) أو شركة ميتا بلاتفورمز (Meta Platforms, Inc.). بالإضافة إلى ذلك، فإن هذا الموقع غير معتمد أو مدعوم من قِبل فيسبوك بأي شكل من الأشكال. كلمة FACEBOOK هي علامة تجارية مسجلة ومملوكة قانونياً لشركة META PLATFORMS, INC.
+        </p>
+
+        <p class="meta-disclaimer-en">
+          <strong>Meta &amp; FTC Compliance Notice:</strong> This website is an independent e-commerce storefront and is NOT affiliated with, sponsored by, or endorsed by Facebook™ or Meta Platforms, Inc. FACEBOOK™ is a registered trademark of META PLATFORMS, INC. All trademarks, service marks, and company names are property of their respective owners. Activkeyz provides genuine digital subscription licenses under strict authorized reseller practices.
+        </p>
+
+        <p class="trademark-notice-text">
+          جميع أسماء المنتجات والبرامج والشعارات المعروضة هي علامات تجارية مملوكة حصرياً لأصحابها الرسميين (مثل OpenAI, Adobe, Microsoft, Google, CapCut وغيرها). Activkeyz منصة مستقلة توفر حلول واشتراكات رقمية مرخصة مع ضمان تشغيل شامل ودعم فني مخصص.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- TOAST NOTIFICATIONS CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="nexa-ui.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check for saved local orders in localStorage
+      let orders = [];
+      try {
+        orders = JSON.parse(localStorage.getItem('nexa_orders') || '[]');
+      } catch(e) {}
+
+      const section = document.getElementById('savedOrdersSection');
+      const list = document.getElementById('savedOrdersList');
+
+      if (orders && orders.length > 0 && list && section) {
+        section.style.display = 'block';
+        list.innerHTML = orders.slice(0, 5).map(o => {
+          const token = localStorage.getItem('nexa_token_' + o.orderId) || o.accessToken || '';
+          const itemsSummary = (o.items && o.items.length > 0) ? o.items.map(i => i.name).join(', ') : 'اشتراك رقمي';
+          const dateStr = o.createdAt ? new Date(o.createdAt).toLocaleDateString('ar-EG') : 'حديثاً';
+          const targetUrl = `order-receipt.html?orderId=${encodeURIComponent(o.orderId)}${token ? `&token=${encodeURIComponent(token)}` : ''}`;
+
+          return `
+            <div class="saved-order-item-card">
+              <div class="saved-order-meta">
+                <span class="saved-order-id">${escapeHtml(o.orderId)}</span>
+                <span class="saved-order-name">${escapeHtml(itemsSummary)}</span>
+                <span class="saved-order-date"><i class="fa-regular fa-calendar"></i> ${dateStr}</span>
+              </div>
+              <a href="${targetUrl}" class="btn-view-saved-order">
+                <i class="fa-solid fa-arrow-left"></i> عرض الطلب والاستلام
+              </a>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Check if orderId in query params
+      const params = new URLSearchParams(window.location.search);
+      const qId = params.get('orderId');
+      if (qId) {
+        document.getElementById('trackOrderIdInput').value = qId;
+        const qToken = params.get('token') || localStorage.getItem('nexa_token_' + qId);
+        if (qToken) document.getElementById('trackTokenInput').value = qToken;
+      }
+    });
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/[&<>"']/g, s => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[s]));
+    }
+
+    async function handleTrackSubmit(e) {
+      e.preventDefault();
+      const orderIdInput = document.getElementById('trackOrderIdInput');
+      const tokenInput = document.getElementById('trackTokenInput');
+      const submitBtn = document.querySelector('.track-btn-submit');
+      const origBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+
+      const orderId = orderIdInput.value.trim().toUpperCase();
+      let token = tokenInput.value.trim();
+
+      if (!orderId) {
+        if (window.NexaUI) window.NexaUI.toast('يرجى كتابة رقم الطلب للبدء في التتبع', 'warning');
+        return;
+      }
+
+      if (!token) {
+        token = localStorage.getItem('nexa_token_' + orderId) || '';
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>جاري البحث عن طلبك...</span>';
+      }
+
+      try {
+        if (window.NexaSupabase?.orders?.getById) {
+          const res = await window.NexaSupabase.orders.getById(orderId, token);
+          if (!res || !res.orderId) {
+            if (window.NexaUI) window.NexaUI.toast('لم يتم العثور على طلب برقم ' + orderId, 'error');
+            return;
+          }
+          if (res.isAuthorized && token) {
+            localStorage.setItem('nexa_token_' + orderId, token);
+          }
+        }
+      } catch (err) {
+        console.warn('Live lookup note:', err);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = origBtnHtml;
+        }
+      }
+
+      const targetUrl = `order-receipt.html?orderId=${encodeURIComponent(orderId)}${token ? `&token=${encodeURIComponent(token)}` : ''}`;
+      window.location.href = targetUrl;
+    }
+  </script>
+</body>
+</html>

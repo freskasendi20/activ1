@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>خريطة الموقع الشاملة | Activkeyz</title>
+  <meta name="description" content="فهرس وخريطة تفاعلية لكافة صفحات وأقسام وتصنيفات منتجات وسياسات متجر Activkeyz الرقمي.">
+  <meta name="google" content="notranslate">
+  <link rel="icon" type="image/png" href="logos/activkeyzsecondlogo.png">
+
+  <!-- Fonts: IBM Plex Sans Arabic (Primary) + Latin Complement -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&family=Cairo:wght@600;700;800&family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="site-pages.css">
+</head>
+
+<body>
+
+  <!-- BACKGROUND LAYERS -->
+  <div class="page-background" aria-hidden="true">
+    <div class="stars-layer"></div>
+    <div class="hero-bg-art" style="height: 520px; opacity: 0.8;"></div>
+    <div class="lower-bg-art" style="top: 450px; opacity: 0.2;"></div>
+    <div class="ambient-glow-top"></div>
+    <div class="ambient-glow-bottom"></div>
+  </div>
+
+  <!-- 1. ANNOUNCEMENT BAR -->
+  <div class="top-announcement-bar">
+    <div class="container announcement-inner">
+      <div class="announcement-spacer"></div>
+
+      <div class="announcement-msg">
+        <span class="gift-icon"><i class="fa-solid fa-sitemap"></i></span>
+        <span>دليل التصفح السريع والوصول المباشر إلى كل ركن في منصة Activkeyz!</span>
+      </div>
+
+      <div class="announcement-countdown" id="countdownTimer">
+        <div class="countdown-slot"><span class="countdown-num" id="hoursVal">05</span><span class="countdown-txt">ساعة</span></div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-slot"><span class="countdown-num" id="minutesVal">18</span><span class="countdown-txt">دقيقة</span></div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-slot"><span class="countdown-num" id="secondsVal">30</span><span class="countdown-txt">ثانية</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. MAIN HEADER -->
+  <header class="main-header" id="mainHeader">
+    <div class="container header-inner">
+
+      <!-- Brand Logo -->
+      <a href="./" class="brand-logo">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="brand-logo-img">
+        <div class="logo-text-group">
+          <span class="logo-title">Activkeyz</span>
+          <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu">
+        <a href="./" class="nav-item">الرئيسية</a>
+        <a href="category.html?cat=all" class="nav-item">المنتجات</a>
+        <a href="about.html" class="nav-item">من نحن</a>
+        <a href="reviews.html" class="nav-item">آراء العملاء</a>
+        <a href="blog.html" class="nav-item">المدونة</a>
+        <a href="policy.html" class="nav-item">السياسات والضمان</a>
+        <a href="contact.html" class="nav-item">اتصل بنا</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="header-actions-wrap">
+        <a href="contact.html" class="header-btn user-btn">
+          <i class="fa-solid fa-headset"></i>
+          <span>الدعم الفني</span>
+        </a>
+        <a href="category.html?cat=all" class="header-btn cart-toggle-btn" title="تصفح المنتجات">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-pill-count" id="cartBadgeCount">0</span>
+        </a>
+        <button class="mobile-menu-burger" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MOBILE NAV DRAWER -->
+  <div class="mobile-drawer-layer" id="mobileDrawer">
+    <div class="mobile-drawer-top">
+      <div class="brand-logo">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" class="mobile-logo-img">
+        <span class="logo-title" style="font-size:1.05rem;">Activkeyz</span>
+      </div>
+      <button class="drawer-exit-btn" id="drawerCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mobile-links-col">
+      <a href="./" class="mobile-link"><i class="fa-solid fa-house"></i> الرئيسية</a>
+      <a href="category.html?cat=all" class="mobile-link"><i class="fa-solid fa-table-cells-large"></i> جميع المنتجات والأقسام</a>
+      <a href="about.html" class="mobile-link"><i class="fa-solid fa-circle-info"></i> من نحن وقصة متجرنا</a>
+      <a href="reviews.html" class="mobile-link"><i class="fa-solid fa-star"></i> آراء وتقييمات العملاء</a>
+      <a href="blog.html" class="mobile-link"><i class="fa-solid fa-newspaper"></i> المدونة والشروحات</a>
+      <a href="policy.html" class="mobile-link"><i class="fa-solid fa-shield-halved"></i> سياسة الضمان والاسترجاع</a>
+      <a href="contact.html" class="mobile-link"><i class="fa-solid fa-headset"></i> اتصل بنا والدعم الفني</a>
+    </div>
+  </div>
+
+  <main class="page-main-flow">
+
+    <!-- SUBPAGE HERO -->
+    <section class="subpage-hero-banner">
+      <div class="container">
+        <div class="subpage-hero-badge">
+          <i class="fa-solid fa-compass"></i>
+          <span>هيكلية الموقع وفهرس الوصول الشامل</span>
+        </div>
+        <h1 class="subpage-hero-title">خريطة موقع Activkeyz التفاعلية</h1>
+        <p class="subpage-hero-desc">
+          استكشف جميع أقسام المتجر، صفحات المنتجات الفردية، صفحات السياسات والضمان، وقنوات الدعم الفني في مكان واحد بروابط مباشرة وسريعة.
+        </p>
+      </div>
+    </section>
+
+    <!-- SITEMAP BLOCKS GRID -->
+    <section class="container">
+      <div class="sitemap-sections-grid">
+
+        <!-- Block 1: Main Pages -->
+        <div class="sitemap-card-block">
+          <div class="sitemap-card-head">
+            <i class="fa-solid fa-landmark"></i>
+            <span>الصفحات العامة والرئيسية</span>
+          </div>
+          <ul class="sitemap-links-list">
+            <li><a href="./">الصفحة الرئيسية للمتجر <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="category.html?cat=all">معرض المنتجات والكتالوج الشامل <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="about.html">من نحن وقصة Activkeyz <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="reviews.html">آراء وتجارب العملاء الموثقة <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="blog.html">المدونة والشروحات التقنية <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="contact.html">مركز الاتصال والدعم الفني 24/7 <i class="fa-solid fa-chevron-left"></i></a></li>
+          </ul>
+        </div>
+
+        <!-- Block 2: Categories -->
+        <div class="sitemap-card-block">
+          <div class="sitemap-card-head">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>أقسام وتصنيفات المنتجات</span>
+          </div>
+          <ul class="sitemap-links-list">
+            <li><a href="category.html?cat=all">كافة المنتجات والتراخيص <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="category.html?cat=ai">أدوات الذكاء الاصطناعي (AI Tools) <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="category.html?cat=creative">البرامج الإبداعية والتصميم (Creative Suite) <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="category.html?cat=office">برامج المكتب والإنتاجية (Office & Cloud) <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="category.html?cat=streaming">الترفيه والمشاهدة (Streaming Hub) <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="category.html?cat=gaming">الألعاب واشتراكات الجيمينج (Gaming Pass) <i class="fa-solid fa-chevron-left"></i></a></li>
+          </ul>
+        </div>
+
+        <!-- Block 3: Individual Product Pages -->
+        <div class="sitemap-card-block">
+          <div class="sitemap-card-head">
+            <i class="fa-solid fa-box-open"></i>
+            <span>صفحات المنتجات المنفصلة</span>
+          </div>
+          <ul class="sitemap-links-list">
+            <li><a href="product.html?id=ai-chatgpt-plus">اشتراك ChatGPT Plus الشهري <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="product.html?id=cr-adobe-all-apps">حزمة Adobe Creative Cloud الشاملة <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="product.html?id=of-microsoft-365">تفعيل Microsoft 365 مدى الحياة <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="product.html?id=cr-capcut-pro-1y">اشتراك CapCut Pro للمصممين <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="product.html?id=ai-gemini-18m">اشتراك Google Gemini Advanced المعتمد <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="product.html?id=st-prime-video-6m">اشتراك Prime Video 6 Months <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="product.html?id=st-youtube-premium-1y">YouTube Premium بدون إعلانات <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="product.html?id=gm-discord-nitro-1y">اشتراك Discord Nitro 1 Year <i class="fa-solid fa-chevron-left"></i></a></li>
+          </ul>
+        </div>
+
+        <!-- Block 4: Policies & Warranty -->
+        <div class="sitemap-card-block">
+          <div class="sitemap-card-head">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>السياسات والضمان والأمان</span>
+          </div>
+          <ul class="sitemap-links-list">
+            <li><a href="policy.html?tab=warranty">سياسة الضمان والاستبدال الفوري <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="policy.html?tab=refund">سياسة الاسترجاع واسترداد الأموال <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="policy.html?tab=privacy">سياسة الخصوصية وأمان البيانات <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="policy.html?tab=terms">شروط الاستخدام والتراخيص القانونية <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="policy.html?tab=security">بروتوكولات الأمان والتشفير البنكي <i class="fa-solid fa-chevron-left"></i></a></li>
+          </ul>
+        </div>
+
+        <!-- Block 5: Support & Communication -->
+        <div class="sitemap-card-block">
+          <div class="sitemap-card-head">
+            <i class="fa-solid fa-headset"></i>
+            <span>الدعم الفني وقنوات التواصل</span>
+          </div>
+          <ul class="sitemap-links-list">
+            <li><a href="https://wa.me/201225106057" target="_blank">المحادثة الفورية عبر واتساب <i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
+            <li><a href="https://t.me/activkeyz_support" target="_blank">قناة الدعم الفني على تليجرام <i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
+            <li><a href="contact.html">نموذج فتح تذكرة دعم فني جديدة <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="contact.html">الأسئلة الشائعة وإرشادات الاستخدام <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="sitemap.xml" target="_blank">ملف خريطة الموقع XML لمحركات البحث <i class="fa-solid fa-arrow-up-right-from-square"></i></a></li>
+          </ul>
+        </div>
+
+        <!-- Block 6: Blog & Knowledge Guides -->
+        <div class="sitemap-card-block">
+          <div class="sitemap-card-head">
+            <i class="fa-solid fa-newspaper"></i>
+            <span>المقالات والشروحات التقنية</span>
+          </div>
+          <ul class="sitemap-links-list">
+            <li><a href="blog.html">مقارنة ChatGPT Plus مقابل Claude 3.5 <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="blog.html">دليل التوفير في باقة Adobe Creative Cloud <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="blog.html">خطوات تفعيل Office 365 مدى الحياة <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="blog.html">مميزات CapCut Pro الحصرية لصناع المحتوى <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="blog.html">دليل ميزات Canva Pro للمصممين <i class="fa-solid fa-chevron-left"></i></a></li>
+            <li><a href="blog.html">كيف تتصفح بأمان مع برامج الـ VPN <i class="fa-solid fa-chevron-left"></i></a></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- UNIFIED AUTH-AWARE FOOTER (PRIORITY 3) -->
+  <footer class="main-page-footer" id="mainFooter">
+    <div class="container footer-main-grid">
+
+      <!-- Column 1: Brand & Direct Support -->
+      <div class="footer-col-item brand-column">
+        <a href="./" class="brand-logo" aria-label="Activkeyz الرئيسية">
+          <img src="logos/activkeyzmainlogo.png" alt="Activkeyz" class="brand-logo-img footer-logo-img">
+          <div class="logo-text-group">
+            <span class="logo-title" style="font-size:1.15rem;">Activkeyz</span>
+            <span class="logo-subtitle">متجرك الذكي للمنتجات الرقمية</span>
+          </div>
+        </a>
+        <p class="footer-tagline">
+          منصتك المعتمدة للاشتراكات والخدمات البرمجية بأسعار تنافسية وضمان شامل ودعم فني متواصل.
+        </p>
+        <div class="footer-contact-actions">
+          <a href="https://wa.me/201225106057" target="_blank" class="footer-contact-pill" title="واتساب المبيعات">
+            <i class="fa-brands fa-whatsapp" style="color: #22c55e;"></i>
+            <span>واتساب المبيعات</span>
+          </a>
+          <a href="contact.html" class="footer-contact-pill" title="مركز المساعدة">
+            <i class="fa-solid fa-headset"></i>
+            <span>الدعم الفني</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Public Products & Categories -->
+      <div class="footer-col-item">
+        <h4 class="footer-block-header">الأقسام والمنتجات</h4>
+        <ul class="footer-anchor-list">
+          <li><a href="category.html?cat=all"><i class="fa-solid fa-border-all"></i> جميع المنتجات والاشتراكات</a></li>
+          <li><a href="category.html?cat=ai"><i class="fa-solid fa-wand-magic-sparkles"></i> أدوات الذكاء الاصطناعي</a></li>
+          <li><a href="category.html?cat=creative"><i class="fa-solid fa-palette"></i> البرامج الإبداعية والتصميم</a></li>
+          <li><a href="category.html?cat=office"><i class="fa-solid fa-briefcase"></i> برامج المكتب والإنتاجية</a></li>
+          <li><a href="category.html?cat=streaming"><i class="fa-solid fa-play"></i> الترفيه والمشاهدة</a></li>
+          <li><a href="category.html?cat=gaming"><i class="fa-solid fa-shield-halved"></i> الألعاب وبطاقات الحماية</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Auth-Aware Customer Shortcuts & Public Support -->
+      <div class="footer-col-item footer-auth-col">
+        <h4 class="footer-block-header" id="footerAccountHeading">الحساب والخدمات</h4>
+        
+        <!-- Logged-Out Visitor Shortcuts -->
+        <ul class="footer-anchor-list footer-visitor-links" id="footerVisitorLinks">
+          <li><a href="account.html"><i class="fa-solid fa-arrow-right-to-bracket"></i> تسجيل الدخول أو إنشاء حساب</a></li>
+          <li><a href="track-order.html"><i class="fa-solid fa-truck-fast"></i> تتبع الطلب بالرقم المرجعي</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-circle-question"></i> مركز المساعدة والاستفسارات</a></li>
+          <li><a href="policy.html"><i class="fa-solid fa-shield-halved"></i> شروط الضمان وسياسة الخصوصية</a></li>
+          <li><a href="about.html"><i class="fa-solid fa-circle-info"></i> عن متجر Activkeyz</a></li>
+        </ul>
+
+        <!-- Logged-In Customer Shortcuts -->
+        <ul class="footer-anchor-list footer-customer-links" id="footerCustomerLinks" style="display: none;">
+          <li><a href="account.html?tab=dashboard"><i class="fa-solid fa-gauge-high"></i> لوحة تحكم حسابي</a></li>
+          <li><a href="account.html?tab=orders"><i class="fa-solid fa-box-archive"></i> طلباتي ومشترياتي</a></li>
+          <li><a href="account.html?tab=wallet"><i class="fa-solid fa-coins"></i> محفظة كوينز Activkeyz</a></li>
+          <li><a href="account.html?tab=profile"><i class="fa-solid fa-id-card"></i> إعدادات وبيانات الحساب</a></li>
+          <li><a href="contact.html"><i class="fa-solid fa-headset"></i> تذاكر الدعم والمساعدة</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Authentic Horizontal Payment Logos Strip -->
+    <div class="footer-baseline-strip">
+      <div class="container baseline-strip-inner">
+        <div class="rights-copyright-text">جميع الحقوق محفوظة © 2026 Activkeyz</div>
+        <div class="payment-logos-strip" aria-label="طرق الدفع المعتمدة">
+          <span class="pay-strip-label">طرق الدفع المعتمدة:</span>
+          <img src="logos/vodafone.svg" alt="Vodafone Cash" class="pay-strip-img" loading="lazy" title="فودافون كاش">
+          <img src="logos/instapay.webp" alt="InstaPay" class="pay-strip-img" loading="lazy" title="شبكة إنستاباي مصر">
+          <img src="logos/tether-usdt.svg" alt="USDT TRC20" class="pay-strip-img" loading="lazy" title="Tether USDT TRC20">
+        </div>
+      </div>
+    </div>
+
+    <!-- META / FACEBOOK ADVERTISING COMPLIANCE & LEGAL DISCLAIMER -->
+    <div class="footer-meta-compliance-box">
+      <div class="container compliance-inner">
+        <div class="compliance-links-row">
+          <a href="privacy.html" class="compliance-link">سياسة الخصوصية</a>
+          <span class="compliance-dot">·</span>
+          <a href="terms.html" class="compliance-link">شروط الاستخدام والخدمة</a>
+          <span class="compliance-dot">·</span>
+          <a href="refund.html" class="compliance-link">الضمان والاسترجاع</a>
+          <span class="compliance-dot">·</span>
+          <a href="policy.html" class="compliance-link">مركز السياسات الشامل</a>
+          <span class="compliance-dot">·</span>
+          <a href="contact.html" class="compliance-link">اتصل بنا والدعم الفني</a>
+          <span class="compliance-dot">·</span>
+          <a href="dashboard.html" class="compliance-link footer-admin-lock-link" title="لوحة التحكم الإدارية" target="_blank"><i class="fa-solid fa-lock"></i> لوحة التحكم</a>
+        </div>
+
+        <p class="meta-disclaimer-text">
+          <strong>إخلاء مسؤولية الإعلانات وميتا (Meta / Facebook Disclaimer):</strong><br>
+          هذا الموقع ليس جزءاً من موقع فيسبوك (Facebook™) أو شركة ميتا بلاتفورمز (Meta Platforms, Inc.). بالإضافة إلى ذلك، فإن هذا الموقع غير معتمد أو مدعوم من قِبل فيسبوك بأي شكل من الأشكال. كلمة FACEBOOK هي علامة تجارية مسجلة ومملوكة قانونياً لشركة META PLATFORMS, INC.
+        </p>
+
+        <p class="meta-disclaimer-en">
+          <strong>Meta &amp; FTC Compliance Notice:</strong> This website is an independent e-commerce storefront and is NOT affiliated with, sponsored by, or endorsed by Facebook™ or Meta Platforms, Inc. FACEBOOK™ is a registered trademark of META PLATFORMS, INC. All trademarks, service marks, and company names are property of their respective owners. Activkeyz provides genuine digital subscription licenses under strict authorized reseller practices.
+        </p>
+
+        <p class="trademark-notice-text">
+          جميع أسماء المنتجات والبرامج والشعارات المعروضة هي علامات تجارية مملوكة حصرياً لأصحابها الرسميين (مثل OpenAI, Adobe, Microsoft, Google, CapCut وغيرها). Activkeyz منصة مستقلة توفر حلول واشتراكات رقمية مرخصة مع ضمان تشغيل شامل ودعم فني مخصص.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="nexa-ui.js"></script>
+
+  <script>
+    // Update Cart Badge Count
+    try {
+      const cart = JSON.parse(localStorage.getItem('nexa_cart') || '[]');
+      const countEl = document.getElementById('cartBadgeCount');
+      if (countEl) countEl.textContent = cart.reduce((acc, item) => acc + (item.qty || 1), 0);
+    } catch(e) {}
+
+    // Mobile Drawer Toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const drawer = document.getElementById('mobileDrawer');
+    const drawerClose = document.getElementById('drawerCloseBtn');
+    if (mobileBtn && drawer) {
+      mobileBtn.addEventListener('click', () => {
+        drawer.classList.add('active');
+        drawer.classList.add('open');
+      });
+    }
+    if (drawerClose && drawer) {
+      drawerClose.addEventListener('click', () => {
+        drawer.classList.remove('active');
+        drawer.classList.remove('open');
+      });
+    }
+  </script>
+
+</body>
+</html>

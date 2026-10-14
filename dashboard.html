@@ -1,0 +1,2031 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ActivKeyz Control Hub | نظام الإدارة السحابي المتكامل للتجارة الرقمية</title>
+  <meta name="description" content="لوحة التحكم الإدارية الاحترافية لمتجر Activkeyz — إدارة المنتجات، المخزون، الباقات، طرق الدفع، الطلبات، الكوبونات والإعدادات السحابية.">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta http-equiv="X-Robots-Tag" content="noindex, nofollow">
+  <meta name="google" content="notranslate">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Readex+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="logos/activkeyzsecondlogo.png">
+  
+  <link rel="stylesheet" href="dashboard.css">
+  <style>
+    /* Security: Conceal administrative dashboard DOM until verified */
+    body:not(.admin-verified) .dash-wrapper,
+    body:not(.admin-verified) .dash-nav-strip,
+    body:not(.admin-verified) .dash-header {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ADMIN SECURITY GATE OVERLAY -->
+  <div class="admin-auth-overlay" id="adminAuthOverlay">
+    <div class="admin-auth-card">
+      <div style="text-align:center;margin-bottom:12px;">
+        <img src="logos/activkeyzmainlogo.png" alt="Activkeyz" style="width:54px;height:54px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(56,189,248,0.5));">
+      </div>
+      <h2 class="admin-auth-title">بوابة أمان لوحة التحكم</h2>
+      <p class="admin-auth-desc">
+        لوحة التحكم الإدارية لمتجر Activkeyz. محمية بمصادقة Supabase السحابية المعتمدة وسياسات الأمان RLS على مستوى قاعدة البيانات.
+      </p>
+
+      <!-- Cloud Admin Auth Form -->
+      <form id="adminCloudAuthForm" onsubmit="event.preventDefault(); handleSupabaseAdminLogin();" class="admin-auth-form">
+        <div class="auth-input-group">
+          <i class="fa-solid fa-envelope auth-input-icon"></i>
+          <input type="email" id="adminEmailInput" placeholder="البريد الإلكتروني للمدير..." autocomplete="username" required>
+        </div>
+        <div class="auth-input-group">
+          <i class="fa-solid fa-lock auth-input-icon"></i>
+          <input type="password" id="adminPasswordInput" placeholder="كلمة مرور المدير..." autocomplete="current-password" required>
+        </div>
+        <div class="auth-error-msg" id="cloudAuthErrorMsg" style="display:none;"></div>
+
+        <div class="auth-btn-row">
+          <button type="submit" id="cloudAuthSubmitBtn" class="dash-btn dash-btn-primary auth-submit-btn">
+            <i class="fa-solid fa-shield-check"></i>
+            <span>دخول المدير المعتمد</span>
+          </button>
+          <a href="./" class="dash-btn dash-btn-ghost">
+            <i class="fa-solid fa-arrow-right"></i>
+            <span>العودة للمتجر</span>
+          </a>
+        </div>
+
+        <div style="margin-top:14px; font-size:0.8rem; color:#64748b; text-align:center; line-height:1.6;">
+          <i class="fa-solid fa-lock"></i> الدخول مقتصر على حساب المالك أو المدير المخول بصلاحية <code>admin</code> في Supabase
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Ambient Space Background -->
+  <div class="dash-bg-layer" aria-hidden="true">
+    <div class="dash-stars"></div>
+    <div class="dash-glow-top"></div>
+    <div class="dash-glow-bottom"></div>
+  </div>
+
+  <!-- TOP HEADER -->
+  <header class="dash-header">
+    <div class="dash-header-inner">
+      
+      <!-- Brand & Hub Status -->
+      <div class="dash-brand-wrap">
+        <img src="logos/activkeyzmainlogo.png" alt="Activkeyz" class="dash-logo-img" style="width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(56,189,248,0.4));">
+        <div>
+          <div class="dash-brand-title">
+            <span>ActivKeyz Control Hub</span>
+            <span class="dash-version-pill">v3.0 ENTERPRISE</span>
+          </div>
+          <div class="dash-sync-badge">
+            <span class="sync-dot"></span>
+            <span id="headerSyncStatusText">متصل بسحابة Supabase (mrinxsiostnzzjowutav)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="dash-header-actions">
+        <a href="./" class="dash-btn dash-btn-ghost" title="زيارة الواجهة الأمامية للمتجر">
+          <i class="fa-solid fa-house"></i>
+          <span>المتجر</span>
+        </a>
+
+        <button class="dash-btn dash-btn-ghost" onclick="syncAllFromSupabase()" title="مزامنة فورية وتحديث البيانات">
+          <i class="fa-solid fa-arrows-rotate"></i>
+          <span>تحديث</span>
+        </button>
+
+        <button class="dash-btn dash-btn-primary" onclick="openAddProductModal()">
+          <i class="fa-solid fa-plus"></i>
+          <span>إضافة اشتراك</span>
+        </button>
+
+        <button class="dash-btn dash-btn-ghost" onclick="lockAdminSession()" title="قفل لوحة التحكم">
+          <i class="fa-solid fa-lock"></i>
+          <span>قفل اللوحة</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 12-MODULE NAVIGATION STRIP -->
+  <nav class="dash-nav-strip">
+    <div class="dash-nav-inner">
+      <button type="button" class="nav-tab active" data-tab="overview" onclick="switchDashboardTab('overview')">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>نظرة عامة</span>
+      </button>
+
+      <button type="button" class="nav-tab" data-tab="products" onclick="switchDashboardTab('products')">
+        <i class="fa-solid fa-cubes"></i>
+        <span>المنتجات</span>
+        <span class="nav-pill" id="navCountProducts">33</span>
+      </button>
+
+      <button type="button" class="nav-tab" data-tab="categories" onclick="switchDashboardTab('categories')">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>الأقسام</span>
+        <span class="nav-pill" id="navCountCategories">5</span>
+      </button>
+
+      <button type="button" class="nav-tab" data-tab="inventory" onclick="switchDashboardTab('inventory')">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        <span>المخزون</span>
+        <span class="nav-pill" id="navCountInventory">33</span>
+      </button>
+
+      <button type="button" class="nav-tab" data-tab="bundles" onclick="switchDashboardTab('bundles')">
+        <i class="fa-solid fa-tags"></i>
+        <span>الباقات والكومبو</span>
+        <span class="nav-pill" id="navCountBundles">2</span>
+      </button>
+
+      <button type="button" class="nav-tab" data-tab="payments" onclick="switchDashboardTab('payments')">
+        <i class="fa-solid fa-credit-card"></i>
+        <span>طرق الدفع</span>
+        <span class="nav-pill" id="navCountPayments">3</span>
+      </button>
+
+      <button type="button" class="nav-tab" data-tab="orders" onclick="switchDashboardTab('orders')">
+        <i class="fa-solid fa-receipt"></i>
+        <span>الطلبات الواردة</span>
+        <span class="nav-pill alert" id="navCountOrders">0</span>
+      </button>
+
+      <button type="button" class="nav-tab" data-tab="customers" onclick="switchDashboardTab('customers')">
+        <i class="fa-solid fa-users"></i>
+        <span>العملاء</span>
+      </button>
+
+      <button type="button" class="nav-tab" data-tab="loyalty" onclick="switchDashboardTab('loyalty')">
+        <i class="fa-solid fa-coins" style="color:#fbbf24;"></i>
+        <span>Activkeyz Coins والمكافآت</span>
+      </button>
+
+      <button type="button" class="nav-tab" data-tab="coupons" onclick="switchDashboardTab('coupons')">
+        <i class="fa-solid fa-ticket"></i>
+        <span>الكوبونات</span>
+      </button>
+
+      <button type="button" class="nav-tab" data-tab="reviews" onclick="switchDashboardTab('reviews')">
+        <i class="fa-solid fa-star"></i>
+        <span>التقييمات</span>
+      </button>
+
+      <button type="button" class="nav-tab" data-tab="tickets" onclick="switchDashboardTab('tickets')">
+        <i class="fa-solid fa-headset"></i>
+        <span>الدعم والمساعدة</span>
+      </button>
+
+      <button type="button" class="nav-tab" data-tab="settings" onclick="switchDashboardTab('settings')">
+        <i class="fa-solid fa-gear"></i>
+        <span>إعدادات المتجر</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN DASHBOARD CONTENT -->
+  <main class="dash-main-container">
+    
+    <!-- ===================================================================
+         SECTION 1: OVERVIEW & STATISTICS
+         =================================================================== -->
+    <div id="dashOverviewSection">
+      
+      <!-- KPI STATS CARDS -->
+      <section class="dash-kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon-box cyan-glow">
+            <i class="fa-solid fa-coins"></i>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">إجمالي المبيعات المؤكدة</span>
+            <span class="kpi-value" id="kpiTotalRevenue">0 ج.م</span>
+            <span class="kpi-sub">من الطلبات المعتمدة</span>
+          </div>
+        </div>
+
+        <div class="kpi-card" style="cursor:pointer;" onclick="switchDashboardTab('orders')">
+          <div class="kpi-icon-box purple-glow">
+            <i class="fa-solid fa-receipt"></i>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">الطلبات الواردة</span>
+            <span class="kpi-value" id="kpiOrdersTotal">0</span>
+            <span class="kpi-sub" style="color:#f87171;" id="kpiPendingOrders">0 قيد المراجعة</span>
+          </div>
+        </div>
+
+        <div class="kpi-card" style="cursor:pointer;" onclick="switchDashboardTab('products')">
+          <div class="kpi-icon-box green-glow">
+            <i class="fa-solid fa-cubes"></i>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">الاشتراكات النشطة</span>
+            <span class="kpi-value" id="kpiTotalProducts">33</span>
+            <span class="kpi-sub">معروضة في المتجر</span>
+          </div>
+        </div>
+
+        <div class="kpi-card" style="cursor:pointer;" onclick="switchDashboardTab('bundles')">
+          <div class="kpi-icon-box gold-glow">
+            <i class="fa-solid fa-tags"></i>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">باقات الكومبو النشطة</span>
+            <span class="kpi-value" id="kpiTotalBundles">2</span>
+            <span class="kpi-sub">عروض التوفير المجمعة</span>
+          </div>
+        </div>
+
+        <div class="kpi-card" style="cursor:pointer;" onclick="switchDashboardTab('inventory')">
+          <div class="kpi-icon-box" style="background:rgba(251, 191, 36, 0.15); color:#fbbf24; border:1px solid rgba(251, 191, 36, 0.4);">
+            <i class="fa-solid fa-boxes-stacked"></i>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">تنبيهات انخفاض المخزون</span>
+            <span class="kpi-value" id="kpiLowStockCount">0</span>
+            <span class="kpi-sub">منتجات تقترب من النفاد</span>
+          </div>
+        </div>
+
+        <div class="kpi-card" style="cursor:pointer;" onclick="switchDashboardTab('payments')">
+          <div class="kpi-icon-box blue-glow">
+            <i class="fa-solid fa-credit-card"></i>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">طرق الدفع المفعلة</span>
+            <span class="kpi-value" id="kpiActivePaymentsCount">3</span>
+            <span class="kpi-sub">كاش، إنستاباي، USDT</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Actions Grid -->
+      <section style="display:flex; gap:12px; margin-bottom:24px; flex-wrap:wrap;">
+        <button class="dash-btn dash-btn-primary" onclick="openAddProductModal()">
+          <i class="fa-solid fa-plus"></i> إضافة اشتراك جديد
+        </button>
+        <button class="dash-btn dash-btn-ghost" onclick="openAddBundleModal()">
+          <i class="fa-solid fa-tags"></i> إنشاء باقة كومبو
+        </button>
+        <button class="dash-btn dash-btn-ghost" onclick="openAddPaymentModal()">
+          <i class="fa-solid fa-credit-card"></i> إضافة وسيلة دفع
+        </button>
+        <button class="dash-btn dash-btn-ghost" onclick="openAddCouponModal()">
+          <i class="fa-solid fa-ticket"></i> إضافة كود خصم
+        </button>
+      </section>
+
+      <!-- Recent Orders Preview Table -->
+      <section class="dash-table-card">
+        <div class="dash-table-header">
+          <div class="table-title-group">
+            <h3 class="table-main-title">أحدث الطلبات الواردة</h3>
+            <span class="table-counter-pill" id="overviewRecentOrdersCount">أحدث 5 طلبات</span>
+          </div>
+          <button class="dash-btn dash-btn-ghost" onclick="switchDashboardTab('orders')">
+            <span>عرض كافة الطلبات</span>
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>رقم الطلب</th>
+                <th>تاريخ الطلب</th>
+                <th>العميل</th>
+                <th>المنتجات</th>
+                <th>المبلغ والدفع</th>
+                <th style="text-align:center;">حالة الدفع</th>
+                <th style="text-align:center;">حالة التنفيذ</th>
+                <th style="text-align:center;">إجراء</th>
+              </tr>
+            </thead>
+            <tbody id="overviewRecentOrdersBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===================================================================
+         SECTION 2: PRODUCTS MANAGEMENT
+         ================================================================== -->
+    <div id="dashProductsSection" style="display:none;">
+      
+      <!-- CONTROLS TOOLBAR -->
+      <section class="dash-toolbar-card">
+        <div class="toolbar-search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="dashSearchInput" placeholder="ابحث بالاسم، أو وصف الاشتراك، أو المورد...">
+        </div>
+
+        <div class="toolbar-filters-group">
+          <div class="filter-select-wrap">
+            <i class="fa-solid fa-layer-group"></i>
+            <select id="dashCategoryFilter">
+              <option value="all">جميع الأقسام</option>
+              <option value="ai">أدوات الذكاء الاصطناعي</option>
+              <option value="creative">البرامج الإبداعية</option>
+              <option value="office">برامج المكتب</option>
+              <option value="streaming">الترفيه والاشتراكات</option>
+              <option value="gaming">الألعاب والبطاقات</option>
+            </select>
+          </div>
+
+          <div class="filter-select-wrap">
+            <i class="fa-solid fa-toggle-on"></i>
+            <select id="dashProductStatusFilter" onchange="renderProductsTable()">
+              <option value="all">كل الحالات (النشطة والمعطلة)</option>
+              <option value="active" selected>النشطة بالمتجر فقط</option>
+              <option value="inactive">المعطلة مؤقتاً</option>
+              <option value="archived">المؤرشفة (Archived)</option>
+            </select>
+          </div>
+
+          <div class="filter-select-wrap">
+            <i class="fa-solid fa-filter"></i>
+            <select id="dashFeatureFilter">
+              <option value="all">الكل</option>
+              <option value="featured">المميزة فقط ⭐</option>
+              <option value="regular">الاعتيادية</option>
+            </select>
+          </div>
+
+          <button class="dash-btn dash-btn-primary" onclick="openAddProductModal()">
+            <i class="fa-solid fa-plus"></i>
+            <span>إضافة اشتراك جديد</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- BULK ACTIONS TOOLBAR -->
+      <section class="dash-toolbar-card" id="productBulkToolbar" style="display:none; background:rgba(56,189,248,0.1); border-color:var(--cyan-bright); margin-bottom:14px;">
+        <div style="display:flex; align-items:center; gap:12px; justify-content:space-between; width:100%;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <i class="fa-solid fa-check-double" style="color:var(--cyan-bright);"></i>
+            <span style="font-weight:700; color:#fff;" id="selectedProductsCount">تم تحديد 0 منتج</span>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="dash-btn dash-btn-ghost" onclick="handleBulkActivate(true)"><i class="fa-solid fa-eye"></i> تفعيل المحدد</button>
+            <button class="dash-btn dash-btn-ghost" onclick="handleBulkActivate(false)"><i class="fa-solid fa-eye-slash"></i> إخفاء المحدد</button>
+            <button class="dash-btn dash-btn-danger" onclick="handleBulkDelete()"><i class="fa-solid fa-trash-can"></i> حذف المحدد</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUCTS DATA TABLE -->
+      <section class="dash-table-card">
+        <div class="dash-table-header">
+          <div class="table-title-group">
+            <h3 class="table-main-title">كتالوج الاشتراكات الرقمية</h3>
+            <span class="table-counter-pill" id="tableShowingCount">يعرض 33 من 33</span>
+          </div>
+          <div class="table-quick-hint">
+            <i class="fa-solid fa-cloud-check"></i>
+            <span>أي تعديل يتم حفظه هنا ينعكس فوراً ومباشرة على واجهة المتجر دون تعديل في الكود!</span>
+          </div>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="dash-table" id="productsTable">
+            <thead>
+              <tr>
+                <th style="width: 40px; text-align:center;"><input type="checkbox" id="selectAllProductsCheckbox" onchange="toggleSelectAllProducts(this.checked)"></th>
+                <th style="width: 50px;">الصورة</th>
+                <th>اسم الاشتراك</th>
+                <th>القسم</th>
+                <th>المدة</th>
+                <th>سعر الجملة</th>
+                <th>سعر البيع (مصر)</th>
+                <th>سعر البيع (USD)</th>
+                <th>حالة المخزون</th>
+                <th style="width: 70px; text-align:center;">مميز؟</th>
+                <th style="width: 70px; text-align:center;">نشط؟</th>
+                <th style="width: 150px; text-align:center;">الإجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===================================================================
+         SECTION 3: CATEGORIES MANAGEMENT
+         =================================================================== -->
+    <div id="dashCategoriesSection" style="display:none;">
+      
+      <section class="dash-toolbar-card" style="margin-bottom:20px; justify-content:space-between;">
+        <div>
+          <h3 style="color:#fff; font-size:1.2rem; font-weight:800; margin-bottom:4px;">إدارة أقسام وتصنيفات المتجر</h3>
+          <p style="color:#94a3b8; font-size:0.85rem;">التحكم بالأقسام، الأيقونات، ترتيب العرض وتسميات الكتالوج.</p>
+        </div>
+        <button class="dash-btn dash-btn-primary" onclick="openAddCategoryModal()">
+          <i class="fa-solid fa-plus"></i> إضافة قسم جديد
+        </button>
+      </section>
+
+      <section class="cards-grid-3" id="categoriesGrid">
+        <!-- Dynamically populated -->
+      </section>
+
+    </div>
+
+    <!-- ===================================================================
+         SECTION 4: INVENTORY & STOCK MANAGEMENT
+         =================================================================== -->
+    <div id="dashInventorySection" style="display:none;">
+      
+      <section class="dash-toolbar-card" style="margin-bottom:20px;">
+        <div class="toolbar-search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="dashInventorySearchInput" placeholder="ابحث عن منتج لإدارة كمياته وتنبيهات مخزونه...">
+        </div>
+
+        <div class="toolbar-filters-group">
+          <div class="filter-select-wrap">
+            <i class="fa-solid fa-filter"></i>
+            <select id="dashInventoryFilter" onchange="renderInventoryTable()">
+              <option value="all">جميع حالات المخزون</option>
+              <option value="in_stock">متوفر بالكامل</option>
+              <option value="low_stock">مخزون منخفض ⚠️</option>
+              <option value="out_of_stock">نفدت الكمية ⛔</option>
+              <option value="paused">مبيعات موقوفة مؤقتاً</option>
+            </select>
+          </div>
+
+          <button class="dash-btn dash-btn-ghost" onclick="openInventoryMovementsModal()">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>سجل حركات المخزون</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="dash-table-card">
+        <div class="dash-table-header">
+          <div class="table-title-group">
+            <h3 class="table-main-title">إدارة المخزون ومنع البيع الزائد (Overselling Prevention)</h3>
+            <span class="table-counter-pill" id="inventoryCountPill">33 منتج</span>
+          </div>
+          <div class="table-quick-hint">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>يتم حجز وخصم الكمية بأمان عبر قواعد بيانات Supabase Transactional، مع استرجاع تلقائي عند الإلغاء.</span>
+          </div>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="dash-table" id="inventoryTable">
+            <thead>
+              <tr>
+                <th style="width: 50px;">الصورة</th>
+                <th>المنتج</th>
+                <th>نوع المخزون</th>
+                <th>المتاح للبيع</th>
+                <th>المحجوز</th>
+                <th>المباع</th>
+                <th>حد التنبيه</th>
+                <th>الحالة الحالية</th>
+                <th style="width: 140px; text-align:center;">إجراءات التعديل</th>
+              </tr>
+            </thead>
+            <tbody id="inventoryTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===================================================================
+         SECTION 5: PRODUCT BUNDLES & COMBOS
+         =================================================================== -->
+    <div id="dashBundlesSection" style="display:none;">
+      
+      <section class="dash-toolbar-card" style="margin-bottom:20px; justify-content:space-between;">
+        <div>
+          <h3 style="color:#fff; font-size:1.2rem; font-weight:800; margin-bottom:4px;">عروض الباقات والكومبو التوفيرية (Bundles)</h3>
+          <p style="color:#94a3b8; font-size:0.85rem;">إنشاء باقات مجمعة تضم منتجين أو أكثر مع احتساب التوفير وخصم المخزون الذاتي.</p>
+        </div>
+        <button class="dash-btn dash-btn-primary" onclick="openAddBundleModal()">
+          <i class="fa-solid fa-plus"></i> إنشاء باقة كومبو جديدة
+        </button>
+      </section>
+
+      <section class="cards-grid-3" id="bundlesGrid">
+        <!-- Dynamically populated -->
+      </section>
+
+    </div>
+
+    <!-- ===================================================================
+         SECTION 6: DYNAMIC PAYMENT METHODS
+         =================================================================== -->
+    <div id="dashPaymentsSection" style="display:none;">
+      
+      <section class="dash-toolbar-card" style="margin-bottom:20px; justify-content:space-between;">
+        <div>
+          <h3 style="color:#fff; font-size:1.2rem; font-weight:800; margin-bottom:4px;">طرق الدفع والتحويل الديناميكية بالكامل</h3>
+          <p style="color:#94a3b8; font-size:0.85rem;">التحكم بجميع وسائل الدفع، أرقام المحافظ، شبكات العملات الرقمية دون تعديل أي سطر برمجي.</p>
+        </div>
+        <button class="dash-btn dash-btn-primary" onclick="openAddPaymentModal()">
+          <i class="fa-solid fa-plus"></i> إضافة وسيلة دفع جديدة
+        </button>
+      </section>
+
+      <section class="cards-grid-3" id="paymentsGrid">
+        <!-- Dynamically populated -->
+      </section>
+
+    </div>
+
+    <!-- ===================================================================
+         SECTION 7: ORDERS MANAGEMENT
+         =================================================================== -->
+    <div id="dashOrdersSection" style="display:none;">
+      
+      <!-- Order Queue Filter Tabs Bar -->
+      <div class="order-queue-tabs-bar" id="orderQueueTabs">
+        <button type="button" class="order-tab-btn active" data-queue="all" onclick="setOrderQueueFilter('all', this)">
+          <i class="fa-solid fa-layer-group"></i> الكل (<span id="qCountAll">0</span>)
+        </button>
+        <button type="button" class="order-tab-btn" data-queue="unverified" onclick="setOrderQueueFilter('unverified', this)">
+          <i class="fa-solid fa-hourglass-half" style="color:#f59e0b;"></i> بانتظار التحقق (<span id="qCountUnverified">0</span>)
+        </button>
+        <button type="button" class="order-tab-btn" data-queue="verified" onclick="setOrderQueueFilter('verified', this)">
+          <i class="fa-solid fa-check" style="color:#34d399;"></i> تم تأكيد الدفع (<span id="qCountVerified">0</span>)
+        </button>
+        <button type="button" class="order-tab-btn" data-queue="in_progress" onclick="setOrderQueueFilter('in_progress', this)">
+          <i class="fa-solid fa-gears" style="color:var(--cyan-bright);"></i> قيد التجهيز (<span id="qCountInProgress">0</span>)
+        </button>
+        <button type="button" class="order-tab-btn" data-queue="fulfilled" onclick="setOrderQueueFilter('fulfilled', this)">
+          <i class="fa-solid fa-check-double" style="color:#10b981;"></i> تم التسليم (<span id="qCountFulfilled">0</span>)
+        </button>
+        <button type="button" class="order-tab-btn" data-queue="cancelled_rejected" onclick="setOrderQueueFilter('cancelled_rejected', this)">
+          <i class="fa-solid fa-ban" style="color:#ef4444;"></i> مرفوض / ملغي (<span id="qCountCancelled">0</span>)
+        </button>
+        <button type="button" class="order-tab-btn" data-queue="unread_messages" onclick="setOrderQueueFilter('unread_messages', this)" style="border-color:rgba(239,68,68,0.4);">
+          <i class="fa-solid fa-envelope-open-text" style="color:#f87171;"></i> رسائل بانتظار الرد (<span id="qCountUnreadMsgs" style="color:#f87171; font-weight:800;">0</span>)
+        </button>
+      </div>
+
+      <section class="dash-toolbar-card" style="margin-bottom:20px;">
+        <div class="toolbar-search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="dashOrderSearchInput" placeholder="ابحث برقم الطلب، هاتف العميل، الإيميل أو الاسم...">
+        </div>
+
+        <div class="toolbar-filters-group">
+          <!-- Payment Status Filter -->
+          <div class="filter-select-wrap">
+            <i class="fa-solid fa-credit-card"></i>
+            <select id="dashOrderPayFilter" onchange="renderOrdersTable()">
+              <option value="all">جميع حالات الدفع</option>
+              <option value="unverified">دفع قيد التحقق ⏳</option>
+              <option value="verified">دفع مؤكد معتمد ✓</option>
+              <option value="rejected">دفع مرفوض ✗</option>
+              <option value="refunded">مسترجع ↩️</option>
+            </select>
+          </div>
+
+          <!-- Fulfillment Status Filter -->
+          <div class="filter-select-wrap">
+            <i class="fa-solid fa-truck-ramp-box"></i>
+            <select id="dashOrderFulFilter" onchange="renderOrdersTable()">
+              <option value="all">جميع حالات التنفيذ</option>
+              <option value="unfulfilled">غير منفذ بعد ⏳</option>
+              <option value="in_progress">جاري التجهيز والإرسال 🔄</option>
+              <option value="fulfilled">تم إرسال التفعيل بنجاح ✓</option>
+              <option value="cancelled">ملغي ✗</option>
+            </select>
+          </div>
+
+          <!-- Phone Country Filter -->
+          <div class="filter-select-wrap">
+            <i class="fa-solid fa-earth-americas"></i>
+            <select id="dashOrderCountryFilter" onchange="renderOrdersTable()">
+              <option value="all">جميع دول الهواتف</option>
+              <option value="EG">🇪🇬 مصر (+20)</option>
+              <option value="SA">🇸🇦 السعودية (+966)</option>
+              <option value="AE">🇦🇪 الإمارات (+971)</option>
+              <option value="KW">🇰🇼 الكويت (+965)</option>
+              <option value="OTHER">🌍 دول أخرى</option>
+            </select>
+          </div>
+
+          <button class="dash-btn dash-btn-ghost" onclick="exportOrdersJSON()" title="تصدير كملف JSON">
+            <i class="fa-solid fa-file-export"></i> تصدير JSON
+          </button>
+        </div>
+      </section>
+
+      <section class="dash-table-card">
+        <div class="dash-table-header">
+          <div class="table-title-group">
+            <h3 class="table-main-title">سجل الطلبات الواردة وإيصالات التحويل</h3>
+            <span class="table-counter-pill" id="ordersTableCountPill">0 طلب</span>
+          </div>
+          <div class="table-quick-hint">
+            <i class="fa-solid fa-receipt"></i>
+            <span>مركز استلام ومعالجة الطلبات وتسليم الاشتراكات الرقمية (Digital Fulfillment Center).</span>
+          </div>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="dash-table" id="ordersTable">
+            <thead>
+              <tr>
+                <th style="width: 110px;">رقم الطلب</th>
+                <th>تاريخ الطلب</th>
+                <th>بيانات العميل</th>
+                <th style="width: 100px; text-align:center;">طريقة الاستلام</th>
+                <th>المنتجات والكمية</th>
+                <th>الإجمالي والدفع</th>
+                <th style="width: 80px; text-align:center;">الإيصال</th>
+                <th style="width: 120px; text-align:center;">حالة الدفع</th>
+                <th style="width: 120px; text-align:center;">حالة التنفيذ</th>
+                <th style="width: 150px; text-align:center;">إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===================================================================
+         SECTION 8: CUSTOMERS MANAGEMENT
+         =================================================================== -->
+    <div id="dashCustomersSection" style="display:none;">
+      
+      <section class="dash-toolbar-card" style="margin-bottom:20px;">
+        <div class="toolbar-search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="dashCustomersSearchInput" placeholder="ابحث باسم العميل، البريد الإلكتروني، أو الهاتف...">
+        </div>
+      </section>
+
+      <section class="dash-table-card">
+        <div class="dash-table-header">
+          <div class="table-title-group">
+            <h3 class="table-main-title">قاعدة بيانات العملاء والمستخدمين</h3>
+            <span class="table-counter-pill" id="customersCountPill">0 مستخدم</span>
+          </div>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="dash-table" id="customersTable">
+            <thead>
+              <tr>
+                <th>معرف وهوية العميل</th>
+                <th>بيانات الاتصال والتحقق</th>
+                <th>إجمالي الطلبات والإنفاق</th>
+                <th>محفظة Activkeyz Coins</th>
+                <th>الصلاحية</th>
+                <th style="width: 160px; text-align:center;">الإجراءات السريعة</th>
+              </tr>
+            </thead>
+            <tbody id="customersTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===================================================================
+         SECTION: Activkeyz Coins & LOYALTY REWARDS MANAGEMENT
+         =================================================================== -->
+    <div id="dashLoyaltySection" style="display:none;">
+
+      <!-- Loyalty Top Toolbar -->
+      <section class="dash-toolbar-card" style="margin-bottom:20px; justify-content:space-between; flex-wrap:wrap; gap:14px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:48px; height:48px; border-radius:14px; background:rgba(251,191,36,0.15); border:1px solid rgba(251,191,36,0.4); display:flex; align-items:center; justify-content:center; color:#fbbf24; font-size:1.4rem;">
+            <i class="fa-solid fa-coins"></i>
+          </div>
+          <div>
+            <h3 style="color:#fff; font-size:1.25rem; font-weight:800; margin:0 0 4px 0;">نظام المكافآت ونقاط الولاء Activkeyz Coins</h3>
+            <p style="color:#94a3b8; font-size:0.85rem; margin:0;">إدارة سياسات كسب واستبدال الكوينز، التسويات اليدوية الموثقة، ومراقبة سجل العمليات (Ledger).</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <span class="meta-pill" style="background:rgba(16,185,129,0.15); color:#34d399; font-weight:800; padding:6px 14px;">
+            <i class="fa-solid fa-circle-check"></i> النظام مؤمن وموثق سحابياً
+          </span>
+        </div>
+      </section>
+
+      <!-- Grid 2 Columns: Policy Rules & Manual Adjustment -->
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap:20px; margin-bottom:20px;">
+        
+        <!-- CARD 1: LOYALTY POLICY RULES -->
+        <section class="dash-table-card" style="padding:22px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08);">
+            <i class="fa-solid fa-sliders" style="color:var(--cyan-bright); font-size:1.2rem;"></i>
+            <h4 style="color:#fff; font-size:1.05rem; font-weight:800; margin:0;">قواعد وسياسات الولاء (Loyalty Rules)</h4>
+          </div>
+
+          <form id="loyaltyRulesForm" onsubmit="event.preventDefault(); handleSaveLoyaltyRules();" style="display:flex; flex-direction:column; gap:14px;">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>معدل كسب الكوينز من المشتريات (Ratio)</label>
+                <input type="number" id="ruleEarnRate" step="0.01" min="0" max="1" placeholder="0.10" style="direction:ltr;">
+                <span style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">0.10 = 1 كوين لكل 10 ج.م مدفوعة كاش (10%)</span>
+              </div>
+              <div class="form-group">
+                <label>قيمة استبدال الكوينز بالجنيه (EGP / Coin)</label>
+                <input type="number" id="ruleRedeemRate" step="0.05" min="0.01" placeholder="0.50" style="direction:ltr;">
+                <span style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">0.50 = كل 10 كوينز تخصم 5.00 ج.م</span>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label>الحد الأدنى لاستبدال الكوينز</label>
+                <input type="number" id="ruleMinRedeem" min="1" step="1" placeholder="10">
+                <span style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">أقل عدد كوينز يسمح باستبداله في الطلب</span>
+              </div>
+              <div class="form-group">
+                <label>أقصى نسبة خصم من إجمالي الطلب (%)</label>
+                <input type="number" id="ruleMaxDiscountPct" min="1" max="100" step="1" placeholder="50">
+                <span style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">مثال: 50% كحد أقصى للخصم المالي</span>
+              </div>
+            </div>
+
+            <div class="form-group" style="padding-top:4px;">
+              <label class="checkbox-container">
+                <input type="checkbox" id="ruleAllowFullPayment" checked>
+                <span class="checkmark"></span>
+                <span style="color:#fff; font-weight:700;">السماح بتغطية الطلب بالكامل 100% بالكوينز (إذا كان الرصيد كافياً)</span>
+              </label>
+            </div>
+
+            <button type="submit" class="dash-btn dash-btn-primary" id="saveLoyaltyRulesBtn" style="margin-top:6px;">
+              <i class="fa-solid fa-floppy-disk"></i> حفظ وتحديث سياسات المكافآت
+            </button>
+          </form>
+        </section>
+
+        <!-- CARD 2: AUDIT-COMPLIANT MANUAL ADJUSTMENT -->
+        <section class="dash-table-card" style="padding:22px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08);">
+            <i class="fa-solid fa-user-gear" style="color:#fbbf24; font-size:1.2rem;"></i>
+            <h4 style="color:#fff; font-size:1.05rem; font-weight:800; margin:0;">التسوية والمنح اليدوي الموثق (Manual Adjustment)</h4>
+          </div>
+
+          <form id="loyaltyAdjustForm" onsubmit="event.preventDefault(); handleAdminLoyaltyAdjust();" style="display:flex; flex-direction:column; gap:14px;">
+            <div class="form-group">
+              <label>اختيار العميل المستهدف *</label>
+              <select id="loyaltyAdjustCustomerSelect" required style="width:100%;">
+                <option value="">اختر العميل بالاسم أو رقم الهاتف...</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>عدد الكوينز المراد تعديله (+ للإضافة أو - للخصم) *</label>
+              <input type="number" id="loyaltyAdjustAmount" required placeholder="مثال: 50 أو -20" style="direction:ltr;">
+              <span style="font-size:0.72rem; color:#94a3b8; margin-top:2px;">اكتب رقماً موجباً لمنح مكافأة، أو سالباً للخصم في حال النزاع.</span>
+            </div>
+
+            <div class="form-group">
+              <label>سبب التعديل والبيان الرقابي (Mandatory Reason) *</label>
+              <input type="text" id="loyaltyAdjustReason" required placeholder="مثال: تعويض تأخير تفعيل أو مكافأة ترويجية VIP...">
+              <span style="font-size:0.72rem; color:#f59e0b; margin-top:2px;">⚠️ حقل إلزامي لمنع إساءة الاستخدام ويتم تدوينه في سجل التدقيق.</span>
+            </div>
+
+            <button type="submit" class="dash-btn" id="applyLoyaltyAdjustBtn" style="background:linear-gradient(135deg, #fbbf24, #d97706); color:#030712; font-weight:900; margin-top:6px;">
+              <i class="fa-solid fa-check"></i> تطبيق التعديل وتوثيقه في السجل
+            </button>
+          </form>
+        </section>
+
+      </div>
+
+      <!-- CARD 3: AUDIT LOG & RECENT TRANSACTIONS TABLE -->
+      <section class="dash-table-card">
+        <div class="dash-table-header">
+          <div class="table-title-group">
+            <h3 class="table-main-title">سجل معاملات وتحركات Activkeyz Coins (Ledger & Audit Trail)</h3>
+            <span class="table-counter-pill" id="loyaltyLedgerCountPill">0 عملية</span>
+          </div>
+          <button class="dash-btn dash-btn-ghost" onclick="loadLoyaltyLedger()" style="padding:6px 14px; font-size:0.8rem;">
+            <i class="fa-solid fa-rotate-right"></i> تحديث السجل
+          </button>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="dash-table" id="loyaltyLedgerTable">
+            <thead>
+              <tr>
+                <th>التاريخ والوقت</th>
+                <th>نوع الحركة</th>
+                <th>العميل المستفيد</th>
+                <th>الطلب المرتبط</th>
+                <th>الكوينز (+ / -)</th>
+                <th>الرصيد بعد</th>
+                <th>البيان وسبب التعديل</th>
+              </tr>
+            </thead>
+            <tbody id="loyaltyLedgerTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===================================================================
+         SECTION 9: COUPONS & PROMOTIONS
+         =================================================================== -->
+    <div id="dashCouponsSection" style="display:none;">
+      
+      <section class="dash-toolbar-card" style="margin-bottom:20px; justify-content:space-between;">
+        <div>
+          <h3 style="color:#fff; font-size:1.2rem; font-weight:800; margin-bottom:4px;">إدارة كوبونات الخصم والعروض الترويجية</h3>
+          <p style="color:#94a3b8; font-size:0.85rem;">كوبونات ثابتة أو نسبية، حدود الاستخدام، وتواريخ انتهاء الصلاحية المحسوبة سحابياً.</p>
+        </div>
+        <button class="dash-btn dash-btn-primary" onclick="openAddCouponModal()">
+          <i class="fa-solid fa-plus"></i> إنشاء كود خصم جديد
+        </button>
+      </section>
+
+      <section class="dash-table-card">
+        <div class="table-responsive-wrapper">
+          <table class="dash-table" id="couponsTable">
+            <thead>
+              <tr>
+                <th>كود الخصم</th>
+                <th>نوع الخصم</th>
+                <th>قيمة الخصم</th>
+                <th>الحد الأدنى للطلب</th>
+                <th>الحد الأقصى للخصم</th>
+                <th>مرات الاستخدام</th>
+                <th>الحالة</th>
+                <th style="width: 130px; text-align:center;">إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="couponsTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===================================================================
+         SECTION 10: REVIEWS MODERATION
+         =================================================================== -->
+    <div id="dashReviewsSection" style="display:none;">
+      
+      <section class="dash-toolbar-card" style="margin-bottom:20px;">
+        <div>
+          <h3 style="color:#fff; font-size:1.2rem; font-weight:800; margin-bottom:4px;">مراجعة واعتماد تقييمات العملاء</h3>
+          <p style="color:#94a3b8; font-size:0.85rem;">لا تظهر التقييمات في المتجر إلا بعد موافقة ومصادقة الإدارة لمنع التقييمات الوهمية.</p>
+        </div>
+      </section>
+
+      <section class="dash-table-card">
+        <div class="table-responsive-wrapper">
+          <table class="dash-table" id="reviewsTable">
+            <thead>
+              <tr>
+                <th>العميل</th>
+                <th>المنتج</th>
+                <th>التقييم</th>
+                <th>التعليق</th>
+                <th>الحالة الحالية</th>
+                <th>التاريخ</th>
+                <th style="width: 140px; text-align:center;">الإجراء</th>
+              </tr>
+            </thead>
+            <tbody id="reviewsTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===================================================================
+         SECTION 11: SUPPORT TICKETS
+         =================================================================== -->
+    <div id="dashTicketsSection" style="display:none;">
+      
+      <section class="dash-toolbar-card" style="margin-bottom:20px;">
+        <div>
+          <h3 style="color:#fff; font-size:1.2rem; font-weight:800; margin-bottom:4px;">تذاكر الدعم الفني وخدمة العملاء</h3>
+          <p style="color:#94a3b8; font-size:0.85rem;">متابعة استفسارات العملاء والرد عليها وتحديث حالة المشكلات.</p>
+        </div>
+      </section>
+
+      <section class="dash-table-card">
+        <div class="table-responsive-wrapper">
+          <table class="dash-table" id="ticketsTable">
+            <thead>
+              <tr>
+                <th>رقم التذكرة</th>
+                <th>العميل</th>
+                <th>الموضوع</th>
+                <th>الرسالة</th>
+                <th>الحالة</th>
+                <th>التاريخ</th>
+                <th style="width: 140px; text-align:center;">الإجراء</th>
+              </tr>
+            </thead>
+            <tbody id="ticketsTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ===================================================================
+         SECTION 12: STORE SETTINGS
+         =================================================================== -->
+    <div id="dashSettingsSection" style="display:none;">
+      
+      <form id="storeSettingsForm" onsubmit="event.preventDefault(); handleSaveStoreSettings();">
+        <div class="cards-grid-3" style="grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); margin-bottom:24px;">
+          
+          <!-- General Business Info -->
+          <div class="management-card">
+            <div>
+              <div class="card-top-row">
+                <span class="card-title"><i class="fa-solid fa-store" style="color:var(--cyan-bright); margin-left:8px;"></i> بيانات المتجر الأساسية</span>
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label>اسم المتجر الرسمي</label>
+                <input type="text" id="settingStoreName" value="ActivKeyz">
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label>البريد الإلكتروني للدعم</label>
+                <input type="email" id="settingStoreEmail" value="support@activkeyz.com">
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label>رقم هاتف الدعم الفني / الاتصال</label>
+                <input type="text" id="settingStorePhone" value="01225106057">
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label>رقم الواتساب الرسمي (مع كود الدولة 20...)</label>
+                <input type="text" id="settingStoreWhatsapp" value="201225106057" placeholder="201225106057">
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label>رابط بوت أو قناة التليجرام</label>
+                <input type="text" id="settingStoreTelegram" value="https://t.me/activkeyz_support" placeholder="https://t.me/...">
+              </div>
+            </div>
+          </div>
+
+          <!-- Currency & Exchange Rate -->
+          <div class="management-card">
+            <div>
+              <div class="card-top-row">
+                <span class="card-title"><i class="fa-solid fa-money-bill-transfer" style="color:var(--cyan-bright); margin-left:8px;"></i> العملات وسعر الصرف</span>
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label>سعر صرف الدولار مقابل الجنيه (USD / EGP)</label>
+                <input type="number" id="settingUsdRate" step="0.1" value="50.0" min="1">
+                <span style="font-size:0.75rem; color:#94a3b8;">تُحسب به الأسعار المعادلة بالدولار في صفحة الدفع تلقائياً.</span>
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label>العملة الافتراضية الرئيسية</label>
+                <input type="text" id="settingPrimaryCurrency" value="EGP" readonly style="opacity:0.7;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement & Global Promotions -->
+          <div class="management-card">
+            <div>
+              <div class="card-top-row">
+                <span class="card-title"><i class="fa-solid fa-bullhorn" style="color:var(--cyan-bright); margin-left:8px;"></i> شريط الإعلانات والخصم العام</span>
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label>نص شريط الإعلان أعلى المتجر</label>
+                <input type="text" id="settingAnnouncementText" value="مرحباً بكم في متجر نكسا الرقمي — تفعيل فوري لكافة الاشتراكات وضمان رسمي كامل!">
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label>نسبة الخصم العام المباشر على جميع المنتجات (%)</label>
+                <input type="number" id="settingGlobalDiscount" min="0" max="100" value="0">
+                <span style="font-size:0.75rem; color:#94a3b8;">اتركه 0% إذا كنت لا ترغب في خصم تلقائي دائم.</span>
+              </div>
+              <div class="form-group">
+                <label class="checkbox-container">
+                  <input type="checkbox" id="settingAnnouncementActive" checked>
+                  <span class="checkmark"></span>
+                  <span style="font-weight:700; color:#fff;">تفعيل شريط الإعلان في الموقع</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Store Operation Mode -->
+          <div class="management-card">
+            <div>
+              <div class="card-top-row">
+                <span class="card-title"><i class="fa-solid fa-server" style="color:var(--cyan-bright); margin-left:8px;"></i> حالة المتجر والصيانة</span>
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label class="checkbox-container">
+                  <input type="checkbox" id="settingMaintenanceMode">
+                  <span class="checkmark"></span>
+                  <span style="font-weight:700; color:#f87171;">تفعيل وضع الصيانة المؤقت للمتجر</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label>رسالة الصيانة المعروضة للزوار</label>
+                <input type="text" id="settingMaintenanceMsg" value="المتجر في وضع الصيانة الدورية المجدولة لتحديث الخوادم، سنعود بعد قليل.">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="text-align:left;">
+          <button type="submit" class="dash-btn dash-btn-primary" style="padding:14px 28px; font-size:1rem;">
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>حفظ وتطبيق إعدادات المتجر في Supabase</span>
+          </button>
+        </div>
+      </form>
+
+    </div>
+
+  </main>
+
+  <!-- ===================================================================
+       MODAL 1: ADD / EDIT PRODUCT MODAL
+       =================================================================== -->
+  <div class="modal-backdrop" id="modalBackdrop" onclick="closeProductModal()"></div>
+  <div class="dash-modal" id="productFormModal" style="max-width:820px;">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <i class="fa-solid fa-sliders" style="color:var(--cyan-primary);"></i>
+        <h3 id="modalTitle">إدارة وتعديل الاشتراك الشاملة</h3>
+      </div>
+      <button type="button" class="modal-close-ico" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Product Modal Inner Tabs Navigation -->
+    <div class="modal-tabs-nav">
+      <button type="button" class="modal-tab-pill active" id="btnTabBasic" onclick="switchProductModalTab('basic')">
+        <i class="fa-solid fa-sliders"></i> البيانات والتسعير
+      </button>
+      <button type="button" class="modal-tab-pill" id="btnTabContent" onclick="switchProductModalTab('content')">
+        <i class="fa-solid fa-file-lines"></i> المحتوى والتسليم والضمان
+      </button>
+      <button type="button" class="modal-tab-pill" id="btnTabVariants" onclick="switchProductModalTab('variants')">
+        <i class="fa-solid fa-layer-group"></i> الباقات والمتغيرات (<span id="modalVariantsBadgeCount">0</span>)
+      </button>
+      <button type="button" class="modal-tab-pill" id="btnTabInventory" onclick="switchProductModalTab('inventory')">
+        <i class="fa-solid fa-boxes-stacked"></i> المخزون والتوافر
+      </button>
+    </div>
+
+    <form id="productForm" onsubmit="event.preventDefault(); handleSaveProduct();">
+      <input type="hidden" id="formProductId">
+
+      <!-- ================= TAB 1: BASIC & PRICING ================= -->
+      <div class="modal-tab-pane active" id="paneProductBasic">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>اسم الاشتراك في المتجر (Product Title) *</label>
+            <input type="text" id="formName" required placeholder="مثال: ChatGPT Plus 1M أو YouTube Premium 1Y">
+          </div>
+
+          <div class="form-group">
+            <label>معرّف الرابط المميز (Unique Slug / ID)</label>
+            <input type="text" id="formProductSlug" placeholder="ai-chatgpt-plus (يُولد آلياً إذا تُرك فارغاً)" dir="ltr">
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>القسم الرئيسي (Category) *</label>
+            <select id="formCategory" required>
+              <!-- Dynamically populated from categoriesList -->
+              <option value="ai">أدوات الذكاء الاصطناعي (AI)</option>
+              <option value="creative">البرامج الإبداعية (Creative)</option>
+              <option value="office">برامج المكتب (Office)</option>
+              <option value="streaming">الترفيه والاشتراكات (Streaming)</option>
+              <option value="gaming">الألعاب والبطاقات (Gaming)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>المدة الزمنية الافتراضية (Duration) *</label>
+            <input type="text" id="formDuration" required placeholder="مثال: 1 شهر، 3 شهور، 1 سنة">
+          </div>
+        </div>
+
+        <!-- Pricing & Wholesale Section -->
+        <div style="background:rgba(6,12,24,0.7); border:1px solid rgba(56,189,248,0.25); border-radius:12px; padding:14px; margin-bottom:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <span style="font-weight:700; color:var(--cyan-bright); font-size:0.88rem;">
+              <i class="fa-solid fa-coins"></i> التسعير وتكلفة الجملة (خاص بالإدارة)
+            </span>
+            <div id="productProfitCard" style="display:flex; gap:10px; font-weight:700; font-size:0.82rem;">
+              <span style="color:#10b981;" id="calcProfitText">+0 ج.م ربح</span>
+              <span style="color:var(--cyan-bright);" id="calcMarginText">(هامش: 0%)</span>
+            </div>
+          </div>
+
+          <div class="form-grid-4" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:12px;">
+            <div class="form-group">
+              <label>معرف المورد (Supplier Identifier) *</label>
+              <input type="text" id="formSourceBot" required placeholder="معرف المورد المعتمد">
+            </div>
+
+            <div class="form-group">
+              <label>سعر الجملة (Wholesale EGP) *</label>
+              <input type="number" id="formWholesaleEgp" required placeholder="مثال: 700" min="0" oninput="autoCalcSuggestedPrice()">
+            </div>
+
+            <div class="form-group">
+              <label>سعر الجملة بالدولار (Wholesale USD)</label>
+              <input type="number" id="formWholesaleUsd" step="0.01" placeholder="14.00" min="0">
+            </div>
+
+            <div class="form-group">
+              <label>سعر البيع النهائي (Retail EGP) *</label>
+              <input type="number" id="formPriceEgp" required placeholder="مثال: 1700" min="1" oninput="updateProfitIndicators()">
+            </div>
+          </div>
+
+          <div class="form-grid-2" style="margin-top:10px; align-items:center;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label>سعر البيع بالدولار للمستهلك (Retail USD) *</label>
+              <input type="number" id="formPriceUsd" step="0.01" required placeholder="34.00" min="0.1">
+            </div>
+
+            <div style="padding-top:18px;">
+              <button type="button" class="btn-formula-calc" style="width:100%;" onclick="applyFormulaPrices()">
+                <i class="fa-solid fa-calculator"></i>
+                <span>حساب الأسعار تلقائياً بمعادلة أرباح المتجر</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-grid-2" style="align-items:center;">
+          <div class="form-group">
+            <label>صورة المنتج (Image URL أو قالب 2K)</label>
+            <select id="formImagePreset" onchange="if(this.value) document.getElementById('formImage').value = this.value;">
+              <option value="">اختر أيقونة المنتج الرسمية المعتمدة...</option>
+              <option value="logos/chatgpt-plus.webp">ChatGPT Plus (AI)</option>
+              <option value="logos/gemini.webp">Google Gemini (AI)</option>
+              <option value="logos/perplexity.webp">Perplexity Pro (AI)</option>
+              <option value="logos/elevenlabs.webp">ElevenLabs (AI)</option>
+              <option value="logos/capcut-pro.webp">CapCut Pro (Creative)</option>
+              <option value="logos/canva-pro.webp">Canva Pro (Creative)</option>
+              <option value="logos/adobe-full-apps.webp">Adobe CC / Photoshop (Creative)</option>
+              <option value="logos/figma-pro.webp">Figma Pro (Creative)</option>
+              <option value="logos/office-365.webp">Microsoft 365 (Office)</option>
+              <option value="logos/notion.webp">Notion (Office)</option>
+              <option value="logos/zoom-pro.webp">Zoom Pro (Office)</option>
+              <option value="logos/coursera-premium.webp">Coursera (Office)</option>
+              <option value="logos/youtube-premium.webp">YouTube Premium (Streaming)</option>
+              <option value="logos/spotify.webp">Spotify (Streaming)</option>
+              <option value="primevideo_icon.svg">Amazon Prime Video (Streaming)</option>
+              <option value="logos/discord-nitro.webp">Discord Nitro (Gaming)</option>
+              <option value="logos/nordvpn.webp">NordVPN (Security)</option>
+            </select>
+            <input type="text" id="formImage" placeholder="أو اكتب مسار الصورة الخاص بك (مثال: logos/gemini.webp)" style="margin-top:6px;">
+          </div>
+
+          <div class="form-group">
+            <label>ترتيب الظهور في الكتالوج (Display Order)</label>
+            <input type="number" id="formDisplayOrder" value="0" min="0" placeholder="0">
+          </div>
+        </div>
+
+        <div class="form-group" style="padding-top:10px; display:flex; gap:20px; flex-wrap:wrap;">
+          <label class="checkbox-container">
+            <input type="checkbox" id="formIsFeatured">
+            <span class="checkmark"></span>
+            <span style="font-weight:700; color:#fff;">منتج مميز ⭐</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" id="formIsActive" checked>
+            <span class="checkmark"></span>
+            <span style="font-weight:700; color:#fff;">نشط بالمتجر</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" id="formIsArchived">
+            <span class="checkmark"></span>
+            <span style="font-weight:700; color:#a855f7;">مؤرشف 📦 (مخفي بدون حذف)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- ================= TAB 2: CUSTOMER CONTENT & DELIVERY ================= -->
+      <div class="modal-tab-pane" id="paneProductContent">
+        <div class="form-group">
+          <label>الوصف المختصر المعروض بالبطاقات (Short Description) *</label>
+          <textarea id="formDesc" rows="2" required placeholder="اكتب وصفاً جذاباً ومختصراً لبطاقة المنتج بالصفحة الرئيسية..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>الوصف التفصيلي الشامل لصفحة المنتج المستقلة (Full Description)</label>
+          <textarea id="formFullDesc" rows="3" placeholder="اكتب شرحاً تفصيلياً شاملاً يظهر في تبويب الوصف بصفحة المنتج..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>المميزات والمواصفات الرسمية (ميزة في كل سطر)</label>
+          <textarea id="formSpecs" rows="3" placeholder="تفعيل رسمي 100% على سيرفرات الشركة&#10;ضمان كامل طوال المدة&#10;تسليم فوري ومباشر"></textarea>
+        </div>
+
+        <!-- Structured Delivery & Activation Settings -->
+        <div style="background:rgba(6,12,24,0.7); border:1px solid rgba(56,189,248,0.25); border-radius:12px; padding:14px; margin-bottom:14px;">
+          <span style="font-weight:700; color:var(--cyan-bright); font-size:0.88rem; display:block; margin-bottom:10px;">
+            <i class="fa-solid fa-truck-fast"></i> إعدادات التفعيل والتسليم المخصصة للمنتج
+          </span>
+
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label>طريقة التفعيل (Activation Method)</label>
+              <select id="formActivationMethod">
+                <option value="personal_email">تفعيل على إيميل العميل الشخصي</option>
+                <option value="pre_activated">حساب جاهز ومفعل بكامل الصلاحيات</option>
+                <option value="license_key">مفتاح ترخيص كود رقمي رسمي</option>
+                <option value="instant_creds">بيانات فورية بعد الدفع</option>
+                <option value="custom">تفعيل مخصص عبر الدعم الفني</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>طريقة التسليم (Delivery Method)</label>
+              <select id="formDeliveryMethod">
+                <option value="whatsapp">بيانات ورابط عبر واتساب</option>
+                <option value="email">إرسال مباشر للبريد الإلكتروني</option>
+                <option value="instant">تسليم فوري في شاشة تأكيد الطلب</option>
+                <option value="custom">تسليم مخصص ومباشر</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>مدة التسليم المتوقعة (Delivery Time)</label>
+              <input type="text" id="formExpectedDelivery" placeholder="فوري خلال دقائق (أو 15-30 دقيقة)">
+            </div>
+          </div>
+
+          <!-- Required Customer Inputs Selector -->
+          <div style="margin-top:12px; padding-top:10px; border-top:1px solid rgba(56,189,248,0.15);">
+            <label style="display:block; margin-bottom:6px; font-weight:700; color:#fff; font-size:0.82rem;">
+              <i class="fa-solid fa-clipboard-check" style="color:var(--cyan-bright);"></i> البيانات المطلوبة من العميل عند الشراء (Required Customer Inputs):
+            </label>
+            <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center;">
+              <label style="display:inline-flex; align-items:center; gap:6px; font-size:0.82rem; cursor:pointer;">
+                <input type="checkbox" id="formReqRecipientEmail" checked>
+                <span>البريد الإلكتروني للاستلام (موصى به)</span>
+              </label>
+              <label style="display:inline-flex; align-items:center; gap:6px; font-size:0.82rem; cursor:pointer;">
+                <input type="checkbox" id="formReqWhatsapp">
+                <span>رقم واتساب للتواصل</span>
+              </label>
+              <label style="display:inline-flex; align-items:center; gap:6px; font-size:0.82rem; cursor:pointer;">
+                <input type="checkbox" id="formReqAccountEmail">
+                <span>بريد الحساب للتفعيل / إيميل الدعوة</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>طريقة التفعيل والاستلام خطوة بخطوة (Activation Guide)</label>
+          <textarea id="formActivationGuide" rows="3" placeholder="1. يتم إرسال بيانات التفعيل أو الحساب إلى الواتساب أو الإيميل فوراً.&#10;2. تسجيل الدخول بالمنصة الرسمية وتأكيد الباقة."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>تعليمات التسليم الخاصة بالطلب (Delivery Instructions)</label>
+          <textarea id="formDeliveryInstructions" rows="2" placeholder="تسليم فوري ومباشر إلى بريدك الإلكتروني والواتساب المسجل بالطلب."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>شروط الضمان وسياسة الاستبدال (Warranty Terms)</label>
+          <textarea id="formWarranty" rows="2" placeholder="ضمان شامل كامل المدة مع استبدال فوري وحل أي مشكلة خلال دقائق."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>تعليمات وشروط إضافية هامة قبل الشراء (Purchase Instructions)</label>
+          <textarea id="formPurchaseInstructions" rows="2" placeholder="ملاحظات هامة للعميل يجب مراعاتها قبل إتمام الدفع..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>قالب رسالة التسليم المباشرة للعميل (Default Fulfillment Message Template)</label>
+          <textarea id="formFulfillmentTemplate" rows="2" placeholder="شكراً لطلبك من Activkeyz! تم تجهيز اشتراكك بنجاح. بيانات التفعيل موضحة بالأسفل..."></textarea>
+        </div>
+      </div>
+
+      <!-- ================= TAB 3: VARIANTS MANAGEMENT ================= -->
+      <div class="modal-tab-pane" id="paneProductVariants">
+        <div style="background:rgba(6,12,24,0.7); border:1px solid rgba(56,189,248,0.25); border-radius:12px; padding:14px; margin-bottom:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <div>
+              <span style="font-weight:700; color:var(--cyan-bright); font-size:0.88rem; display:block;">
+                <i class="fa-solid fa-layer-group"></i> الباقات والمدد المتعددة للاشتراك
+              </span>
+              <span style="font-size:0.75rem; color:#94a3b8;">
+                تظهر هذه الباقات في صفحة المنتج لاختيار المدة والسعر المطلوب مباشرة وتطبيقها في السلة والدفع.
+              </span>
+            </div>
+            <button type="button" class="dash-btn dash-btn-ghost" style="padding:4px 10px; font-size:0.78rem;" onclick="loadProductVariantsInModal()">
+              <i class="fa-solid fa-rotate-right"></i> تحديث
+            </button>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:0.84rem;">
+              <thead>
+                <tr style="border-bottom:1px solid rgba(255,255,255,0.1); color:#94a3b8; text-align:right;">
+                  <th style="padding:8px;">اسم الباقة</th>
+                  <th style="padding:8px;">المدة</th>
+                  <th style="padding:8px;">السعر (ج.م)</th>
+                  <th style="padding:8px;">السعر ($)</th>
+                  <th style="padding:8px;">الحالة</th>
+                  <th style="padding:8px; text-align:center;">إجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="productVariantsTableBody">
+                <tr><td colspan="6" style="padding:14px; text-align:center; color:#64748b;">جاري جلب الباقات...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Add Variant Box -->
+        <div style="background:rgba(6,12,24,0.85); border:1px solid rgba(56,189,248,0.3); border-radius:12px; padding:14px;">
+          <span style="font-weight:700; color:var(--cyan-bright); font-size:0.85rem; display:block; margin-bottom:10px;">
+            <i class="fa-solid fa-plus-circle"></i> إضافة باقة / مدة جديدة لهذا المنتج:
+          </span>
+          <div class="form-grid-4" style="gap:10px; margin-bottom:10px;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:0.75rem;">اسم الباقة *</label>
+              <input type="text" id="newVarName" placeholder="مثال: 3 شهور أو سنة كاملة" style="padding:7px 10px; font-size:0.82rem;">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:0.75rem;">المدة *</label>
+              <input type="text" id="newVarDuration" placeholder="3 شهور" style="padding:7px 10px; font-size:0.82rem;">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:0.75rem;">سعر البيع (EGP) *</label>
+              <input type="number" id="newVarPriceEgp" placeholder="3800" min="1" style="padding:7px 10px; font-size:0.82rem;">
+            </div>
+            <div class="form-group" style="margin-bottom:0;">
+              <label style="font-size:0.75rem;">سعر البيع (USD)</label>
+              <input type="number" id="newVarPriceUsd" step="0.01" placeholder="76.00" min="0" style="padding:7px 10px; font-size:0.82rem;">
+            </div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+            <label class="checkbox-container" style="font-size:0.8rem;">
+              <input type="checkbox" id="newVarIsActive" checked>
+              <span class="checkmark"></span>
+              <span style="color:#fff;">باقة نشطة ومتاحة للشراء</span>
+            </label>
+            <button type="button" class="dash-btn dash-btn-primary" style="padding:6px 16px; font-size:0.82rem;" onclick="handleAddVariantFromModal()">
+              <i class="fa-solid fa-plus"></i> إضافة الباقة في Supabase
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= TAB 4: INVENTORY & STOCK ================= -->
+      <div class="modal-tab-pane" id="paneProductInventory">
+        <div style="background:rgba(6,12,24,0.7); border:1px solid rgba(56,189,248,0.25); border-radius:12px; padding:16px; margin-bottom:14px;">
+          <span style="font-weight:700; color:var(--cyan-bright); font-size:0.88rem; display:block; margin-bottom:12px;">
+            <i class="fa-solid fa-boxes-stacked"></i> نمط المخزون والتوافر المباشر
+          </span>
+          <div class="form-grid-3">
+            <div class="form-group">
+              <label>نمط المخزون (Stock Mode)</label>
+              <select id="formStockType" onchange="toggleFormStockType()">
+                <option value="unlimited">غير محدود (Unlimited)</option>
+                <option value="limited">محدود بالعدد (Limited)</option>
+                <option value="manual">تنفيذ يدوي (Manual)</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="formQtyGroup">
+              <label>الكمية المتاحة (Available)</label>
+              <input type="number" id="formQuantityAvailable" value="100" min="0">
+            </div>
+
+            <div class="form-group" id="formThresholdGroup">
+              <label>حد تنبيه النفاد (Threshold)</label>
+              <input type="number" id="formLowStockThreshold" value="5" min="1">
+            </div>
+          </div>
+
+          <div style="margin-top:12px; display:flex; gap:16px;">
+            <label class="checkbox-container">
+              <input type="checkbox" id="formIsPaused">
+              <span class="checkmark"></span>
+              <span style="font-weight:700; color:#f87171;">إيقاف البيع مؤقتاً (نفدت الكمية / Paused)</span>
+            </label>
+          </div>
+        </div>
+
+        <div style="text-align:left;">
+          <button type="button" class="dash-btn dash-btn-ghost" onclick="openInventoryForProduct(document.getElementById('formProductId').value)">
+            <i class="fa-solid fa-clock-rotate-left"></i> الانتقال لسجل التوريد وتعديلات المخزون المدققة
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer" style="margin-top:20px; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <button type="button" class="dash-btn dash-btn-ghost" onclick="closeProductModal()">إلغاء</button>
+          <a id="btnPreviewStorefront" href="#" target="_blank" class="dash-btn dash-btn-ghost" style="margin-right:8px; display:none;">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> معاينة بالمتجر
+          </a>
+        </div>
+        <button type="submit" class="dash-btn dash-btn-primary" id="btnSaveProductSubmit">
+          <i class="fa-solid fa-check"></i>
+          <span>حفظ وتطبيق في Supabase فوراً</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ===================================================================
+       MODAL 2: ADD / EDIT CATEGORY MODAL
+       =================================================================== -->
+  <div class="modal-backdrop" id="categoryModalBackdrop" style="display:none;" onclick="closeCategoryModal()"></div>
+  <div class="dash-modal" id="categoryFormModal" style="display:none; max-width:550px;">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <i class="fa-solid fa-layer-group" style="color:var(--cyan-primary);"></i>
+        <h3 id="categoryModalTitle">إضافة قسم جديد</h3>
+      </div>
+      <button class="modal-close-ico" onclick="closeCategoryModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <form id="categoryForm" onsubmit="event.preventDefault(); handleSaveCategory();">
+      <input type="hidden" id="formCategoryId">
+
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>معرف القسم (Slug / ID) *</label>
+        <input type="text" id="formCategorySlug" required placeholder="مثال: cloud أو design">
+      </div>
+
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>اسم القسم باللغة العربية *</label>
+        <input type="text" id="formCategoryName" required placeholder="مثال: الاستضافات السحابية">
+      </div>
+
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>أيقونة القسم (FontAwesome Class)</label>
+        <input type="text" id="formCategoryIcon" placeholder="fa-solid fa-cloud">
+      </div>
+
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>وصف مختصر للقسم</label>
+        <textarea id="formCategoryDesc" rows="2" placeholder="وصف للأقسام والمنتجات المشمولة..."></textarea>
+      </div>
+
+      <div class="form-group" style="margin-bottom:16px;">
+        <label>ترتيب العرض (Display Order)</label>
+        <input type="number" id="formCategoryOrder" value="1" min="1">
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="dash-btn dash-btn-ghost" onclick="closeCategoryModal()">إلغاء</button>
+        <button type="submit" class="dash-btn dash-btn-primary">
+          <i class="fa-solid fa-check"></i>
+          <span>حفظ القسم</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ===================================================================
+       MODAL 3: INVENTORY RESTOCK & ADJUST MODAL
+       =================================================================== -->
+  <div class="modal-backdrop" id="inventoryModalBackdrop" style="display:none;" onclick="closeInventoryModal()"></div>
+  <div class="dash-modal" id="inventoryFormModal" style="display:none; max-width:550px;">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <i class="fa-solid fa-boxes-stacked" style="color:var(--cyan-primary);"></i>
+        <h3>إدارة مخزون المنتج</h3>
+      </div>
+      <button class="modal-close-ico" onclick="closeInventoryModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <form id="inventoryForm" onsubmit="event.preventDefault(); handleSaveInventory();">
+      <input type="hidden" id="invProductId">
+
+      <div style="background:rgba(56,189,248,0.08); padding:12px; border-radius:10px; margin-bottom:14px; border:1px solid rgba(56,189,248,0.2);">
+        <strong id="invProductName" style="color:#fff; font-size:1.05rem;">ChatGPT Plus 1M</strong>
+      </div>
+
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>نوع إدارة المخزون (Stock Policy) *</label>
+        <select id="invStockType" required onchange="toggleInventoryInputs()">
+          <option value="unlimited">مخزون غير محدود (Unlimited Stock - تسليم متاح دائماً)</option>
+          <option value="limited">مخزون محدود بعدد محدد (Limited Stock - تتبع وإيقاف آلي)</option>
+          <option value="manual">تنفيذ يدوي فوري (Manual Fulfillment - تواصل وتحضير مخصص)</option>
+        </select>
+      </div>
+
+      <div class="form-grid-2" id="invQuantitiesGrid">
+        <div class="form-group">
+          <label>الكمية المتاحة حالياً (Available)</label>
+          <input type="number" id="invQuantityAvailable" min="0" value="100">
+        </div>
+
+        <div class="form-group">
+          <label>حد التنبيه بانخفاض المخزون (Low-Stock Threshold)</label>
+          <input type="number" id="invLowStockThreshold" min="1" value="5">
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:12px;">
+        <label>سبب التعديل / ملاحظات الحركة (Movement Reason)</label>
+        <input type="text" id="invReason" placeholder="مثال: توريد كمية جديدة للمخزون">
+      </div>
+
+      <div class="form-group" style="margin-top:12px;">
+        <label class="checkbox-container">
+          <input type="checkbox" id="invIsPaused">
+          <span class="checkmark"></span>
+          <span style="font-weight:700; color:#f87171;">إيقاف مبيعات هذا المنتج مؤقتاً (Pause Sales)</span>
+        </label>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="dash-btn dash-btn-ghost" onclick="closeInventoryModal()">إلغاء</button>
+        <button type="submit" class="dash-btn dash-btn-primary">
+          <i class="fa-solid fa-check"></i>
+          <span>تحديث المخزون وتسجيل الحركة</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ===================================================================
+       MODAL 4: INVENTORY MOVEMENTS AUDIT LOG
+       =================================================================== -->
+  <div class="modal-backdrop" id="inventoryLogBackdrop" style="display:none;" onclick="closeInventoryLogModal()"></div>
+  <div class="dash-modal" id="inventoryLogModal" style="display:none; max-width:700px;">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <i class="fa-solid fa-clock-rotate-left" style="color:var(--cyan-primary);"></i>
+        <h3>سجل حركات وتدقيق المخزون (Inventory Audit Trail)</h3>
+      </div>
+      <button class="modal-close-ico" onclick="closeInventoryLogModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div style="max-height:480px; overflow-y:auto; padding:10px 0;">
+      <div class="timeline-list" id="inventoryMovementsTimeline">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="dash-btn dash-btn-ghost" onclick="closeInventoryLogModal()">إغلاق</button>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MODAL 5: ADD / EDIT BUNDLE MODAL
+       =================================================================== -->
+  <div class="modal-backdrop" id="bundleModalBackdrop" style="display:none;" onclick="closeBundleModal()"></div>
+  <div class="dash-modal" id="bundleFormModal" style="display:none; max-width:680px;">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <i class="fa-solid fa-tags" style="color:var(--cyan-primary);"></i>
+        <h3 id="bundleModalTitle">إنشاء باقة كومبو جديدة</h3>
+      </div>
+      <button class="modal-close-ico" onclick="closeBundleModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <form id="bundleForm" onsubmit="event.preventDefault(); handleSaveBundle();">
+      <input type="hidden" id="formBundleId">
+
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>اسم الباقة الترويجي *</label>
+        <input type="text" id="formBundleName" required placeholder="مثال: باقة صانع المحتوى الذكي (ChatGPT + Canva + CapCut)">
+      </div>
+
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>وصف الباقة ومميزاتها للعميل</label>
+        <textarea id="formBundleDesc" rows="2" placeholder="اشرح توفير الباقة وما تتضمنه بالتفصيل..."></textarea>
+      </div>
+
+      <!-- Included Products Selector -->
+      <div class="form-group" style="margin-bottom:14px;">
+        <label>اختر المنتجات المشمولة في هذه الباقة (اختر منتجين أو أكثر) *</label>
+        <div id="bundleProductsPicker" style="max-height:180px; overflow-y:auto; background:rgba(6,12,24,0.7); border:1px solid rgba(56,189,248,0.25); border-radius:10px; padding:10px; display:flex; flex-direction:column; gap:8px;">
+          <!-- Dynamically populated checklist -->
+        </div>
+      </div>
+
+      <div class="form-grid-3">
+        <div class="form-group">
+          <label>السعر الأصلي المجمع (EGP)</label>
+          <input type="number" id="formBundleOriginalPrice" required min="1" placeholder="مثال: 1850">
+        </div>
+
+        <div class="form-group">
+          <label>سعر الباقة بعد الخصم (EGP) *</label>
+          <input type="number" id="formBundlePriceEgp" required min="1" placeholder="مثال: 1399" oninput="calcBundleSavings()">
+        </div>
+
+        <div class="form-group">
+          <label>سعر الباقة بالدولار (USD)</label>
+          <input type="number" id="formBundlePriceUsd" step="0.01" min="0.1" placeholder="مثال: 27.98">
+        </div>
+      </div>
+
+      <div id="bundleSavingsPreview" style="background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); padding:8px 12px; border-radius:8px; margin-bottom:12px; color:#34d399; font-weight:700; font-size:0.85rem;">
+        توفير العميل المتوقع: 0 ج.م
+      </div>
+
+      <div class="form-grid-3">
+        <div class="form-group">
+          <label>تاريخ البدء (Starts At)</label>
+          <input type="datetime-local" id="formBundleStartsAt">
+        </div>
+        <div class="form-group">
+          <label>تاريخ الانتهاء (Expires At - اختياري)</label>
+          <input type="datetime-local" id="formBundleExpiresAt">
+        </div>
+        <div class="form-group">
+          <label>ترتيب العرض (Order)</label>
+          <input type="number" id="formBundleDisplayOrder" value="0" min="0">
+        </div>
+      </div>
+
+      <div class="form-grid-2" style="align-items:center;">
+        <div class="form-group">
+          <label>صورة الباقة (Image URL)</label>
+          <input type="text" id="formBundleImage" value="logos/chatgpt-plus.webp">
+        </div>
+
+        <div class="form-group" style="padding-top:20px; display:flex; gap:16px;">
+          <label class="checkbox-container">
+            <input type="checkbox" id="formBundleIsActive" checked>
+            <span class="checkmark"></span>
+            <span style="font-weight:700; color:#fff;">باقة نشطة</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" id="formBundleIsFeatured" checked>
+            <span class="checkmark"></span>
+            <span style="font-weight:700; color:#fff;">عرض بالهيرو</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="dash-btn dash-btn-ghost" onclick="closeBundleModal()">إلغاء</button>
+        <button type="submit" class="dash-btn dash-btn-primary">
+          <i class="fa-solid fa-check"></i>
+          <span>حفظ الباقة في المتجر</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ===================================================================
+       MODAL 6: ADD / EDIT PAYMENT METHOD MODAL
+       =================================================================== -->
+  <div class="modal-backdrop" id="paymentModalBackdrop" style="display:none;" onclick="closePaymentModal()"></div>
+  <div class="dash-modal" id="paymentFormModal" style="display:none; max-width:620px;">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <i class="fa-solid fa-credit-card" style="color:var(--cyan-primary);"></i>
+        <h3 id="paymentModalTitle">إضافة وسيلة دفع جديدة</h3>
+      </div>
+      <button class="modal-close-ico" onclick="closePaymentModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <form id="paymentForm" onsubmit="event.preventDefault(); handleSavePaymentMethod();">
+      <input type="hidden" id="formPaymentId">
+
+      <!-- Quick Payment Method Presets -->
+      <div style="background:rgba(6,12,24,0.6); padding:8px 12px; border-radius:10px; border:1px solid rgba(56,189,248,0.2); margin-bottom:14px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+        <span style="font-size:0.78rem; color:#94a3b8;"><i class="fa-solid fa-wand-magic-sparkles"></i> قوالب جاهزة:</span>
+        <button type="button" class="dash-btn dash-btn-ghost" style="padding:4px 8px; font-size:0.75rem;" onclick="applyPaymentPreset('vodafone')">فودافون كاش</button>
+        <button type="button" class="dash-btn dash-btn-ghost" style="padding:4px 8px; font-size:0.75rem;" onclick="applyPaymentPreset('instapay')">إنستاباي (InstaPay)</button>
+        <button type="button" class="dash-btn dash-btn-ghost" style="padding:4px 8px; font-size:0.75rem;" onclick="applyPaymentPreset('usdt')">USDT TRC20</button>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>اسم وسيلة الدفع المعروض للعميل *</label>
+          <input type="text" id="formPaymentName" required placeholder="مثال: فودافون كاش أو USDT TRC20">
+        </div>
+
+        <div class="form-group">
+          <label>كود وسيلة الدفع (Code) *</label>
+          <input type="text" id="formPaymentCode" required placeholder="مثال: VODAFONE أو USDT">
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>رقم المحفظة / الحساب البنكي</label>
+          <input type="text" id="formPaymentAccount" placeholder="012XXXXXXXX">
+        </div>
+
+        <div class="form-group">
+          <label>اسم صاحب الحساب / المحفظة</label>
+          <input type="text" id="formPaymentHolder" placeholder="Activkeyz Official">
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>العملة المقبولة</label>
+          <select id="formPaymentCurrency">
+            <option value="EGP">الجنيه المصري (EGP)</option>
+            <option value="USD">الدولار الأمريكي (USD)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>شبكة التحويل المشفرة (خاص بـ USDT/Crypto)</label>
+          <input type="text" id="formPaymentNetwork" placeholder="مثال: TRC20 أو BEP20">
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>عنوان المحفظة الرقمية الكامل (Wallet Address)</label>
+        <input type="text" id="formPaymentWallet" placeholder="مثال: TY23k... (خاص بالعملات المشفرة)">
+      </div>
+
+      <div class="form-group" style="margin-bottom:12px;">
+        <label>تعليمات التحويل المعروضة للعميل *</label>
+        <textarea id="formPaymentInstructions" rows="3" required placeholder="اكتب الخطوات التي يجب على العميل اتباعها بدقة لإتمام التحويل..."></textarea>
+      </div>
+
+      <div class="form-grid-2" style="align-items:center;">
+        <div class="form-group">
+          <label>ترتيب الظهور (Display Order)</label>
+          <input type="number" id="formPaymentOrder" value="1" min="1">
+        </div>
+
+        <div class="form-group" style="padding-top:20px; display:flex; gap:16px;">
+          <label class="checkbox-container">
+            <input type="checkbox" id="formPaymentRequiresReceipt" checked>
+            <span class="checkmark"></span>
+            <span style="font-weight:700; color:#fff;">إرفاق الإيصال إلزامي</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" id="formPaymentIsActive" checked>
+            <span class="checkmark"></span>
+            <span style="font-weight:700; color:#fff;">وسيلة مفعلة</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="dash-btn dash-btn-ghost" onclick="closePaymentModal()">إلغاء</button>
+        <button type="submit" class="dash-btn dash-btn-primary">
+          <i class="fa-solid fa-check"></i>
+          <span>حفظ وسيلة الدفع وتطبيقها في صفحة الدفع</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ===================================================================
+       MODAL 7: ORDER DETAILS & STATUS UPDATE MODAL
+       =================================================================== -->
+  <div class="modal-backdrop" id="orderDetailsBackdrop" style="display:none;" onclick="closeOrderDetailsModal()"></div>
+  <div class="dash-modal order-workspace-modal" id="orderDetailsModal" style="display:none;">
+    <div class="modal-header" style="padding:14px 20px; border-bottom:1px solid rgba(56,189,248,0.2);">
+      <div class="modal-title-wrap" style="gap:12px;">
+        <i class="fa-solid fa-box-open" style="color:var(--cyan-bright); font-size:1.3rem;"></i>
+        <div>
+          <h3 id="orderDetailsTitle" style="font-size:1.15rem; font-weight:800; color:#fff; margin:0;">إدارة وتسليم الطلب</h3>
+          <div id="orderWorkspaceSubtitle" style="font-size:0.75rem; color:#94a3b8; margin-top:2px;"></div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div id="orderWorkspaceStatusBadges" style="display:flex; gap:6px;"></div>
+        <button class="modal-close-ico" onclick="closeOrderDetailsModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+
+    <!-- Workspace Navigation Bar -->
+    <div class="workspace-nav-bar">
+      <button type="button" class="workspace-nav-btn active" id="btnWsTabOverview" onclick="switchOrderWorkspaceTab('overview')">
+        <i class="fa-solid fa-chart-pie"></i> نظرة عامة والملخص
+      </button>
+      <button type="button" class="workspace-nav-btn" id="btnWsTabPayment" onclick="switchOrderWorkspaceTab('payment')">
+        <i class="fa-solid fa-credit-card"></i> إدارة الدفع والتحقق
+      </button>
+      <button type="button" class="workspace-nav-btn" id="btnWsTabDelivery" onclick="switchOrderWorkspaceTab('delivery')">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> التسليم الرقمي الذكي
+      </button>
+      <button type="button" class="workspace-nav-btn" id="btnWsTabMessages" onclick="switchOrderWorkspaceTab('messages')">
+        <i class="fa-solid fa-comments"></i> محادثة العميل <span id="wsUnreadChatBadge" style="display:none;" class="badge-unread-chat">جديد</span>
+      </button>
+      <button type="button" class="workspace-nav-btn" id="btnWsTabNotes" onclick="switchOrderWorkspaceTab('notes')">
+        <i class="fa-solid fa-user-shield"></i> ملاحظات داخلية
+      </button>
+      <button type="button" class="workspace-nav-btn" id="btnWsTabHistory" onclick="switchOrderWorkspaceTab('history')">
+        <i class="fa-solid fa-clock-rotate-left"></i> سجل النشاطات
+      </button>
+    </div>
+
+    <div style="max-height:680px; overflow-y:auto; padding:0;" id="orderDetailsContent">
+      <!-- Dynamically populated panes -->
+    </div>
+
+    <div class="modal-footer" style="padding:12px 20px; border-top:1px solid rgba(56,189,248,0.2); justify-content:space-between;" id="orderDetailsFooter">
+      <!-- Dynamically populated action buttons -->
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MODAL 8: ADD / EDIT COUPON MODAL
+       =================================================================== -->
+  <div class="modal-backdrop" id="couponModalBackdrop" style="display:none;" onclick="closeCouponModal()"></div>
+  <div class="dash-modal" id="couponFormModal" style="display:none; max-width:550px;">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <i class="fa-solid fa-ticket" style="color:var(--cyan-primary);"></i>
+        <h3 id="couponModalTitle">إنشاء كود خصم جديد</h3>
+      </div>
+      <button class="modal-close-ico" onclick="closeCouponModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <form id="couponForm" onsubmit="event.preventDefault(); handleSaveCoupon();">
+      <input type="hidden" id="formCouponId">
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>رمز الكوبون (Code) *</label>
+          <input type="text" id="formCouponCode" required placeholder="مثال: ACTIV20" style="text-transform:uppercase;">
+        </div>
+
+        <div class="form-group">
+          <label>نوع الخصم (Discount Type) *</label>
+          <select id="formCouponType">
+            <option value="percentage">نسبة مئوية (%)</option>
+            <option value="fixed">مبلغ ثابت بالجنيه (EGP)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>قيمة الخصم *</label>
+          <input type="number" id="formCouponValue" required min="1" placeholder="مثال: 20 أو 100">
+        </div>
+
+        <div class="form-group">
+          <label>الحد الأدنى لقيمة الطلب (EGP)</label>
+          <input type="number" id="formCouponMinOrder" value="0" min="0">
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>أقصى حد لمبلغ الخصم (EGP)</label>
+          <input type="number" id="formCouponMaxDiscount" placeholder="مثال: 200 (للنسب المئوية)">
+        </div>
+
+        <div class="form-group">
+          <label>الحد الأقصى لمرات الاستخدام</label>
+          <input type="number" id="formCouponUsageLimit" placeholder="مثال: 100">
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>تاريخ انتهاء الصلاحية (Expiry - اختياري)</label>
+          <input type="datetime-local" id="formCouponExpiresAt">
+        </div>
+
+        <div class="form-group">
+          <label>صلاحية الكوبون (Eligibility)</label>
+          <select id="formCouponEligibility">
+            <option value="all">يسري على كافة المنتجات والباقات</option>
+            <!-- Dynamically populated from productsList -->
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:12px;">
+        <label class="checkbox-container">
+          <input type="checkbox" id="formCouponIsActive" checked>
+          <span class="checkmark"></span>
+          <span style="font-weight:700; color:#fff;">كوبون مفعل</span>
+        </label>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="dash-btn dash-btn-ghost" onclick="closeCouponModal()">إلغاء</button>
+        <button type="submit" class="dash-btn dash-btn-primary">
+          <i class="fa-solid fa-check"></i>
+          <span>حفظ وتفعيل الكوبون</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ===================================================================
+       MODAL 9: TICKET REPLY MODAL
+       =================================================================== -->
+  <div class="modal-backdrop" id="ticketModalBackdrop" style="display:none;" onclick="closeTicketModal()"></div>
+  <div class="dash-modal" id="ticketModal" style="display:none; max-width:600px;">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <i class="fa-solid fa-headset" style="color:var(--cyan-primary);"></i>
+        <h3 id="ticketModalTitle">الرد على تذكرة الدعم</h3>
+      </div>
+      <button class="modal-close-ico" onclick="closeTicketModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div id="ticketModalBody" style="padding:10px 0;">
+      <!-- Dynamically populated -->
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="dash-btn dash-btn-ghost" onclick="closeTicketModal()">إغلاق</button>
+      <button type="button" class="dash-btn dash-btn-primary" onclick="submitTicketReply()">
+        <i class="fa-solid fa-paper-plane"></i>
+        <span>إرسال الرد وتحديث الحالة</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MODAL 10: RECEIPT SIGNED URL LIGHTBOX
+       =================================================================== -->
+  <div class="modal-backdrop" id="receiptLightboxBackdrop" style="display:none; z-index:300;" onclick="closeReceiptLightbox()"></div>
+  <div class="dash-modal" id="receiptLightboxModal" style="display:none; z-index:310; max-width:640px; text-align:center;">
+    <div class="modal-header">
+      <div class="modal-title-wrap">
+        <i class="fa-solid fa-receipt" style="color:var(--cyan-primary);"></i>
+        <h3 id="receiptLightboxTitle">معاينة إيصال التحويل (رابط موقع آمن)</h3>
+      </div>
+      <button class="modal-close-ico" onclick="closeReceiptLightbox()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div style="padding:16px; background:#000; border-radius:12px; margin:16px 0; max-height:500px; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+      <img id="receiptLightboxImg" src="" alt="إيصال التحويل" style="max-width:100%; max-height:480px; object-fit:contain; border-radius:8px;">
+    </div>
+    <div class="modal-footer" style="justify-content:space-between; flex-wrap:wrap; gap:10px;">
+      <span id="receiptLightboxOrderRef" style="color:var(--cyan-bright); font-weight:700;"></span>
+      <div style="display:flex; gap:8px;">
+        <a id="receiptLightboxOpenFullBtn" href="#" target="_blank" rel="noopener noreferrer" class="dash-btn dash-btn-ghost" style="color:var(--cyan-bright); border-color:rgba(56,189,248,0.4);">
+          <i class="fa-solid fa-up-right-from-square"></i> فتح بالحجم الكامل
+        </a>
+        <button type="button" class="dash-btn dash-btn-ghost" onclick="closeReceiptLightbox()">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS CONTAINER -->
+  <div class="dash-toast-container" id="dashToastContainer"></div>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="products-data.js"></script>
+  <script src="supabase-client.js"></script>
+  <script src="nexa-ui.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

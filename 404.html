@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الصفحة غير موجودة 404 | Activkeyz</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="logos/activkeyzsecondlogo.png">
+
+  <!-- Preconnect & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="design-system.css">
+
+  <script>
+    // GitHub Pages Smart Route Resolver
+    (function() {
+      const path = window.location.pathname;
+      const parts = path.split('/').filter(Boolean);
+      const lastPart = parts.length > 0 ? parts[parts.length - 1].toLowerCase().replace(/\.html$/, '') : '';
+
+      const routes = {
+        'admin': 'dashboard.html',
+        'dashboard': 'dashboard.html',
+        'login': 'account.html',
+        'register': 'account.html',
+        'account': 'account.html',
+        'privacy': 'privacy.html',
+        'terms': 'terms.html',
+        'refund': 'refund.html',
+        'policy': 'policy.html',
+        'about': 'about.html',
+        'contact': 'contact.html',
+        'reviews': 'reviews.html',
+        'blog': 'blog.html',
+        'category': 'category.html',
+        'checkout': 'checkout.html',
+        'track': 'track-order.html',
+        'track-order': 'track-order.html',
+        'index': './'
+      };
+
+      if (routes[lastPart]) {
+        if (routes[lastPart] === './') {
+          parts.pop();
+          const target = parts.length > 0 ? '/' + parts.join('/') + '/' : '/';
+          window.location.replace(target + window.location.search + window.location.hash);
+        } else {
+          parts[parts.length - 1] = routes[lastPart];
+          const newPath = '/' + parts.join('/');
+          window.location.replace(newPath + window.location.search + window.location.hash);
+        }
+      }
+    })();
+  </script>
+
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #060d1a;
+      color: #ffffff;
+      font-family: var(--font-arabic, 'IBM Plex Sans Arabic', sans-serif);
+      margin: 0;
+    }
+    .error-hero-card {
+      max-width: 580px;
+      margin: 80px auto;
+      padding: 48px 32px;
+      background: rgba(11, 20, 36, 0.9);
+      border: 1.5px solid rgba(56, 189, 248, 0.3);
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.15);
+    }
+    .error-num {
+      font-size: 5rem;
+      font-weight: 900;
+      color: transparent;
+      background: linear-gradient(135deg, #38bdf8, #0284c7);
+      -webkit-background-clip: text;
+      font-family: var(--font-latin, sans-serif);
+      line-height: 1;
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+    .error-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+    .error-desc {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .error-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-background" aria-hidden="true">
+    <div class="stars-layer"></div>
+    <div class="ambient-glow-top"></div>
+    <div class="ambient-glow-bottom"></div>
+  </div>
+
+  <main style="flex:1; display:flex; align-items:center; justify-content:center; padding: 20px;">
+    <div class="error-hero-card">
+      <div style="margin-bottom:16px;">
+        <img src="logos/activkeyzsecondlogo.png" alt="Activkeyz" style="width:64px;height:64px;object-fit:contain;filter:drop-shadow(0 0 15px rgba(56,189,248,0.5));">
+      </div>
+      <div class="error-num">404</div>
+      <h1 class="error-title">الصفحة المطلوبة غير موجودة أو تم نقلها</h1>
+      <p class="error-desc">
+        عذراً، يبدو أن الرابط الذي حاولت الوصول إليه غير صحيح أو تم تحديث مساره. يمكنك العودة للصفحة الرئيسية للمتجر أو تصفح الأقسام مباشرة.
+      </p>
+      <div class="error-actions">
+        <a href="./" class="btn btn-cyan-primary" style="padding: 12px 26px; border-radius: 12px; font-weight: 800; display: inline-flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-house"></i>
+          <span>العودة للرئيسية</span>
+        </a>
+        <a href="category.html?cat=all" class="btn btn-translucent" style="padding: 12px 22px; border-radius: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-table-cells-large"></i>
+          <span>تصفح المنتجات</span>
+        </a>
+        <a href="contact.html" class="btn btn-translucent" style="padding: 12px 20px; border-radius: 12px; font-weight: 700;">
+          <i class="fa-solid fa-headset"></i>
+          <span>الدعم الفني</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer style="text-align:center; padding: 20px; color:#64748b; font-size:0.85rem; border-top:1px solid rgba(255,255,255,0.06);">
+    &copy; 2026 Activkeyz. متجرك الذكي للمنتجات والتراخيص الرقمية.
+  </footer>
+</body>
+
+</html>
